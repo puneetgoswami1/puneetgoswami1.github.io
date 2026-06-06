@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  overflow-x: hidden;
+}
+
+/* GLOW EFFECT */
+
+body::before {
+  content: "";
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  background: cyan;
+  filter: blur(180px);
+  opacity: 0.15;
+  top: -100px;
+  right: -100px;
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  background: #00ffff;
+  filter: blur(180px);
+  opacity: 0.1;
+  bottom: -100px;
+  left: -100px;
+  z-index: -1;
+}
+
+/* CUSTOM SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: cyan;
+  border-radius: 20px;
+}
+
+body{
+  background:#070514;
+  color:white;
+  overflow-x:hidden;
+}
+
+.gold-text{
+  color:#d4af37;
+}
+
+.hero-title{
+  font-family: Georgia, serif;
+}
+
+.about-circle{
+  width:320px;
+  height:320px;
+  border:6px solid #d4af37;
+  border-radius:50%;
+  box-shadow:0 0 40px rgba(212,175,55,.3);
+}
+
+.glow-line{
+  width:120px;
+  height:3px;
+  background:#d4af37;
+  margin:auto;
+  border-radius:20px;
+}
+/* MOON FLOAT */
+
+@keyframes floatMoon {
+  0%,100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.float-moon {
+  animation: floatMoon 1.5s ease-in-out infinite;
+}
+
+/* STAR TWINKLE */
+
+@keyframes twinkle {
+  0%,100% {
+    opacity: .5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+.twinkle-star {
+  animation: twinkle 2s ease-in-out infinite;
+}
+
+/* CAMEL MOVE */
+
+@keyframes camelMove {
+  0%,100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+}
+
+.camel-move {
+  animation: camelMove 8s ease-in-out infinite;
+}
+
+/* NAME GLOW */
+
+@keyframes glowText {
+  0%,100% {
+    text-shadow: 0 0 10px rgba(250,204,21,.4);
+  }
+  50% {
+    text-shadow: 0 0 35px rgba(250,204,21,1);
+  }
+}
+
+.glow-name {
+  animation: glowText 3s ease-in-out infinite;
+}
+.glass-card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.3),
+    0 0 25px rgba(250,204,21,0.12);
+
+  transition: all 0.4s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(250,204,21,0.5);
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.4),
+    0 0 40px rgba(250,204,21,0.25);
+}
+.about-glow {
+  position: relative;
+}
+
+.about-glow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 120%;
+  height: 120%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(212,175,55,0.25) 0%,
+    transparent 70%
+  );
+  filter: blur(25px);
+  z-index: -1;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.about-glow:hover::after {
+  opacity: 1;
+}
+.star{
+  position:absolute;
+  color:white;
+  font-size:6px;
+  opacity:.0.3;
+  animation:twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+  0%,100%{
+    opacity:.1;
+  }
+
+  50%{
+    opacity:.8;
+  }
+}
+@keyframes twinkle{
+  0%,100%{
+    opacity:.15;
+  }
+
+  50%{
+    opacity:.8;
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 3s linear infinite;
+  will-change: transform;
+}
+.marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 4rem;
+  white-space: nowrap;
+
+  animation: marquee 12s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
