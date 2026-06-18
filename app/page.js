@@ -30,19 +30,17 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
   useEffect(() => {
+  history.scrollRestoration = "manual";
+
+  window.scrollTo(0, 0);
+
   if (window.location.hash) {
-    window.history.replaceState(
+    history.replaceState(
       null,
       "",
       window.location.pathname
     );
   }
-
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "instant",
-  });
 }, []);
 
 
