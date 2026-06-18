@@ -419,9 +419,9 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
 
         {/* ABOUT */}
 <motion.section
-id="about"
+id="about" 
   
-  className="pt-0 pb-20 px-6 bg-[#06030f] relative overflow-hidden"
+  className="scroll-mt-28 pt-0 pb-20 px-6 bg-[#06030f] relative overflow-hidden"
 >
 <motion.div
  animate={{ y:[0,10,0] }}
@@ -861,7 +861,7 @@ June 2023 - May 2025
 </p>
 </motion.div>
 
-<div id="experience" className="text-center my-20">
+<div id="experience" className="scroll-mt-28 text-center my-20">
   
   <div className="flex items-center justify-center gap-4">
 
@@ -1152,7 +1152,7 @@ June 2023 - May 2025
 
 {/* Project Section */}
 
-<section id="projects" className="py-24">
+<section id="projects" className="scroll-mt-28 py-24">
   
 
   <div className="flex items-center justify-center gap-4 -mt-8">
@@ -1406,7 +1406,7 @@ hover:drop-shadow-[0_0_12px_#ffd95e]
 
 {/* Technical Skills */}
 
-<section id="skills" className="py-24">
+<section id="skills" className="scroll-mt-28 py-24">
   
 
   <div className="flex items-center justify-center gap-4 -mt-8">
@@ -1725,7 +1725,7 @@ active:scale-95
 
 {/* Certifications */}
 
-<section id="certifications" className="py-24">
+<section id="certifications" className="scroll-mt-28 py-24">
 
   <div className="flex items-center justify-center gap-4 -mt-8">
 <div className="flex items-center justify-center gap-4">
@@ -1939,7 +1939,7 @@ active:scale-95
 
 {/* Get in Touch*/}
 
-<section  id="contact" className="py-24">
+<section  id="contact" className="scroll-mt-28 py-24">
    
   
 
