@@ -30,14 +30,21 @@ import { useEffect, useState } from "react";
 export default function Home() {
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "instant",
-    });
-  }, []);
+  if (window.location.hash) {
+    window.history.replaceState(
+      null,
+      "",
+      window.location.pathname
+    );
+  }
 
-  // baaki code...
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "instant",
+  });
+}, []);
+
 
 
   const [showAllProjects, setShowAllProjects] = useState(false);
@@ -2093,4 +2100,4 @@ active:scale-95
       </div>
     </main>
   );
-} 
+}  
