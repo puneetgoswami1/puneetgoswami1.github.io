@@ -255,11 +255,7 @@ useEffect(() => {
 
         {/* Navbar */}
         <nav
-className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-center z-50 ${
-  scrolled
-    ? "bg-black/70 backdrop-blur-md border-b border-white/10"
-    : "bg-transparent"
-}`}
+className="fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-center z-[9999] bg-black/70 backdrop-blur-md border-b border-white/10"
 >
           <h1 className="text-2xl font-black tracking-wide text-[#d4af37] cursor-pointer hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_20px_#facc15] transition-all duration-300">
             P.G.
