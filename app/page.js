@@ -323,12 +323,7 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
   <div className="w-full h-full bg-gradient-to-t from-yellow-300/20 via-yellow-200/5 to-transparent blur-3xl" />
 </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="max-w-5xl"
-          >
+          <div className="max-w-5xl">
 
             
 
@@ -419,7 +414,7 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
     className="text-[#d4af37] text-4xl animate-bounce"
   />
 </div>
-          </motion.div>
+          </div>
         </section>
 
 
