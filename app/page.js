@@ -32,8 +32,6 @@ export default function Home() {
   useEffect(() => {
   history.scrollRestoration = "manual";
 
-  window.scrollTo(0, 0);
-
   if (window.location.hash) {
     history.replaceState(
       null,
@@ -41,6 +39,9 @@ export default function Home() {
       window.location.pathname
     );
   }
+
+  window.scrollTo(0, 0);
+
 }, []);
 
 
