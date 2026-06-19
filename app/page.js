@@ -329,11 +329,11 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
             {/* Star Icon */}
 
             <p className="uppercase tracking-[6px] text-[#facc15] text-sm mb-6">
-              Data Analyst • Power BI • SQL • Python
+              Data Analyst • SQL • Python
             </p>
 
             <h1
-  className="5xl md:text-[75px] font-bold leading-none mb-8"
+  className="4xl md:text-[75px] font-bold leading-none mb-8"
   style={{
     textShadow: "0 0 50px rgba(255,255,255,0.35)"
   }}
@@ -342,7 +342,7 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
             </h1>
 
             <h2 className="text-xl md:text-2xl text-gray-300 mb-8">
-               Data Analyst • Business Intelligence • AI Researcher
+               Data Analyst • AI Researcher
             </h2>
 
             <div className="flex flex-wrap justify-center gap-4 text-gray-300 mb-8">
