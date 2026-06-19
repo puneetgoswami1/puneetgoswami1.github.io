@@ -772,21 +772,21 @@ text-gray-300
 
   <div>
     <h3 className="text-3xl font-bold text-white">
-      University of California, Berkeley
+      ICFAI University, Jaipur
     </h3>
 
     <p className="text-[#d4af37] mt-2">
-      Bachelor of Arts, Computer Science
+      Bachelor of Computer Application, Computer Application
     </p>
   </div>
 
   <div className="flex gap-3 items-center">
     <span className="px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full">
-      GPA: 4.0
+      GPA: 8.0
     </span>
 
     <span className="text-gray-300">
-      May 2025 - May 2027
+      May 2020 - Sep 2023
     </span>
   </div>
 
@@ -815,26 +815,23 @@ duration-300
 
 <div>
 <h3 className="text-3xl font-bold text-white">
-College of San Mateo
+Royal International
 </h3>
 
 <p className="text-[#d4af37] mt-2 font-semibold">
-Associate of Science — Computer Science, Physics, and Mathematics
+Senior Secondary(+2) — Computer Science, Physics,  Chemistry,and Mathematics
 </p>
 </div>
 
 <div className="flex gap-4 items-center flex-wrap">
 
 <span className="px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full">
-GPA: 4.0
+GPA: 7.0
 </span>
 
-<span className="px-4 py-1 bg-white/10 text-white rounded-full">
-Summa Cum Laude (3x)
-</span>
 
 <span className="text-gray-300">
-June 2023 - May 2025
+March 2019 - May 2020
 </span>
  
 </div>
