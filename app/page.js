@@ -426,7 +426,7 @@ id="about"
 
 
 <motion.div
-  className="absolute left-20 top-40 w-32 h-32 border border-yellow-400/10 rotate-45"
+  className="absolute left-20 top-40 w-32 h-32 border border-yellow-400/5 rotate-45"
   animate={{ rotate: [45, 405] }}
   transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
 />
