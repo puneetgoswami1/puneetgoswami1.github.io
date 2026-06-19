@@ -423,6 +423,19 @@ id="about"
   
   className="scroll-mt-28 pt-0 pb-20 px-6 bg-[#06030f] relative overflow-hidden"
 >
+
+
+[14:59, 19/06/2026] Puneet Goswami: <motion.div
+  className="absolute left-20 top-40 w-32 h-32 border border-yellow-400/20 rotate-45"
+  animate={{ rotate: [45, 405] }}
+  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+/>
+[14:59, 19/06/2026] Puneet Goswami: <motion.div
+  className="absolute right-20 top-72 w-24 h-24 border border-yellow-400/15 rotate-45"
+  animate={{ rotate: [45, 405] }}
+  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+/>
+
 <motion.div
  animate={{ y:[0,10,0] }}
  transition={{ repeat:Infinity,duration:1.5 }}
