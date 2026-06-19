@@ -311,7 +311,7 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
 <motion.div
   className="absolute bottom-0 left-0 w-full h-80 pointer-events-none z-10"
   animate={{
-    x: [0, 15, 0],
+    x: [0, 40, 0],
   }}
   transition={{
     duration: 20,
