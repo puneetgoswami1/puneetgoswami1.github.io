@@ -425,7 +425,7 @@ id="about"
 >
 
 
-[14:59, 19/06/2026] Puneet Goswami: <motion.div
+<motion.div
   className="absolute left-20 top-40 w-32 h-32 border border-yellow-400/20 rotate-45"
   animate={{ rotate: [45, 405] }}
   transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
