@@ -314,7 +314,7 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
     x: [0, 15, 0],
   }}
   transition={{
-    duration: 40,
+    duration: 20,
     repeat: Infinity,
     ease: "easeInOut",
   }}
