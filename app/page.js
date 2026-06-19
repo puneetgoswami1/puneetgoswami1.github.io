@@ -431,7 +431,7 @@ id="about"
   transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
 />
 <motion.div
-  className="absolute right-20 top-72 w-24 h-24 border border-yellow-400/15 rotate-45"
+  className="absolute right-20 top-72 w-24 h-24 border border-yellow-400/10 rotate-45"
   animate={{ rotate: [45, 405] }}
   transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
 />
