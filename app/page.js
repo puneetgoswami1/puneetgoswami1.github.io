@@ -819,7 +819,7 @@ Royal International
 </h3>
 
 <p className="text-[#d4af37] mt-2 font-semibold">
-Senior Secondary(+2) — Computer Science, Physics,  Chemistry,and Mathematics
+Senior Secondary(+2) — Computer Science, Physics, Chemistry, and Mathematics
 </p>
 </div>
 
@@ -861,12 +861,14 @@ March 2019 - May 2020
     <span className="tracking-wide">Relevant Coursework:</span>
   </span>
 
-  Data Structures & Algorithms, Computer Architecture,
-  Discrete Mathematics & Probability, Structure &
-  Interpretation of Computer Programs, Designing
-  Information Devices & Systems, Object-Oriented Programming,
-  Systems Programming, Software Engineering Methods,
-  Linear Algebra, Calculus I-III, Physics I-II
+ Advanced SQL, Database Management Systems, Data Structures & Algorithms, 
+ Python for Data Analytics, Statistical Analysis, Probability & Statistics, 
+ Linear Algebra, Calculus I-III, Data Mining, Machine Learning, 
+ Deep Learning Fundamentals, Business Intelligence, Data Warehousing, 
+ ETL Pipelines, Big Data Technologies, Predictive Modeling, Data Visualization, Microsoft Power BI, 
+ Tableau, Advanced Excel Analytics, Cloud Data Engineering, 
+ Artificial Intelligence, Object-Oriented Programming,
+ Computer Architecture, Operations Research.
 
 </p>
 </motion.div>
