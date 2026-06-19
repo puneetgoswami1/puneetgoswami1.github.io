@@ -289,7 +289,7 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
         {/* Hero */}
         <section className="min-h-screen flex items-center justify-center text-center px-6 relative pt-28">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-  {[...Array(50)].map((_, i) => (
+  {[...Array(20)].map((_, i) => (
     <div
       key={i}
       className="star"
