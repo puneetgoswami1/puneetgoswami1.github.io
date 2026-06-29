@@ -190,42 +190,55 @@ const projects = [
 
   const experiences = [
   {
-    company: "Company One",
-    role: "Software Engineer Intern",
-    date: "June 2025 - August 2025",
+    company: "Contra",
+    role: "Data Analyst Intern",
+    date: "April 2023 - June 2024",
     side: "right",
     points: [
-      "Built responsive web applications using React and Next.js.",
-      "Improved website performance and optimization.",
-      "Worked with APIs and backend integration."
+   "Supported analytics projects using SQL, Excel and Power BI for business reporting.",
+    "Cleaned, transformed and validated datasets to improve reporting accuracy.",
+    "Built interactive dashboards and generated actionable insights for business decisions."
+
     ],
-    skills: ["React", "Next.js", "JavaScript"]
+    skills: [  "SQL",
+    "Excel",
+    "Power BI",
+    "Data Cleaning",
+    "Data Visualization" ]
   },
 
   {
-    company: "Company Two",
-    role: "Frontend Developer",
+    company: "Vmayo Technnologies Pvt.Ltd",
+    role: "Data Analyst",
     date: "December 2024 - May 2025",
     side: "left",
     points: [
-      "Created modern UI components with Tailwind CSS.",
-      "Implemented responsive mobile-first layouts.",
-      "Collaborated with team on production features."
+     "Analyzed business datasets using SQL, Excel and Power BI to identify trends and KPIs.",
+    "Designed interactive dashboards and automated reports for operational decision-making.",
+    "Performed data cleaning, validation and transformation to improve data quality."
     ],
-    skills: ["Tailwind", "HTML", "CSS"]
+    skills: [  "SQL",
+    "Excel",
+    "Power BI",
+    "Data Analysis",
+    "Dashboard Development" ]
   },
 
   {
-    company: "Company Three",
-    role: "Software Engineer",
+    company: "Lemon.io",
+    role: "Data Analyst",
     date: "January 2024 - November 2024",
     side: "right",
     points: [
-      "Developed scalable applications.",
-      "Integrated REST APIs.",
-      "Enhanced user experience and accessibility."
+       "Performed advanced data analysis to identify business trends and growth opportunities.",
+    "Developed Power BI dashboards and optimized SQL queries for KPI monitoring.",
+    "Collaborated with cross-functional teams to deliver data-driven insights and reporting."
     ],
-    skills: ["Node.js", "MongoDB", "Express"]
+    skills: [ "SQL",
+    "Python",
+    "Power BI",
+    "Excel",
+    "Business Intelligence"]
   }
 ];
 
