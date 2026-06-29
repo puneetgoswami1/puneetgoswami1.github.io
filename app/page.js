@@ -196,8 +196,8 @@ const projects = [
     side: "right",
     points: [
    "Supported analytics projects using SQL, Excel and Power BI for business reporting.",
-    "Cleaned, transformed and validated datasets to improve reporting accuracy.",
-    "Built interactive dashboards and generated actionable insights for business decisions."
+   "Cleaned, transformed and validated datasets to improve reporting accuracy.",
+   "Built interactive dashboards and generated actionable insights for business decisions."
 
     ],
     skills: [  "SQL",
@@ -986,14 +986,17 @@ March 2019 - May 2020
             </span>
           </div>
 
-          <ul className="space-y-3 mb-5">
+          <ul className="space-y-5 mb-6 mt-5">
             {exp.points.map((point, i) => (
               <li
                 key={i}
-                className="flex items-start gap-2 text-gray-300"
+                className="flex items-start gap-4 text-gray-300 leading-8 text-[16px]"
               >
-                <span className="text-[#d4af37] mt-1">•</span>
-                {point}
+                <span className="text-[#d4af37] mt-[6px] text-lg flex-shrink-0">
+                  •</span>
+                <p className="text-left leading-8 tracking-wide">
+  {point}
+</p>
               </li>
             ))}
           </ul>
