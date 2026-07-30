@@ -959,14 +959,13 @@ March 2019 - May 2020
       </div>
 
       <div
-    className={`w-full md:w-[53%]
+   
+     className={`w-full md:w-[45%]
   ${
     exp.side === "left"
-      ? "md:mr-auto md:pr-16"
-      : "md:ml-auto md:pl-16"
-  }
-  md:mt-10
-  `}
+      ? "md:mr-auto md:pr-16 md:translate-y-8"
+      : "md:ml-auto md:pl-16 md:translate-y-8"
+  }`}
 >
 
         <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
