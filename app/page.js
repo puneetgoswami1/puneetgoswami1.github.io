@@ -449,13 +449,7 @@ id="about"
   transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
 />
 
-<motion.div
- animate={{ y:[0,10,0] }}
- transition={{ repeat:Infinity,duration:1.5 }}
- className="text-[#d4af37] text-3xl text-center mb-10"
->
- ᗐ
-</motion.div>
+
   <motion.div
   initial={{ opacity: 0, y: 50 }}
   whileInView={{ opacity: 1, y: 0 }}
