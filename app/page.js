@@ -964,7 +964,9 @@ March 2019 - May 2020
     exp.side === "left"
       ? "md:mr-auto md:pr-12"
       : "md:ml-auto md:pl-12"
-  }`}
+  }
+  md:mt-6
+  `}
 >
 
         <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
