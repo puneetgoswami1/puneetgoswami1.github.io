@@ -934,7 +934,7 @@ March 2019 - May 2020
 
 <div className="relative max-w-6xl mx-auto py-20">
 
-  <div className="absolute left-1/2 top-20 h-full w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
+  <div className="absolute left-1/2 top-20 h-[980px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
 
   {experiences.map((exp, index) => (
     <motion.div
@@ -959,7 +959,7 @@ March 2019 - May 2020
       </div>
 
       <div
-    className={`w-full md:w-[47%]
+    className={`w-full md:w-[58%]
   ${
     exp.side === "left"
       ? "md:mr-auto md:pr-12"
@@ -970,7 +970,8 @@ March 2019 - May 2020
         <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
 
           <div className="flex justify-between items-start mb-3">
-            <div>
+            <div className="flex-1 text-left">
+
               <h3 className="text-2xl font-bold text-white leading-tight">
                 {exp.company}
               </h3>
