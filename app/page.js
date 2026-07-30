@@ -963,8 +963,8 @@ March 2019 - May 2020
      className={`w-full md:w-[47%]
   ${
     exp.side === "left"
-      ? "md:mr-auto md:pr-6 md:translate-y-8"
-      : "md:ml-auto md:pl-6 md:translate-y-8"
+      ? "md:mr-auto md:pr-4 md:translate-y-8"
+      : "md:ml-auto md:pl-4 md:translate-y-8"
   }`}
 >
 
