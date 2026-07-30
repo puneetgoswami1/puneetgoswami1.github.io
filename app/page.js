@@ -965,7 +965,7 @@ March 2019 - May 2020
       ? "md:mr-auto md:pr-12"
       : "md:ml-auto md:pl-12"
   }
-  md:mt-6
+  md:mt-10
   `}
 >
 
