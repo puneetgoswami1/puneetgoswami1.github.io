@@ -959,7 +959,7 @@ March 2019 - May 2020
       </div>
 
       <div
-  className={`w-full md:w-[47%]
+  className={`w-full md:w-[58%]
   ${exp.side === "left"
     ? "md:mr-auto md:pr-0"
     : "md:ml-auto md:pl-0"
@@ -972,29 +972,29 @@ March 2019 - May 2020
 
           <div className="flex justify-between items-start mb-3">
             <div>
-              <h3 className="text-3xl font-bold text-white">
+              <h3 className="text-2xl font-bold text-white leading-tight">
                 {exp.company}
               </h3>
 
-              <p className="text-[#d4af37] font-semibold text-lg">
+              <p className="text-[#d4af37] font-semibold text-lg mt-1">
                 {exp.role}
               </p>
             </div>
 
-            <span className="text-gray-300 text-sm">
+            <span className="text-gray-300 text-sm text-right min-w-[150px]">
               {exp.date}
             </span>
           </div>
 
-          <ul className="space-y-5 mb-6 mt-5">
+          <ul className="space-y-6 mb-6 mt-5">
             {exp.points.map((point, i) => (
               <li
                 key={i}
-                className="flex items-start gap-4 text-gray-300 leading-8 text-[16px]"
+                className="flex items-start gap-4 text-gray-300 leading-8 text-[15px]"
               >
                 <span className="text-[#d4af37] mt-[6px] text-lg flex-shrink-0">
                   •</span>
-                <p className="text-left leading-8 tracking-wide">
+                <p className="text-left leading-8 tracking-normal max-w-[95%]">
   {point}
 </p>
               </li>
