@@ -208,7 +208,7 @@ const projects = [
   },
 
   {
-    company: "Vmayo Technnologies Pvt.Ltd",
+    company: "Vmayo Technnologies",
     role: "Data Analyst",
     date: "December 2024 - May 2025",
     side: "left",
