@@ -934,7 +934,7 @@ March 2019 - May 2020
 
 <div className="relative max-w-6xl mx-auto py-20">
 
-  <div className="absolute left-1/2 top-20 h-[750px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
+  <div className="absolute left-1/2 top-20 h-full w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
 
   {experiences.map((exp, index) => (
     <motion.div
@@ -952,20 +952,19 @@ March 2019 - May 2020
       className="relative mb-16"
     >
 
-      <div className="hidden md:flex absolute left-1/2 -translate-x-[30px] z-20 top-6">
+      <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-10">
        <div className="w-14 h-14 rounded-full border-[3px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
   <FaCode className="text-[#39ff88] text-2xl drop-shadow-[0_0_8px_#39ff88]" />
 </div>
       </div>
 
       <div
-  className={`w-full md:w-[58%]
-  ${exp.side === "left"
-    ? "md:mr-auto md:pr-0"
-    : "md:ml-auto md:pl-0"
-  }
-  md:translate-y-8
-  `}
+    className={`w-full md:w-[47%]
+  ${
+    exp.side === "left"
+      ? "md:mr-auto md:pr-12"
+      : "md:ml-auto md:pl-12"
+  }`}
 >
 
         <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
