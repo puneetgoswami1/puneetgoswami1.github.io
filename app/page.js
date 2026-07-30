@@ -934,7 +934,7 @@ March 2019 - May 2020
 
 <div className="relative max-w-6xl mx-auto py-20">
 
-  <div className="absolute left-1/2 top-20 h-[980px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
+  <div className="absolute left-1/2 top-20 h-[750px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
 
   {experiences.map((exp, index) => (
     <motion.div
@@ -959,7 +959,7 @@ March 2019 - May 2020
       </div>
 
       <div
-    className={`w-full md:w-[58%]
+    className={`w-full md:w-[45%]
   ${
     exp.side === "left"
       ? "md:mr-auto md:pr-12"
