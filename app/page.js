@@ -960,7 +960,7 @@ March 2019 - May 2020
 
       <div
    
-     className={`w-full md:w-[47%]
+     className={`w-full md:w-[50%]
   ${
     exp.side === "left"
       ? "md:mr-auto md:pr-4 md:translate-y-8"
