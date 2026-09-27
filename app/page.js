@@ -264,7 +264,7 @@ useEffect(() => {
       }}
     >
       {/* Overlay */}
-      <div className="min-h-screen bg-black/50 pb-16">
+      <div className="min-h-screen bg-black/50">
 
         {/* Navbar */}
         <nav
