@@ -2097,7 +2097,7 @@ active:scale-95
 
 </section>
 
-<div className="mt-40 pt-4 border-t border-white/10 text-center">
+<div className="mt-8 pt-4 border-t border-white/10 text-center">
 
   <div className="flex items-center justify-center gap-4 mb-0">
     
@@ -2111,7 +2111,7 @@ active:scale-95
     
   </div>
 
-  <p className="text-gray-400 text-lg mt-6">
+  <p className="text-gray-400 text-lg mt-2">
     © 2026 Puneet Goswami
   </p>
 
