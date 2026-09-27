@@ -33,15 +33,14 @@ export default function Home() {
   history.scrollRestoration = "manual";
 
   if (window.location.hash) {
-    history.replaceState(
-      null,
-      "",
-      window.location.pathname
-    );
+    const id = window.location.hash.replace("#", "");
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "instant", block: "start" });
+    }, 0);
+  } else {
+    window.scrollTo(0, 0);
   }
-
-  window.scrollTo(0, 0);
-
 }, []);
 
 
