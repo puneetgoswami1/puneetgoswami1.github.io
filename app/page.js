@@ -2097,7 +2097,7 @@ active:scale-95
 
 </section>
 
-<div className="mt-40 pt-4 pb-0 border-t border-white/10 text-center">
+<div className="mt-0 pt-4 pb-0 border-t border-white/10 text-center">
 
   <div className="flex items-center justify-center gap-4">
     
