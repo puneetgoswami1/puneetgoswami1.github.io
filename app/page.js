@@ -256,7 +256,7 @@ useEffect(() => {
 }, []);
   return (
     <main
-      className="min-h-screen text-white"
+      className="min-h-screen text-white overflow-x-hidden"
       style={{
         backgroundImage: "url('/mosq.jpg')",
         backgroundSize: "cover",
@@ -435,7 +435,7 @@ className={`fixed top-0 left-0 w-full px-4 py-6 flex justify-between items-cente
 <motion.section
 id="about" 
   
-  className="scroll-mt-28 pt-0 pb-20 px-6 bg-[#06030f] relative overflow-hidden"
+  className="scroll-mt-28 pt-0 pb-2 px-6 bg-[#06030f] relative overflow-hidden"
 >
 
 
@@ -1969,7 +1969,7 @@ active:scale-95
 
 {/* Get in Touch*/}
 
-<section  id="contact" className="scroll-mt-28 py-24">
+<section  id="contact" className="scroll-mt-28 pt-16 pb-4">
    
   
 
@@ -2097,7 +2097,7 @@ active:scale-95
 
 </section>
 
-<div className="mt-8 pt-4 border-t border-white/10 text-center">
+<div className="mt-10 pt-4 border-t border-white/10 text-center">
 
   <div className="flex items-center justify-center gap-4 mb-0">
     
