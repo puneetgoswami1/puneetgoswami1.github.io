@@ -43,134 +43,34 @@ export default function Home() {
   const [showAllCertifications, setShowAllCertifications] = useState(false);
 
   const certifications = [
-    {
-      title: "Google IT Automation with Python",
-      issuer: "Google",
-      date: "Apr 2025",
-    },
-    {
-      title: "Introduction to AI in Digital Marketing",
-      issuer: "HubSpot",
-      date: "Mar 2025",
-    },
-    {
-      title: "Configuration Management and the Cloud",
-      issuer: "Google",
-      date: "Jan 2025",
-    },
-    {
-      title: "Troubleshooting and Debugging Techniques",
-      issuer: "Google",
-      date: "Dec 2024",
-    },
-    {
-      title: "Introduction to Git and GitHub",
-      issuer: "Google",
-      date: "Dec 2024",
-    },
-    {
-      title: "Using Python to Interact with the Operating System",
-      issuer: "Google",
-      date: "Dec 2024",
-    },
-    {
-      title: "Crash Course on Python",
-      issuer: "Google",
-      date: "Dec 2024",
-    },
-    {
-      title: "Stanford Science Small Groups — U-Net AI for Biomedical Image Segmentation",
-      issuer: "Stanford University",
-      date: "Nov 2024",
-    },
-    {
-      title: "Stanford CCOP Bootcamp — Certificate of Completion",
-      issuer: "Stanford University",
-      date: "Aug 2024",
-    },
-    {
-      title: "Stanford Fair for Community College Students",
-      issuer: "Stanford University",
-      date: "May 2025",
-    },
-    {
-      title: "IRB Administration",
-      issuer: "CITI Program",
-      date: "Jun 2024",
-    },
-    {
-      title: "Responsible Conduct of Research for Engineers",
-      issuer: "CITI Program",
-      date: "Jun 2024",
-    },
-    {
-      title: "Stanford Code in Place — Certificate of Completion",
-      issuer: "Stanford / Code in Place",
-      date: "Jun 2024",
-    },
+    { title: "Google IT Automation with Python", issuer: "Google", date: "Apr 2025" },
+    { title: "Introduction to AI in Digital Marketing", issuer: "HubSpot", date: "Mar 2025" },
+    { title: "Configuration Management and the Cloud", issuer: "Google", date: "Jan 2025" },
+    { title: "Troubleshooting and Debugging Techniques", issuer: "Google", date: "Dec 2024" },
+    { title: "Introduction to Git and GitHub", issuer: "Google", date: "Dec 2024" },
+    { title: "Using Python to Interact with the Operating System", issuer: "Google", date: "Dec 2024" },
+    { title: "Crash Course on Python", issuer: "Google", date: "Dec 2024" },
+    { title: "Stanford Science Small Groups — U-Net AI for Biomedical Image Segmentation", issuer: "Stanford University", date: "Nov 2024" },
+    { title: "Stanford CCOP Bootcamp — Certificate of Completion", issuer: "Stanford University", date: "Aug 2024" },
+    { title: "Stanford Fair for Community College Students", issuer: "Stanford University", date: "May 2025" },
+    { title: "IRB Administration", issuer: "CITI Program", date: "Jun 2024" },
+    { title: "Responsible Conduct of Research for Engineers", issuer: "CITI Program", date: "Jun 2024" },
+    { title: "Stanford Code in Place — Certificate of Completion", issuer: "Stanford / Code in Place", date: "Jun 2024" },
   ];
 
   const projects = [
-    {
-      title: "AI Research Assistant",
-      desc: "Built an advanced AI research assistant using LLMs, RAG pipelines and vector databases for semantic search.",
-      tech: ["Python", "OpenAI", "RAG", "Vector DB"]
-    },
-    {
-      title: "Medical Image Analysis",
-      desc: "Deep learning system for automated disease detection from radiology images using CNN architectures.",
-      tech: ["PyTorch", "CNN", "Medical AI", "CV"]
-    },
-    {
-      title: "Fraud Detection System",
-      desc: "Machine learning platform for detecting financial fraud using anomaly detection techniques.",
-      tech: ["Python", "ML", "XGBoost", "Analytics"]
-    },
-    {
-      title: "Smart Traffic Prediction",
-      desc: "Predictive traffic management platform using AI and real-time sensor data.",
-      tech: ["AI", "Prediction", "Data Science", "IoT"]
-    },
-    {
-      title: "NLP Sentiment Engine",
-      desc: "Natural language processing engine capable of classifying sentiment from large scale datasets.",
-      tech: ["NLP", "Transformers", "BERT", "Python"]
-    },
-    {
-      title: "Computer Vision Surveillance",
-      desc: "Real-time object detection and monitoring platform using YOLO and OpenCV.",
-      tech: ["YOLO", "OpenCV", "CV", "AI"]
-    },
-    {
-      title: "3D Geological Visualization Tool",
-      desc: "Interactive 3D subsurface visualization tool using Python and Mayavi for volumetric geological datasets.",
-      tech: ["Python", "Mayavi", "NumPy", "PyVista"]
-    },
-    {
-      title: "Computer Science Club Website",
-      desc: "Full-stack website featuring AI chatbot, gallery, team section and contact forms.",
-      tech: ["JavaScript", "HTML/CSS", "AI Chatbot", "Full-Stack"]
-    },
-    {
-      title: "Girls Who Code Club Website",
-      desc: "Platform promoting diversity and inclusion with events, membership signup and contact forms.",
-      tech: ["HTML5", "CSS3", "JavaScript", "Bootstrap"]
-    },
-    {
-      title: "Network Connectivity Monitor",
-      desc: "Raspberry Pi based monitoring system with real-time network status indicators.",
-      tech: ["Python", "Raspberry Pi", "GPIO", "Networking"]
-    },
-    {
-      title: "K-12 STEM Enrichment Platform",
-      desc: "Responsive STEM learning platform built using React, Astro and Firebase.",
-      tech: ["React", "Astro", "Firebase", "Tailwind CSS"]
-    },
-    {
-      title: "Automated Attendance System",
-      desc: "Attendance management system using image recognition and automation workflows.",
-      tech: ["Python", "SikuliX", "Automation"]
-    }
+    { title: "AI Research Assistant", desc: "Built an advanced AI research assistant using LLMs, RAG pipelines and vector databases for semantic search.", tech: ["Python", "OpenAI", "RAG", "Vector DB"] },
+    { title: "Medical Image Analysis", desc: "Deep learning system for automated disease detection from radiology images using CNN architectures.", tech: ["PyTorch", "CNN", "Medical AI", "CV"] },
+    { title: "Fraud Detection System", desc: "Machine learning platform for detecting financial fraud using anomaly detection techniques.", tech: ["Python", "ML", "XGBoost", "Analytics"] },
+    { title: "Smart Traffic Prediction", desc: "Predictive traffic management platform using AI and real-time sensor data.", tech: ["AI", "Prediction", "Data Science", "IoT"] },
+    { title: "NLP Sentiment Engine", desc: "Natural language processing engine capable of classifying sentiment from large scale datasets.", tech: ["NLP", "Transformers", "BERT", "Python"] },
+    { title: "Computer Vision Surveillance", desc: "Real-time object detection and monitoring platform using YOLO and OpenCV.", tech: ["YOLO", "OpenCV", "CV", "AI"] },
+    { title: "3D Geological Visualization Tool", desc: "Interactive 3D subsurface visualization tool using Python and Mayavi for volumetric geological datasets.", tech: ["Python", "Mayavi", "NumPy", "PyVista"] },
+    { title: "Computer Science Club Website", desc: "Full-stack website featuring AI chatbot, gallery, team section and contact forms.", tech: ["JavaScript", "HTML/CSS", "AI Chatbot", "Full-Stack"] },
+    { title: "Girls Who Code Club Website", desc: "Platform promoting diversity and inclusion with events, membership signup and contact forms.", tech: ["HTML5", "CSS3", "JavaScript", "Bootstrap"] },
+    { title: "Network Connectivity Monitor", desc: "Raspberry Pi based monitoring system with real-time network status indicators.", tech: ["Python", "Raspberry Pi", "GPIO", "Networking"] },
+    { title: "K-12 STEM Enrichment Platform", desc: "Responsive STEM learning platform built using React, Astro and Firebase.", tech: ["React", "Astro", "Firebase", "Tailwind CSS"] },
+    { title: "Automated Attendance System", desc: "Attendance management system using image recognition and automation workflows.", tech: ["Python", "SikuliX", "Automation"] }
   ];
 
   const experiences = [
@@ -243,47 +143,48 @@ export default function Home() {
               : "bg-transparent"
           }`}
         >
-          <h1 className="text-xl sm:text-2xl font-black tracking-wide text-[#d4af37] cursor-pointer hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_20px_#facc15] transition-all duration-300">
+          <h1 className="text-xl sm:text-2xl font-serif font-black tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] hover:scale-105 active:scale-95 transition-all duration-300">
             P.G.
           </h1>
           <ul className="hidden lg:flex items-center gap-6 text-sm text-white font-medium">
-            <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold"><a href="#about">About</a></li>
-            <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold"><a href="#experience">Experience</a></li>
-            <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold"><a href="#projects">Projects</a></li>
-            <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold"><a href="#skills">Skills</a></li>
-            <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold"><a href="#certifications">Certifications</a></li>
-            <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold"><a href="#contact">Contact</a></li>
+            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#about">About</a></li>
+            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#experience">Experience</a></li>
+            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#projects">Projects</a></li>
+            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#skills">Skills</a></li>
+            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#certifications">Certifications</a></li>
+            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#contact">Contact</a></li>
           </ul>
 
-          <div className="flex items-center gap-4 sm:gap-5 text-lg sm:text-xl">
+          <div className="flex items-center gap-4 sm:gap-5 text-lg sm:text-xl text-gray-300">
             <FaLinkedin
               onClick={() => window.open("https://www.linkedin.com/in/puneetgoswami-ai/", "_blank")}
-              className="hover:text-yellow-400 hover:scale-125 active:scale-90 hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.9)] transition-all duration-300 cursor-pointer"
+              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
             />
             <FaGithub
               onClick={() => window.open("https://github.com/puneetgoswami1", "_blank")}
-              className="hover:text-yellow-400 hover:scale-125 active:scale-90 hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.9)] transition-all duration-300 cursor-pointer"
+              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
             />
             <FaEnvelope
               onClick={() => window.location.href = "mailto:parasgoswami1156@gmail.com"}
-              className="hover:text-yellow-400 hover:scale-125 active:scale-90 hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.9)] transition-all duration-300 cursor-pointer"
+              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
             />
           </div>
         </nav>
 
-        {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(50)].map((_, i) => (
+        {/* HERO SECTION - Style matching Heba Alazzeh */}
+        <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-6 sm:pb-8">
+          
+          {/* Lightweight Background Stars to Remove Lag */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
+            {[...Array(20)].map((_, i) => (
               <div
                 key={i}
-                className="star"
+                className="star opacity-60"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 8}s`,
-                  animationDuration: `${3 + Math.random() * 5}s`,
-                  fontSize: `${4 + Math.random() * 4}px`,
+                  left: `${(i * 19) % 100}%`,
+                  top: `${(i * 23) % 90}%`,
+                  animationDelay: `${i * 0.4}s`,
+                  fontSize: `${(i % 3) + 3}px`,
                 }}
               >
                 ✦
@@ -291,62 +192,67 @@ export default function Home() {
             ))}
           </div>
 
-          <motion.div
-            className="absolute bottom-0 left-0 w-full h-80 pointer-events-none z-10"
-            animate={{ x: [0, 40, 0] }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <div className="w-full h-full bg-gradient-to-t from-yellow-300/20 via-yellow-200/5 to-transparent blur-3xl" />
-          </motion.div>
+          {/* Smooth Background Ambient Glow */}
+          <div className="absolute bottom-0 left-0 w-full h-72 pointer-events-none z-0 transform-gpu bg-gradient-to-t from-[#e8cb76]/10 via-transparent to-transparent blur-2xl" />
 
-          <div className="max-w-5xl w-full">
-            <p className="uppercase tracking-[4px] sm:tracking-[6px] text-[#facc15] text-xs sm:text-sm mb-4 sm:mb-6">
-              Data Analyst • SQL • Python
+          {/* Center Content */}
+          <div className="max-w-4xl w-full my-auto z-10">
+            
+            {/* Top Sparkle Star */}
+            <div className="flex justify-center mb-3">
+              <span className="text-[#e8cb76] text-2xl drop-shadow-[0_0_12px_rgba(232,203,118,0.7)] animate-pulse">
+                ✦
+              </span>
+            </div>
+
+            {/* Subtitle in exact Heba Alazzeh style */}
+            <p className="uppercase tracking-[3px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3 sm:mb-4">
+              DATA ANALYST • SQL • PYTHON
             </p>
 
-            {/* Puneet Goswami - Line wrapping fixed with whitespace-nowrap */}
+            {/* Name - Exact Serif Typography and Golden Color from Image 1 */}
             <h1
-              className="text-[34px] sm:text-6xl md:text-[75px] font-bold leading-tight md:leading-none mb-6 md:mb-8 whitespace-nowrap"
+              className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-tight text-[#f5deb3] mb-3 sm:mb-4 leading-none"
               style={{
-                textShadow: "0 0 50px rgba(255,255,255,0.35)",
+                color: "#e8cb76",
+                textShadow: "0 0 35px rgba(232,203,118,0.35)",
               }}
             >
-              𝓟𝓾𝓷𝓮𝓮𝓽 𝓖𝓸𝓼𝔀𝓪𝓶𝓲
+              Puneet Goswami
             </h1>
 
-            <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 md:mb-8">
+            {/* Role Tagline */}
+            <h2 className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-5 sm:mb-6">
               Data Analyst • AI Researcher
             </h2>
 
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-gray-300 text-sm sm:text-base mb-6 md:mb-8">
-              <span className="flex items-center gap-2">
-                <FaMapMarkerAlt />
+            {/* Details with icons */}
+            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-6">
+              <span className="flex items-center gap-1.5">
+                <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
                 Rajasthan, India
               </span>
-              <span>|</span>
-              <span className="flex items-center gap-2">
-                <FaGraduationCap className="text-[#d4af37]" />
+              <span className="text-gray-500">|</span>
+              <span className="flex items-center gap-1.5">
+                <FaGraduationCap className="text-[#e8cb76] text-sm" />
                 BCA ICFAI University
               </span>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 md:mb-8">
-              <span className="px-4 py-2 sm:px-5 sm:py-3 text-xs sm:text-base rounded-2xl bg-black/30 border border-white/20 hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] hover:scale-110 hover:shadow-[0_0_30px_rgba(212,175,55,0.8)] active:scale-95 transition-all duration-300 cursor-pointer">
-                Lemon.io
-              </span>
-              <span className="px-4 py-2 sm:px-5 sm:py-3 text-xs sm:text-base rounded-2xl bg-black/30 border border-white/20 hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] hover:scale-110 hover:shadow-[0_0_30px_rgba(212,175,55,0.8)] active:scale-95 transition-all duration-300 cursor-pointer">
-                Data Annotation
-              </span>
-              <span className="px-4 py-2 sm:px-5 sm:py-3 text-xs sm:text-base rounded-2xl bg-black/30 border border-white/20 hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] hover:scale-110 hover:shadow-[0_0_30px_rgba(212,175,55,0.8)] active:scale-95 transition-all duration-300 cursor-pointer">
-                Contra
-              </span>
+            {/* Company / Platform Tags */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-7 sm:mb-8">
+              {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
+                <span
+                  key={item}
+                  className="px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/10 text-gray-200 hover:border-[#e8cb76]/60 transition-all duration-300"
+                >
+                  {item}
+                </span>
+              ))}
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-8 md:mb-10 px-4">
+            {/* Action Buttons matching Heba Alazzeh */}
+            <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 max-w-md mx-auto">
               <button
                 onClick={() =>
                   document.querySelector("#experience")?.scrollIntoView({
@@ -354,9 +260,9 @@ export default function Home() {
                     block: "start",
                   })
                 }
-                className="w-full sm:w-auto bg-[#d4af37] text-black px-8 md:px-10 py-3.5 md:py-4 rounded-2xl font-bold border border-[#d4af37] hover:scale-110 hover:shadow-[0_0_40px_rgba(212,175,55,0.9)] active:scale-95 transition-all duration-300 cursor-pointer text-sm md:text-base"
+                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl shadow-lg transition-all duration-300 text-xs sm:text-sm flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
               >
-                ✦ Explore My Work
+                <span>☆</span> Explore My Work
               </button>
 
               <button
@@ -366,74 +272,51 @@ export default function Home() {
                     block: "start",
                   })
                 }
-                className="w-full sm:w-auto px-8 md:px-10 py-3.5 md:py-4 rounded-2xl font-bold border border-white/30 bg-black/30 backdrop-blur-md hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] hover:scale-110 hover:shadow-[0_0_40px_rgba(212,175,55,0.8)] active:scale-95 transition-all duration-300 cursor-pointer text-sm md:text-base"
+                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 backdrop-blur-md text-white font-medium px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl transition-all duration-300 text-xs sm:text-sm active:scale-95 cursor-pointer"
               >
                 Get In Touch
               </button>
             </div>
+          </div>
 
-            <div className="mt-10 md:mt-20 flex justify-center">
-              <FaHandPointDown className="text-[#d4af37] text-3xl md:text-4xl animate-bounce" />
-            </div>
+          {/* Hand Icon - Screen ke ekdum bottom edge par pinned on Mobile */}
+          <div className="z-20 mt-auto pt-4 md:pt-0">
+            <FaHandPointDown
+              onClick={() =>
+                document.querySelector("#about")?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                })
+              }
+              className="text-[#ebb236] text-2xl sm:text-3xl animate-bounce cursor-pointer opacity-90 hover:opacity-100 transition-opacity"
+            />
           </div>
         </section>
 
         {/* ABOUT */}
         <motion.section
           id="about"
-          className="scroll-mt-28 pt-0 pb-2 px-4 sm:px-6 bg-[#06030f] relative overflow-hidden"
+          className="scroll-mt-28 pt-4 pb-2 px-4 sm:px-6 bg-[#06030f] relative overflow-hidden"
         >
-          <motion.div
-            className="absolute left-20 top-40 w-32 h-32 border border-yellow-400/5 rotate-45"
-            animate={{ rotate: [45, 405] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.div
-            className="absolute right-20 top-72 w-24 h-24 border border-yellow-400/10 rotate-45"
-            animate={{ rotate: [45, 405] }}
-            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          />
-
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="text-[#d4af37] text-2xl md:text-3xl text-center mb-6 md:mb-10"
-          >
-            ᗐ
-          </motion.div>
-
-          {/* About Heading */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-2 md:mb-4"
-          >
+          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-2 md:mb-4">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaBookOpen className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-            <motion.h2
-              whileHover={{
-                scale: 1.08,
-                textShadow:
-                  "0px 0px 10px rgba(212,175,55,0.8), 0px 0px 25px rgba(212,175,55,0.6)",
-              }}
-              whileTap={{ scale: 0.88, rotate: -1 }}
-              transition={{ duration: 0.3 }}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap"
-            >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap">
               About Me
-            </motion.h2>
+            </h2>
             <div className="flex gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* About Stars - Centered & Shifted Up */}
-          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8 ml-0 md:ml-4">
+          {/* About Stars */}
+          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8">
             <div className="flex items-center gap-1.5 md:gap-2">
               <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
               <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
@@ -445,20 +328,8 @@ export default function Home() {
             <div className="w-36 h-36 md:w-56 md:h-56 rounded-full border-[4px] md:border-[5px] border-[#d4af37]"></div>
 
             <div className="max-w-2xl px-2">
-              <p
-                initial={{ opacity: 0, y: 150 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
-                className="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 transition-all duration-500 hover:scale-[1.03] hover:border-[#d4af37] hover:shadow-[0_0_40px_rgba(212,175,55,0.25)] text-gray-300 text-sm sm:text-base leading-relaxed"
-              >
-                {"Hi, my name is Puneet and I am an aspiring Data Analyst from Jaipur. I am passionate about data analytics, business intelligence, dashboard creation and transforming raw data into meaningful insights. I enjoy working with SQL, Python, Power BI and Excel to solve real-world business problems and help organizations make data-driven decisions."
-                  .split(" ")
-                  .map((word, index) => (
-                    <span key={index} className="inline-block mr-1.5 sm:mr-2">
-                      {word}
-                    </span>
-                  ))}
+              <p className="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 text-gray-300 text-sm sm:text-base leading-relaxed">
+                Hi, my name is Puneet and I am an aspiring Data Analyst from Jaipur. I am passionate about data analytics, business intelligence, dashboard creation and transforming raw data into meaningful insights. I enjoy working with SQL, Python, Power BI and Excel to solve real-world business problems and help organizations make data-driven decisions.
               </p>
             </div>
           </div>
@@ -486,38 +357,26 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Education Heading */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 md:mt-28 mb-2 md:mb-4"
-          >
+          {/* EDUCATION */}
+          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 md:mt-28 mb-2 md:mb-4">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaGraduationCap className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-            <motion.h2
-              whileHover={{
-                scale: 1.08,
-                textShadow:
-                  "0px 0px 10px rgba(212,175,55,0.8), 0px 0px 25px rgba(212,175,55,0.6)",
-              }}
-              whileTap={{ scale: 0.88, rotate: -1 }}
-              transition={{ duration: 0.3 }}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap"
-            >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap">
               Education
-            </motion.h2>
+            </h2>
             <div className="flex gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Education Stars - Centered & Shifted Up */}
-          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8 ml-0 md:ml-12">
+          {/* Education Stars */}
+          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8">
             <div className="flex items-center gap-1.5 md:gap-2">
               <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
               <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
@@ -525,7 +384,7 @@ export default function Home() {
             </div>
           </div>
 
-          <motion.div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
+          <div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
             <div className="flex justify-between items-start flex-col sm:flex-row gap-3">
               <div>
                 <h3 className="text-xl sm:text-3xl font-bold text-white">ICFAI University, Jaipur</h3>
@@ -536,9 +395,9 @@ export default function Home() {
                 <span className="text-gray-300 text-xs sm:text-sm">May 2020 - Sep 2023</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
+          <div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
             <div className="flex justify-between items-start flex-wrap gap-3">
               <div>
                 <h3 className="text-xl sm:text-3xl font-bold text-white">Royal International</h3>
@@ -549,17 +408,17 @@ export default function Home() {
                 <span className="text-gray-300 text-xs sm:text-sm">March 2019 - May 2020</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div className="max-w-6xl mx-auto mt-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6 hover:border-[#d4af37]/50 transition-all duration-300">
+          <div className="max-w-6xl mx-auto mt-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6 hover:border-[#d4af37]/50 transition-all duration-300">
             <p className="text-gray-200 text-xs sm:text-base leading-relaxed">
               <span className="text-white font-semibold flex items-center gap-2 mb-2">
                 <FaBookOpen className="text-[#d4af37] text-lg sm:text-xl" />
                 <span className="tracking-wide">Relevant Coursework:</span>
               </span>
-              Advanced SQL, Database Management Systems, Data Structures & Algorithms, Python for Data Analytics, Statistical Analysis, Probability & Statistics, Linear Algebra, Calculus I-III, Data Mining, Machine Learning, Deep Learning Fundamentals, Business Intelligence, Data Warehousing, ETL Pipelines, Big Data Technologies, Predictive Modeling, Data Visualization, Microsoft Power BI, Tableau, Advanced Excel Analytics, Cloud Data Engineering, Artificial Intelligence, Object-Oriented Programming, Computer Architecture, Operations Research.
+              Advanced SQL, Database Management Systems, Data Structures & Algorithms, Python for Data Analytics, Statistical Analysis, Probability & Statistics, Linear Algebra, Machine Learning, Deep Learning, Business Intelligence, Data Warehousing, Microsoft Power BI.
             </p>
-          </motion.div>
+          </div>
 
           {/* EXPERIENCE */}
           <div id="experience" className="scroll-mt-28 text-center my-10 md:my-20">
@@ -572,7 +431,7 @@ export default function Home() {
 
               <FaBriefcase className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:drop-shadow-[0_0_15px_#d4af37] hover:scale-105 active:scale-95 whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Experience
               </h2>
 
@@ -585,7 +444,7 @@ export default function Home() {
 
             {/* Experience Stars */}
             <div className="w-full flex justify-center mb-6 md:mb-8">
-              <div className="flex items-center justify-center gap-1.5 md:gap-2 ml-0 md:ml-12">
+              <div className="flex items-center justify-center gap-1.5 md:gap-2">
                 <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
                 <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
                 <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
@@ -596,12 +455,8 @@ export default function Home() {
               <div className="absolute left-1/2 top-[120px] h-[1050px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
 
               {experiences.map((exp, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
                   className="relative mb-6 sm:mb-16"
                 >
                   <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-10">
@@ -617,7 +472,7 @@ export default function Home() {
                         : "md:ml-auto md:pl-4 md:translate-y-8"
                     }`}
                   >
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-300">
                       <div className="flex justify-between items-start mb-3">
                         <div className="flex-1 text-left">
                           <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
@@ -656,12 +511,12 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Research Section */}
+          {/* RESEARCH */}
           <section id="research" className="py-8 md:py-24">
             <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
@@ -672,7 +527,7 @@ export default function Home() {
 
               <FaFlask className="text-[#d4af37] text-base sm:text-xl flex-shrink-0" />
 
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Research & Publications
               </h2>
 
@@ -683,7 +538,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Research Stars */}
             <div className="flex justify-center items-center gap-1.5 md:gap-4 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
               <span className="text-xs md:text-2xl">✦</span>
               <span className="text-sm md:text-2xl">◆</span>
@@ -691,8 +545,7 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-              {/* Card 3 */}
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl">
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Three</h3>
@@ -702,35 +555,22 @@ export default function Home() {
                 </div>
 
                 <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
-                  <li className="flex gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    Developed advanced AI systems using modern machine learning pipelines.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    Implemented scalable architectures for large-scale data processing.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    Published findings and collaborated with research teams.
-                  </li>
+                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Developed advanced AI systems using machine learning pipelines.</li>
+                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Implemented scalable architectures for large-scale data processing.</li>
                 </ul>
 
                 <a href="#" className="inline-flex items-center gap-2 text-[#d4af37] font-semibold text-xs sm:text-base mb-4">
-                  <FaGithub />
-                  View on GitHub
+                  <FaGithub /> View on GitHub
                 </a>
 
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">Python</span>
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">TensorFlow</span>
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">NLP</span>
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">LLM</span>
+                  {["Python", "TensorFlow", "NLP", "LLM"].map((tag) => (
+                    <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
+                  ))}
                 </div>
               </div>
 
-              {/* Card 4 */}
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl">
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Four</h3>
@@ -740,36 +580,24 @@ export default function Home() {
                 </div>
 
                 <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
-                  <li className="flex gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    Built intelligent systems for real-time prediction and analytics.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    Optimized model performance through distributed computing methods.
-                  </li>
-                  <li className="flex gap-2">
-                    <span className="text-[#d4af37]">•</span>
-                    Worked with multidisciplinary teams on cutting-edge AI solutions.
-                  </li>
+                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Built intelligent systems for real-time prediction and analytics.</li>
+                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Optimized model performance through distributed computing methods.</li>
                 </ul>
 
                 <a href="#" className="inline-flex items-center gap-2 text-[#d4af37] font-semibold text-xs sm:text-base mb-4">
-                  <FaGithub />
-                  View on GitHub
+                  <FaGithub /> View on GitHub
                 </a>
 
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">PyTorch</span>
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">Deep Learning</span>
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">Computer Vision</span>
-                  <span className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">AI</span>
+                  {["PyTorch", "Deep Learning", "Computer Vision", "AI"].map((tag) => (
+                    <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
+                  ))}
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Project Section */}
+          {/* PROJECTS */}
           <section id="projects" className="scroll-mt-28 py-8 md:py-24">
             <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
@@ -780,7 +608,7 @@ export default function Home() {
 
               <FaLightbulb className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Project
               </h2>
 
@@ -791,8 +619,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Project Stars */}
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
               <span className="text-xs md:text-2xl">✦</span>
               <span className="text-sm md:text-2xl">◆</span>
               <span className="text-xs md:text-2xl">✦</span>
@@ -800,15 +627,12 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
               {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:border-[#d4af37]/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)] flex flex-col justify-between"
+                  className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between"
                 >
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 transition-all duration-300 group-hover:text-[#ffd95e]">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-[#ffd95e] transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-gray-300 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-5">
@@ -817,9 +641,8 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <a href="#" className="flex items-center gap-2 text-[#ffd95e] font-semibold text-xs sm:text-sm mb-3 sm:mb-4 transition-all duration-300 hover:scale-105 hover:text-[#fff176] hover:drop-shadow-[0_0_12px_#ffd95e]">
-                      <FaExternalLinkAlt />
-                      GitHub
+                    <a href="#" className="flex items-center gap-2 text-[#ffd95e] font-semibold text-xs sm:text-sm mb-3 sm:mb-4">
+                      <FaExternalLinkAlt /> GitHub
                     </a>
 
                     <div className="flex flex-wrap gap-2">
@@ -830,14 +653,14 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
             <div className="flex justify-center mt-6 sm:mt-8">
               <button
                 onClick={() => setShowAllProjects(!showAllProjects)}
-                className="px-5 sm:px-6 py-2.5 border border-[#d4af37]/50 rounded-xl text-white text-xs sm:text-sm font-semibold flex items-center gap-2 hover:border-[#d4af37] hover:text-[#d4af37] hover:shadow-[0_0_20px_#d4af37] hover:scale-105 active:scale-95 transition-all duration-300"
+                className="px-5 sm:px-6 py-2.5 border border-[#d4af37]/50 rounded-xl text-white text-xs sm:text-sm font-semibold flex items-center gap-2 hover:border-[#d4af37] hover:text-[#d4af37] transition-all"
               >
                 <span className="text-xs">{showAllProjects ? "▲" : "▼"}</span>
                 {showAllProjects ? "Show Less" : `View All ${projects.length} Projects`}
@@ -845,7 +668,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Leadership & Involvement Section */}
+          {/* LEADERSHIP */}
           <section id="Leadership" className="py-8 md:py-24">
             <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
@@ -856,7 +679,7 @@ export default function Home() {
 
               <FaUsers className="text-[#d4af37] text-base sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Leadership & Involvement
               </h2>
 
@@ -867,53 +690,43 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Leadership Stars */}
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
               <span className="text-xs md:text-2xl">✦</span>
               <span className="text-sm md:text-2xl">◆</span>
               <span className="text-xs md:text-2xl">✦</span>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-              <motion.div
-                whileHover={{ y: -8 }}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_25px_#d4af37] hover:scale-105 transition-all duration-300"
-              >
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
                 <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Stanford SERIS Scholar</h3>
                 <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">Stanford University School of Engineering</p>
                 <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Dec 2024 - Feb 2025</p>
                 <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                   Competitively selected as 1 of 23 undergraduates across the U.S. for Stanford’s Engineering Research Introduction Scholar Program.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div
-                whileHover={{ y: -8 }}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_25px_#d4af37] hover:scale-105 transition-all duration-300"
-              >
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
                 <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Break Through Tech AI Fellow</h3>
                 <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">Break Through Tech (Cornell University)</p>
                 <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Mar 2025 - Jun 2025</p>
                 <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                   Selected as one of 1,000 fellows nationwide for a rigorous AI/ML program. Completed ML coursework and AI Studio projects.
                 </p>
-              </motion.div>
+              </div>
 
-              <motion.div
-                whileHover={{ y: -8 }}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_25px_#d4af37] hover:scale-105 transition-all duration-300"
-              >
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
                 <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Girls Who Code Club — President</h3>
                 <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">College of San Mateo</p>
                 <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Apr 2024 - May 2025</p>
                 <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                   Founded and led the Girls Who Code Club, organizing coding workshops and community outreach to promote diversity in STEM.
                 </p>
-              </motion.div>
+              </div>
             </div>
           </section>
 
-          {/* Technical Skills */}
+          {/* SKILLS */}
           <section id="skills" className="scroll-mt-28 py-8 md:py-24">
             <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
@@ -924,7 +737,7 @@ export default function Home() {
 
               <FaUserSecret className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Technical Skills
               </h2>
 
@@ -935,102 +748,35 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Skills Stars */}
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
               <span className="text-xs md:text-2xl">✦</span>
               <span className="text-sm md:text-2xl">◆</span>
               <span className="text-xs md:text-2xl">✦</span>
             </div>
 
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-              {/* Languages */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-              >
-                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Languages</h3>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {["Java", "Python", "C++", "SQL", "JavaScript", "TypeScript", "PHP", "HTML/CSS", "Julia", "LaTeX", "MatLab", "LangChain"].map((item) => (
-                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                      {item}
-                    </span>
-                  ))}
+              {[
+                { title: "Languages", list: ["Python", "SQL", "Java", "C++", "JavaScript", "TypeScript", "HTML/CSS"] },
+                { title: "Frameworks", list: ["React", "Next.js", "Node.js", "Django", "Flask", "Express.js"] },
+                { title: "Developer Tools", list: ["Git", "GitHub", "Docker", "VS Code", "JIRA"] },
+                { title: "Libraries", list: ["Pandas", "NumPy", "Matplotlib", "SciPy", "Seaborn", "OpenAI API"] },
+                { title: "Databases", list: ["PostgreSQL", "MySQL", "Firebase", "SQLite"] },
+              ].map((category, idx) => (
+                <div key={idx} className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md">
+                  <h3 className="text-[#d4af37] text-xl font-bold mb-4">{category.title}</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {category.list.map((item) => (
+                      <span key={item} className="px-2.5 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">
+                        {item}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-
-              {/* Frameworks */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-              >
-                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Frameworks</h3>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {["React", "Node.js", "Next.js", "WordPress", "GraphQL", "Django", "Flask", "Express.js"].map((item) => (
-                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Developer Tools */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-              >
-                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Developer Tools</h3>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {["Git", "GitHub", "GitLab", "Docker", "Kubernetes", "VS Code", "JIRA"].map((item) => (
-                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Libraries */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 }}
-                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-              >
-                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Libraries</h3>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {["Pandas", "NumPy", "Matplotlib", "Mayavi", "SciPy", "Seaborn", "OpenAI API"].map((item) => (
-                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Databases */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.4 }}
-                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-              >
-                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Databases</h3>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {["PostgreSQL", "MySQL", "Firebase", "SQLite"].map((item) => (
-                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+              ))}
             </div>
           </section>
 
-          {/* Certifications */}
+          {/* CERTIFICATIONS */}
           <section id="certifications" className="scroll-mt-28 py-8 md:py-24">
             <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
@@ -1041,7 +787,7 @@ export default function Home() {
 
               <FaAward className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Certifications
               </h2>
 
@@ -1052,8 +798,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Certifications Stars */}
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
               <span className="text-xs md:text-2xl">✦</span>
               <span className="text-sm md:text-2xl">◆</span>
               <span className="text-xs md:text-2xl">✦</span>
@@ -1061,12 +806,9 @@ export default function Home() {
 
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="bg-[#111827]/70 border border-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-md flex flex-col justify-between"
+                  className="bg-[#111827]/70 border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col justify-between"
                 >
                   <div className="flex justify-between items-start gap-3 sm:gap-4">
                     <div>
@@ -1075,7 +817,7 @@ export default function Home() {
                     </div>
                     <span className="text-gray-400 text-xs sm:text-sm whitespace-nowrap">{cert.date}</span>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -1088,7 +830,7 @@ export default function Home() {
             </button>
           </section>
 
-          {/* Recommendation Section */}
+          {/* RECOMMENDATION */}
           <section id="Recommendation" className="py-8 md:py-24">
             <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
@@ -1099,7 +841,7 @@ export default function Home() {
 
               <FaRegCommentDots className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Recommendation
               </h2>
 
@@ -1110,22 +852,16 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Recommendation Stars */}
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
               <span className="text-xs md:text-2xl">✦</span>
               <span className="text-sm md:text-2xl">◆</span>
               <span className="text-xs md:text-2xl">✦</span>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-md"
-            >
+            <div className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-md">
               <FaQuoteLeft className="text-[#d4af37] text-2xl sm:text-4xl mb-3 sm:mb-6 opacity-80" />
               <p className="text-gray-200 text-sm sm:text-base md:text-xl leading-relaxed italic">
-                "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work. His ability to learn quickly and adapt to new technologies makes him a valuable contributor to any team."
+                "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
               </p>
 
               <div className="mt-5 sm:mt-8 pt-4 border-t border-white/10">
@@ -1133,10 +869,10 @@ export default function Home() {
                 <p className="text-[#d4af37] text-sm sm:text-lg font-semibold mt-1 sm:mt-2">Senior Software Engineer | AI Research Mentor</p>
                 <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Technology Industry Professional</p>
               </div>
-            </motion.div>
+            </div>
           </section>
 
-          {/* Get in Touch */}
+          {/* CONTACT */}
           <section id="contact" className="scroll-mt-28 pt-8 md:pt-16 pb-4">
             <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
@@ -1147,7 +883,7 @@ export default function Home() {
 
               <HiOutlineMail className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
                 Get in Touch
               </h2>
 
@@ -1158,8 +894,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Contact Stars */}
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
               <span className="text-xs md:text-2xl">✦</span>
               <span className="text-sm md:text-2xl">◆</span>
               <span className="text-xs md:text-2xl">✦</span>
@@ -1173,7 +908,7 @@ export default function Home() {
               <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6">
                 <a
                   href="mailto:parasgoswami1156@gmail.com"
-                  className="w-full sm:w-auto bg-[#ffd95e] text-black px-4 sm:px-6 py-3 rounded-xl font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-300 hover:scale-105"
+                  className="w-full sm:w-auto bg-[#ebb236] text-black px-4 sm:px-6 py-3 rounded-xl font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-300 hover:scale-105"
                 >
                   <HiOutlineMail className="text-lg sm:text-2xl" />
                   parasgoswami1156@gmail.com
@@ -1183,7 +918,7 @@ export default function Home() {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ffd95e] hover:text-[#ffd95e]"
+                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ebb236] hover:text-[#ebb236]"
                 >
                   <FaLinkedin className="text-lg sm:text-2xl" />
                   Follow on LinkedIn
@@ -1193,7 +928,7 @@ export default function Home() {
                   href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ffd95e] hover:text-[#ffd95e]"
+                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ebb236] hover:text-[#ebb236]"
                 >
                   <FaGithub className="text-lg sm:text-2xl" />
                   GitHub
@@ -1202,7 +937,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Footer */}
+          {/* FOOTER */}
           <div className="mt-8 md:mt-10 pt-4 border-t border-white/10 text-center pb-2">
             <div className="flex items-center justify-center gap-2 sm:gap-4 mb-0">
               <span className="text-[#d4af37] text-xs sm:text-sm">✦ ✦ ✦</span>
