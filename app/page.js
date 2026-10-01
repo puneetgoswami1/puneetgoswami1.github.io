@@ -1,13 +1,12 @@
 "use client";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaHandPointDown } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaGithub,
   FaLinkedin,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaBars,
   FaBookOpen,
   FaGraduationCap,
   FaDatabase,
@@ -17,30 +16,50 @@ import {
   FaCode,
   FaFlask,
   FaLightbulb,
-  FaChevronDown,
-  FaChevronUp,
   FaExternalLinkAlt,
   FaUsers,
   FaUserSecret,
   FaAward,
   FaRegCommentDots,
-  FaQuoteLeft
+  FaQuoteLeft,
+  FaCheckCircle
 } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Home() {
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllCertifications, setShowAllCertifications] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const toastShownRef = useRef(false);
+
   useEffect(() => {
     history.scrollRestoration = "manual";
-
     if (window.location.hash) {
       history.replaceState(null, "", window.location.pathname);
     }
-
     window.scrollTo(0, 0);
-  }, []);
 
-  const [showAllProjects, setShowAllProjects] = useState(false);
-  const [showAllCertifications, setShowAllCertifications] = useState(false);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+
+      // Bottom reaching detection for "Thank You" popup
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollTop + windowHeight >= documentHeight - 120 && !toastShownRef.current) {
+        toastShownRef.current = true;
+        setShowToast(true);
+        setTimeout(() => {
+          setShowToast(false);
+        }, 3500);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const certifications = [
     { title: "Google IT Automation with Python", issuer: "Google", date: "Apr 2025" },
@@ -112,78 +131,88 @@ export default function Home() {
     }
   ];
 
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <main
-      className="min-h-screen text-white overflow-x-hidden"
+      className="min-h-screen text-white overflow-x-hidden relative"
       style={{
         backgroundImage: "url('/mosq.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed",
+        backgroundRepeat: "no-repeat",
+        // Fixed scroll removed so background moves smoothly with scroll
       }}
     >
-      <div className="min-h-screen bg-black/50">
+      {/* 5-Second Falling Meteor (Shooting Star) Animation */}
+      <motion.div
+        className="absolute h-[2px] w-[90px] sm:w-[130px] bg-gradient-to-r from-transparent via-[#ffd95e] to-white pointer-events-none transform -rotate-45 z-20"
+        initial={{ top: "-5%", left: "95%", opacity: 0 }}
+        animate={{
+          top: ["-5%", "65%"],
+          left: ["95%", "15%"],
+          opacity: [0, 1, 0.8, 0],
+        }}
+        transition={{
+          duration: 1.2,
+          repeat: Infinity,
+          repeatDelay: 5,
+          ease: "easeOut",
+        }}
+      />
 
+      <div className="min-h-screen bg-black/55 backdrop-blur-[1px]">
         {/* Navbar */}
         <nav
-          className={`fixed top-0 left-0 w-full px-4 sm:px-6 py-4 sm:py-6 flex justify-between items-center z-50 transition-all duration-300 ${
+          className={`fixed top-0 left-0 w-full px-4 sm:px-6 py-4 sm:py-5 flex justify-between items-center z-50 transition-all duration-300 ${
             scrolled
-              ? "bg-black/70 backdrop-blur-md border-b border-white/10"
+              ? "bg-black/85 backdrop-blur-md border-b border-white/10 shadow-lg"
               : "bg-transparent"
           }`}
         >
-          <h1 className="text-xl sm:text-2xl font-serif font-black tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] hover:scale-105 active:scale-95 transition-all duration-300">
+          <h1 className="text-xl sm:text-2xl font-serif font-black tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] transition-colors">
             P.G.
           </h1>
           <ul className="hidden lg:flex items-center gap-6 text-sm text-white font-medium">
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#about">About</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#experience">Experience</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#projects">Projects</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#skills">Skills</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#certifications">Certifications</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#contact">Contact</a></li>
+            <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#about">About</a></li>
+            <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#experience">Experience</a></li>
+            <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#projects">Projects</a></li>
+            <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#skills">Skills</a></li>
+            <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#certifications">Certifications</a></li>
+            <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#contact">Contact</a></li>
           </ul>
 
           <div className="flex items-center gap-4 sm:gap-5 text-lg sm:text-xl text-gray-300">
-            <FaLinkedin
-              onClick={() => window.open("https://www.linkedin.com/in/puneetgoswami-ai/", "_blank")}
-              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
-            />
-            <FaGithub
-              onClick={() => window.open("https://github.com/puneetgoswami1", "_blank")}
-              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
-            />
-            <FaEnvelope
-              onClick={() => window.location.href = "mailto:parasgoswami1156@gmail.com"}
-              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
-            />
+            <motion.div whileTap={{ scale: 0.9 }}>
+              <FaLinkedin
+                onClick={() => window.open("https://www.linkedin.com/in/puneetgoswami-ai/", "_blank")}
+                className="hover:text-[#e8cb76] cursor-pointer transition-colors"
+              />
+            </motion.div>
+            <motion.div whileTap={{ scale: 0.9 }}>
+              <FaGithub
+                onClick={() => window.open("https://github.com/puneetgoswami1", "_blank")}
+                className="hover:text-[#e8cb76] cursor-pointer transition-colors"
+              />
+            </motion.div>
+            <motion.div whileTap={{ scale: 0.9 }}>
+              <FaEnvelope
+                onClick={() => window.location.href = "mailto:parasgoswami1156@gmail.com"}
+                className="hover:text-[#e8cb76] cursor-pointer transition-colors"
+              />
+            </motion.div>
           </div>
         </nav>
 
-        {/* HERO SECTION - Style matching Heba Alazzeh */}
-        <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-6 sm:pb-8">
-          
-          {/* Lightweight Background Stars to Remove Lag */}
+        {/* HERO SECTION */}
+        <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-5">
+          {/* Subtle GPU Stars */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
-            {[...Array(20)].map((_, i) => (
+            {[...Array(18)].map((_, i) => (
               <div
                 key={i}
-                className="star opacity-60"
+                className="star opacity-50"
                 style={{
-                  left: `${(i * 19) % 100}%`,
-                  top: `${(i * 23) % 90}%`,
-                  animationDelay: `${i * 0.4}s`,
+                  left: `${(i * 21) % 100}%`,
+                  top: `${(i * 17) % 85}%`,
                   fontSize: `${(i % 3) + 3}px`,
                 }}
               >
@@ -192,27 +221,19 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Smooth Background Ambient Glow */}
-          <div className="absolute bottom-0 left-0 w-full h-72 pointer-events-none z-0 transform-gpu bg-gradient-to-t from-[#e8cb76]/10 via-transparent to-transparent blur-2xl" />
-
-          {/* Center Content */}
           <div className="max-w-4xl w-full my-auto z-10">
-            
-            {/* Top Sparkle Star */}
-            <div className="flex justify-center mb-3">
+            <div className="flex justify-center mb-2">
               <span className="text-[#e8cb76] text-2xl drop-shadow-[0_0_12px_rgba(232,203,118,0.7)] animate-pulse">
                 ✦
               </span>
             </div>
 
-            {/* Subtitle in exact Heba Alazzeh style */}
-            <p className="uppercase tracking-[3px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3 sm:mb-4">
+            <p className="uppercase tracking-[3px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3">
               DATA ANALYST • SQL • PYTHON
             </p>
 
-            {/* Name - Exact Serif Typography and Golden Color from Image 1 */}
             <h1
-              className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-tight text-[#f5deb3] mb-3 sm:mb-4 leading-none"
+              className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-tight mb-2 sm:mb-3 leading-none whitespace-nowrap"
               style={{
                 color: "#e8cb76",
                 textShadow: "0 0 35px rgba(232,203,118,0.35)",
@@ -221,13 +242,11 @@ export default function Home() {
               Puneet Goswami
             </h1>
 
-            {/* Role Tagline */}
-            <h2 className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-5 sm:mb-6">
+            <h2 className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-4 sm:mb-5">
               Data Analyst • AI Researcher
             </h2>
 
-            {/* Details with icons */}
-            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-6">
+            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-5">
               <span className="flex items-center gap-1.5">
                 <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
                 Rajasthan, India
@@ -239,73 +258,66 @@ export default function Home() {
               </span>
             </div>
 
-            {/* Company / Platform Tags */}
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-7 sm:mb-8">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-6">
               {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
-                <span
+                <motion.span
                   key={item}
-                  className="px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/10 text-gray-200 hover:border-[#e8cb76]/60 transition-all duration-300"
+                  whileTap={{ scale: 0.94 }}
+                  className="px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/10 text-gray-200 active:border-[#e8cb76] cursor-pointer transition-colors"
                 >
                   {item}
-                </span>
+                </motion.span>
               ))}
             </div>
 
-            {/* Action Buttons matching Heba Alazzeh */}
+            {/* Buttons */}
             <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 max-w-md mx-auto">
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() =>
-                  document.querySelector("#experience")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
+                  document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl shadow-lg transition-all duration-300 text-xs sm:text-sm flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
+                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-2.5 sm:py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
               >
                 <span>☆</span> Explore My Work
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileTap={{ scale: 0.95 }}
                 onClick={() =>
-                  document.querySelector("#contact")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
+                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 backdrop-blur-md text-white font-medium px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl transition-all duration-300 text-xs sm:text-sm active:scale-95 cursor-pointer"
+                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-2.5 sm:py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
               >
                 Get In Touch
-              </button>
+              </motion.button>
             </div>
           </div>
 
-          {/* Hand Icon - Screen ke ekdum bottom edge par pinned on Mobile */}
-          <div className="z-20 mt-auto pt-4 md:pt-0">
+          {/* Hand Icon - Pinned at extreme bottom edge for mobile */}
+          <div className="z-20 mt-auto pt-2">
             <FaHandPointDown
               onClick={() =>
-                document.querySelector("#about")?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                })
+                document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
               }
-              className="text-[#ebb236] text-2xl sm:text-3xl animate-bounce cursor-pointer opacity-90 hover:opacity-100 transition-opacity"
+              className="text-[#ebb236] text-2xl sm:text-3xl animate-bounce cursor-pointer opacity-90 hover:opacity-100"
             />
           </div>
         </section>
 
         {/* ABOUT */}
-        <motion.section
+        <section
           id="about"
           className="scroll-mt-28 pt-4 pb-2 px-4 sm:px-6 bg-[#06030f] relative overflow-hidden"
         >
-          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-2 md:mb-4">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaBookOpen className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
               About Me
             </h2>
             <div className="flex gap-1">
@@ -315,34 +327,39 @@ export default function Home() {
             </div>
           </div>
 
-          {/* About Stars */}
-          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8">
-            <div className="flex items-center gap-1.5 md:gap-2">
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-              <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
+          {/* Centered Stars shifted UP */}
+          <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6">
+            <div className="flex items-center gap-1.5 md:gap-2 text-[#d4af37]">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
             </div>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-6 md:gap-8 mb-8">
             <div className="w-36 h-36 md:w-56 md:h-56 rounded-full border-[4px] md:border-[5px] border-[#d4af37]"></div>
-
             <div className="max-w-2xl px-2">
-              <p className="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 text-gray-300 text-sm sm:text-base leading-relaxed">
+              <motion.div
+                whileTap={{ scale: 0.98 }}
+                className="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 text-gray-300 text-sm sm:text-base leading-relaxed active:border-[#d4af37]/40 transition-colors"
+              >
                 Hi, my name is Puneet and I am an aspiring Data Analyst from Jaipur. I am passionate about data analytics, business intelligence, dashboard creation and transforming raw data into meaningful insights. I enjoy working with SQL, Python, Power BI and Excel to solve real-world business problems and help organizations make data-driven decisions.
-              </p>
+              </motion.div>
             </div>
           </div>
 
-          {/* Marquee */}
-          <div className="mt-6 md:mt-8 text-center">
-            <h3 className="tracking-[4px] sm:tracking-[6px] text-[#d4af37] uppercase text-xs sm:text-sm mb-6 md:mb-10">
+          {/* Marquee - Faster Speed */}
+          <div className="mt-4 md:mt-6 text-center">
+            <h3 className="tracking-[4px] text-[#d4af37] uppercase text-xs sm:text-sm mb-4">
               Organizations & Platforms
             </h3>
           </div>
-          <div className="overflow-hidden w-full">
+          <div className="overflow-hidden w-full mb-6">
             <div className="marquee-wrapper">
-              <div className="marquee-track">
+              <div
+                className="marquee-track flex gap-8"
+                style={{ animationDuration: "14s" }} // Faster marquee
+              >
                 <span className="flex items-center gap-2"><FaLinkedin /> LinkedIn</span>
                 <span className="flex items-center gap-2"><FaGithub /> GitHub</span>
                 <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
@@ -358,14 +375,14 @@ export default function Home() {
           </div>
 
           {/* EDUCATION */}
-          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 md:mt-28 mb-2 md:mb-4">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-12 md:mt-24 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaGraduationCap className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
               Education
             </h2>
             <div className="flex gap-1">
@@ -375,66 +392,70 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Education Stars */}
-          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8">
-            <div className="flex items-center gap-1.5 md:gap-2">
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-              <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
+          {/* Centered Stars shifted UP */}
+          <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6">
+            <div className="flex items-center gap-1.5 md:gap-2 text-[#d4af37]">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
             </div>
           </div>
 
-          <div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
-            <div className="flex justify-between items-start flex-col sm:flex-row gap-3">
-              <div>
-                <h3 className="text-xl sm:text-3xl font-bold text-white">ICFAI University, Jaipur</h3>
-                <p className="text-[#d4af37] mt-1 text-sm sm:text-base">Bachelor of Computer Application, Computer Application</p>
+          <div className="max-w-6xl mx-auto space-y-5">
+            <motion.div
+              whileTap={{ scale: 0.98 }}
+              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 active:border-[#d4af37]/40 transition-colors"
+            >
+              <div className="flex justify-between items-start flex-col sm:flex-row gap-2">
+                <div>
+                  <h3 className="text-lg sm:text-2xl font-bold text-white">ICFAI University, Jaipur</h3>
+                  <p className="text-[#d4af37] mt-1 text-xs sm:text-base">Bachelor of Computer Application, Computer Application</p>
+                </div>
+                <div className="flex gap-3 items-center">
+                  <span className="px-3 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs">GPA: 8.0</span>
+                  <span className="text-gray-300 text-xs">May 2020 - Sep 2023</span>
+                </div>
               </div>
-              <div className="flex gap-3 items-center">
-                <span className="px-3 md:px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs sm:text-sm">GPA: 8.0</span>
-                <span className="text-gray-300 text-xs sm:text-sm">May 2020 - Sep 2023</span>
+            </motion.div>
+
+            <motion.div
+              whileTap={{ scale: 0.98 }}
+              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 active:border-[#d4af37]/40 transition-colors"
+            >
+              <div className="flex justify-between items-start flex-wrap gap-2">
+                <div>
+                  <h3 className="text-lg sm:text-2xl font-bold text-white">Royal International</h3>
+                  <p className="text-[#d4af37] mt-1 text-xs sm:text-base font-semibold">Senior Secondary(+2) — CS, Physics, Chemistry, Math</p>
+                </div>
+                <div className="flex gap-3 items-center flex-wrap">
+                  <span className="px-3 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs">GPA: 7.0</span>
+                  <span className="text-gray-300 text-xs">March 2019 - May 2020</span>
+                </div>
               </div>
+            </motion.div>
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6">
+              <p className="text-gray-200 text-xs sm:text-sm leading-relaxed">
+                <span className="text-white font-semibold flex items-center gap-2 mb-1.5">
+                  <FaBookOpen className="text-[#d4af37]" /> Relevant Coursework:
+                </span>
+                Advanced SQL, DBMS, Data Structures & Algorithms, Python for Analytics, Statistics, Linear Algebra, Machine Learning, Business Intelligence, Data Warehousing, Power BI.
+              </p>
             </div>
           </div>
 
-          <div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
-            <div className="flex justify-between items-start flex-wrap gap-3">
-              <div>
-                <h3 className="text-xl sm:text-3xl font-bold text-white">Royal International</h3>
-                <p className="text-[#d4af37] mt-1 text-sm sm:text-base font-semibold">Senior Secondary(+2) — Computer Science, Physics, Chemistry, and Mathematics</p>
-              </div>
-              <div className="flex gap-3 items-center flex-wrap">
-                <span className="px-3 md:px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs sm:text-sm">GPA: 7.0</span>
-                <span className="text-gray-300 text-xs sm:text-sm">March 2019 - May 2020</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="max-w-6xl mx-auto mt-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6 hover:border-[#d4af37]/50 transition-all duration-300">
-            <p className="text-gray-200 text-xs sm:text-base leading-relaxed">
-              <span className="text-white font-semibold flex items-center gap-2 mb-2">
-                <FaBookOpen className="text-[#d4af37] text-lg sm:text-xl" />
-                <span className="tracking-wide">Relevant Coursework:</span>
-              </span>
-              Advanced SQL, Database Management Systems, Data Structures & Algorithms, Python for Data Analytics, Statistical Analysis, Probability & Statistics, Linear Algebra, Machine Learning, Deep Learning, Business Intelligence, Data Warehousing, Microsoft Power BI.
-            </p>
-          </div>
-
-          {/* EXPERIENCE */}
+          {/* EXPERIENCE SECTION WITH SMOOTH RESTORED ANIMATION */}
           <div id="experience" className="scroll-mt-28 text-center my-10 md:my-20">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <FaBriefcase className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                 Experience
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -442,95 +463,89 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Experience Stars */}
-            <div className="w-full flex justify-center mb-6 md:mb-8">
-              <div className="flex items-center justify-center gap-1.5 md:gap-2">
-                <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-                <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
-                <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-6 md:mb-8">
+              <div className="flex items-center gap-1.5 md:gap-2 text-[#d4af37]">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
               </div>
             </div>
 
-            <div className="relative max-w-6xl mx-auto py-4 md:py-20">
-              <div className="absolute left-1/2 top-[120px] h-[1050px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
+            <div className="relative max-w-6xl mx-auto py-2 md:py-16">
+              <div className="absolute left-1/2 top-[40px] h-[85%] w-[2px] bg-[#d4af37]/25 -translate-x-1/2 hidden md:block"></div>
 
               {experiences.map((exp, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="relative mb-6 sm:mb-16"
+                  initial={{
+                    opacity: 0,
+                    x: typeof window !== "undefined" && window.innerWidth > 768 ? (exp.side === "left" ? -40 : 40) : 0,
+                    y: 20
+                  }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative mb-6 sm:mb-14 cursor-pointer"
                 >
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-10">
-                    <div className="w-14 h-14 rounded-full border-[3px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                      <FaCode className="text-[#39ff88] text-2xl drop-shadow-[0_0_8px_#39ff88]" />
+                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-8">
+                    <div className="w-12 h-12 rounded-full border-[2.5px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                      <FaCode className="text-[#39ff88] text-xl" />
                     </div>
                   </div>
 
                   <div
-                    className={`w-full md:w-[50%] ${
+                    className={`w-full md:w-[48%] ${
                       exp.side === "left"
-                        ? "md:mr-auto md:pr-4 md:translate-y-8"
-                        : "md:ml-auto md:pl-4 md:translate-y-8"
+                        ? "md:mr-auto text-left"
+                        : "md:ml-auto text-left"
                     }`}
                   >
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-300">
-                      <div className="flex justify-between items-start mb-3">
-                        <div className="flex-1 text-left">
-                          <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
-                            {exp.company}
-                          </h3>
-                          <p className="text-[#d4af37] font-semibold text-base sm:text-lg mt-1">
-                            {exp.role}
-                          </p>
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:border-[#d4af37]/40 active:border-[#d4af37] transition-all">
+                      <div className="flex justify-between items-start mb-2 sm:mb-3">
+                        <div>
+                          <h3 className="text-lg sm:text-xl font-bold text-white">{exp.company}</h3>
+                          <p className="text-[#d4af37] font-semibold text-sm sm:text-base">{exp.role}</p>
                         </div>
-                        <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[110px]">
-                          {exp.date}
-                        </span>
+                        <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[100px]">{exp.date}</span>
                       </div>
 
-                      <ul className="space-y-3 sm:space-y-6 mb-4 sm:mb-6 mt-3 sm:mt-5">
+                      <ul className="space-y-2 mb-4 text-gray-300 text-xs sm:text-sm">
                         {exp.points.map((point, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2.5 sm:gap-4 text-gray-300 leading-6 sm:leading-8 text-xs sm:text-[15px]"
-                          >
-                            <span className="text-[#d4af37] mt-[2px] sm:mt-[6px] text-base sm:text-lg flex-shrink-0">•</span>
-                            <p className="text-left max-w-[95%]">{point}</p>
+                          <li key={i} className="flex items-start gap-2">
+                            <span className="text-[#d4af37]">•</span>
+                            <span>{point}</span>
                           </li>
                         ))}
                       </ul>
 
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2">
                         {exp.skills.map((skill, i) => (
-                          <span
-                            key={i}
-                            className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white"
-                          >
+                          <span key={i} className="px-2.5 py-0.5 rounded-lg bg-white/10 text-[11px] sm:text-xs text-white">
                             {skill}
                           </span>
                         ))}
                       </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
 
           {/* RESEARCH */}
-          <section id="research" className="py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+          <section id="research" className="py-6 md:py-20">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <FaFlask className="text-[#d4af37] text-base sm:text-xl flex-shrink-0" />
-
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                 Research & Publications
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -538,80 +553,68 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-4 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6 text-[#ffd95e]">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl">
-                <div className="flex justify-between items-start mb-3">
+            <div className="grid md:grid-cols-2 gap-5 max-w-6xl mx-auto">
+              <motion.div
+                whileTap={{ scale: 0.98 }}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 active:border-[#d4af37]/40 transition-colors"
+              >
+                <div className="flex justify-between items-start mb-2">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Three</h3>
-                    <p className="text-[#d4af37] font-semibold text-base sm:text-lg">AI Researcher</p>
+                    <h3 className="text-lg font-bold text-white">Research Project Three</h3>
+                    <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">AI Researcher</p>
                   </div>
-                  <span className="text-gray-300 text-xs sm:text-sm">June 2024 - Present</span>
+                  <span className="text-gray-300 text-xs">June 2024 - Present</span>
                 </div>
-
-                <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Developed advanced AI systems using machine learning pipelines.</li>
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Implemented scalable architectures for large-scale data processing.</li>
-                </ul>
-
-                <a href="#" className="inline-flex items-center gap-2 text-[#d4af37] font-semibold text-xs sm:text-base mb-4">
-                  <FaGithub /> View on GitHub
-                </a>
-
-                <div className="flex flex-wrap gap-2">
+                <p className="text-gray-300 text-xs sm:text-sm mb-3">Developed scalable AI architectures for large-scale biomedical image segmentation.</p>
+                <div className="flex flex-wrap gap-1.5">
                   {["Python", "TensorFlow", "NLP", "LLM"].map((tag) => (
-                    <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
+                    <span key={tag} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">{tag}</span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl">
-                <div className="flex justify-between items-start mb-3">
+              <motion.div
+                whileTap={{ scale: 0.98 }}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 active:border-[#d4af37]/40 transition-colors"
+              >
+                <div className="flex justify-between items-start mb-2">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Four</h3>
-                    <p className="text-[#d4af37] font-semibold text-base sm:text-lg">AI Researcher</p>
+                    <h3 className="text-lg font-bold text-white">Research Project Four</h3>
+                    <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">AI Researcher</p>
                   </div>
-                  <span className="text-gray-300 text-xs sm:text-sm">June 2024 - Present</span>
+                  <span className="text-gray-300 text-xs">June 2024 - Present</span>
                 </div>
-
-                <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Built intelligent systems for real-time prediction and analytics.</li>
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Optimized model performance through distributed computing methods.</li>
-                </ul>
-
-                <a href="#" className="inline-flex items-center gap-2 text-[#d4af37] font-semibold text-xs sm:text-base mb-4">
-                  <FaGithub /> View on GitHub
-                </a>
-
-                <div className="flex flex-wrap gap-2">
-                  {["PyTorch", "Deep Learning", "Computer Vision", "AI"].map((tag) => (
-                    <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
+                <p className="text-gray-300 text-xs sm:text-sm mb-3">Optimized deep learning models using distributed computing and PyTorch.</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["PyTorch", "Deep Learning", "CV", "AI"].map((tag) => (
+                    <span key={tag} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">{tag}</span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </section>
 
-          {/* PROJECTS */}
-          <section id="projects" className="scroll-mt-28 py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+          {/* PROJECTS WITH GLOWING GITHUB & ANIMATED VIEW ALL */}
+          <section id="projects" className="scroll-mt-28 py-6 md:py-20">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <FaLightbulb className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Project
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+                Projects
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -619,70 +622,82 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6 text-[#ffd95e]">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-              {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
-                <div
-                  key={index}
-                  className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between"
-                >
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-[#ffd95e] transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-5">
-                      {project.desc}
-                    </p>
-                  </div>
-
-                  <div>
-                    <a href="#" className="flex items-center gap-2 text-[#ffd95e] font-semibold text-xs sm:text-sm mb-3 sm:mb-4">
-                      <FaExternalLinkAlt /> GitHub
-                    </a>
-
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech, i) => (
-                        <span key={i} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">
-                          {tech}
-                        </span>
-                      ))}
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+              <AnimatePresence>
+                {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.35, delay: index * 0.04 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 flex flex-col justify-between hover:border-[#d4af37]/40 active:border-[#d4af37] transition-all"
+                  >
+                    <div>
+                      <h3 className="text-lg font-bold text-white mb-1.5">{project.title}</h3>
+                      <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4">{project.desc}</p>
                     </div>
-                  </div>
-                </div>
-              ))}
+
+                    <div>
+                      {/* Interactive GitHub Button with Glow */}
+                      <motion.button
+                        whileTap={{ scale: 0.92 }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open("https://github.com/puneetgoswami1", "_blank");
+                        }}
+                        className="inline-flex items-center gap-1.5 text-[#ffd95e] hover:text-yellow-300 text-xs font-semibold mb-3 px-2.5 py-1 rounded-lg border border-[#ffd95e]/30 hover:border-[#ffd95e] active:shadow-[0_0_15px_#ffd95e] transition-all cursor-pointer"
+                      >
+                        <FaExternalLinkAlt className="text-[10px]" /> GitHub
+                      </motion.button>
+
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.tech.map((tech, i) => (
+                          <span key={i} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
 
-            <div className="flex justify-center mt-6 sm:mt-8">
-              <button
+            {/* View All Button with Click & Glow Effect */}
+            <div className="flex justify-center mt-7">
+              <motion.button
+                whileTap={{ scale: 0.92 }}
                 onClick={() => setShowAllProjects(!showAllProjects)}
-                className="px-5 sm:px-6 py-2.5 border border-[#d4af37]/50 rounded-xl text-white text-xs sm:text-sm font-semibold flex items-center gap-2 hover:border-[#d4af37] hover:text-[#d4af37] transition-all"
+                className="px-6 py-2.5 border border-[#d4af37]/60 active:border-[#ffd95e] rounded-xl text-white text-xs sm:text-sm font-semibold active:shadow-[0_0_20px_#d4af37] hover:text-[#d4af37] transition-all cursor-pointer"
               >
-                <span className="text-xs">{showAllProjects ? "▲" : "▼"}</span>
-                {showAllProjects ? "Show Less" : `View All ${projects.length} Projects`}
-              </button>
+                {showAllProjects ? "▲ Show Less" : `▼ View All ${projects.length} Projects`}
+              </motion.button>
             </div>
           </section>
 
           {/* LEADERSHIP */}
-          <section id="Leadership" className="py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+          <section id="Leadership" className="py-6 md:py-20">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <FaUsers className="text-[#d4af37] text-base sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                 Leadership & Involvement
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -690,57 +705,47 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6 text-[#ffd95e]">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
-                <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Stanford SERIS Scholar</h3>
-                <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">Stanford University School of Engineering</p>
-                <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Dec 2024 - Feb 2025</p>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                  Competitively selected as 1 of 23 undergraduates across the U.S. for Stanford’s Engineering Research Introduction Scholar Program.
-                </p>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
-                <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Break Through Tech AI Fellow</h3>
-                <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">Break Through Tech (Cornell University)</p>
-                <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Mar 2025 - Jun 2025</p>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                  Selected as one of 1,000 fellows nationwide for a rigorous AI/ML program. Completed ML coursework and AI Studio projects.
-                </p>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
-                <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Girls Who Code Club — President</h3>
-                <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">College of San Mateo</p>
-                <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Apr 2024 - May 2025</p>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                  Founded and led the Girls Who Code Club, organizing coding workshops and community outreach to promote diversity in STEM.
-                </p>
-              </div>
+            <div className="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+              {[
+                { title: "Stanford SERIS Scholar", org: "Stanford School of Engineering", date: "Dec 2024 - Feb 2025", desc: "1 of 23 undergraduates selected nationwide for research introduction." },
+                { title: "Break Through Tech Fellow", org: "Cornell University", date: "Mar 2025 - Jun 2025", desc: "Completed hands-on machine learning AI studio programs." },
+                { title: "Girls Who Code — President", org: "College of San Mateo", date: "Apr 2024 - May 2025", desc: "Organized technical workshops to promote diversity in STEM." }
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 active:border-[#d4af37]/40 transition-colors"
+                >
+                  <h3 className="text-white text-base font-bold mb-1">{item.title}</h3>
+                  <p className="text-[#d4af37] text-xs font-semibold">{item.org}</p>
+                  <p className="text-gray-400 text-[11px] mb-2">{item.date}</p>
+                  <p className="text-gray-300 text-xs leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
             </div>
           </section>
 
           {/* SKILLS */}
-          <section id="skills" className="scroll-mt-28 py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+          <section id="skills" className="scroll-mt-28 py-6 md:py-20">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <FaUserSecret className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                 Technical Skills
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -748,13 +753,16 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6 text-[#ffd95e]">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
+              </div>
             </div>
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
               {[
                 { title: "Languages", list: ["Python", "SQL", "Java", "C++", "JavaScript", "TypeScript", "HTML/CSS"] },
                 { title: "Frameworks", list: ["React", "Next.js", "Node.js", "Django", "Flask", "Express.js"] },
@@ -762,13 +770,17 @@ export default function Home() {
                 { title: "Libraries", list: ["Pandas", "NumPy", "Matplotlib", "SciPy", "Seaborn", "OpenAI API"] },
                 { title: "Databases", list: ["PostgreSQL", "MySQL", "Firebase", "SQLite"] },
               ].map((category, idx) => (
-                <div key={idx} className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md">
-                  <h3 className="text-[#d4af37] text-xl font-bold mb-4">{category.title}</h3>
-                  <div className="flex flex-wrap gap-2">
+                <div key={idx} className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5">
+                  <h3 className="text-[#d4af37] text-base font-bold mb-3">{category.title}</h3>
+                  <div className="flex flex-wrap gap-1.5">
                     {category.list.map((item) => (
-                      <span key={item} className="px-2.5 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">
+                      <motion.span
+                        key={item}
+                        whileTap={{ scale: 0.9 }}
+                        className="px-2.5 py-1 rounded-lg bg-white/10 text-xs text-white cursor-pointer active:border-[#d4af37]"
+                      >
                         {item}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
                 </div>
@@ -776,21 +788,18 @@ export default function Home() {
             </div>
           </section>
 
-          {/* CERTIFICATIONS */}
-          <section id="certifications" className="scroll-mt-28 py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+          {/* CERTIFICATIONS WITH GLOWING VIEW ALL */}
+          <section id="certifications" className="scroll-mt-28 py-6 md:py-20">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <FaAward className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                 Certifications
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -798,53 +807,60 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6 text-[#ffd95e]">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
+              </div>
             </div>
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-              {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
-                <div
-                  key={index}
-                  className="bg-[#111827]/70 border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col justify-between"
-                >
-                  <div className="flex justify-between items-start gap-3 sm:gap-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+              <AnimatePresence>
+                {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.35, delay: index * 0.04 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="bg-[#111827]/70 border border-white/10 rounded-2xl p-4 flex flex-col justify-between active:border-[#d4af37]/50 transition-colors"
+                  >
                     <div>
-                      <h3 className="text-white font-bold text-sm sm:text-lg">{cert.title}</h3>
-                      <p className="text-[#d4af37] font-semibold text-xs sm:text-sm mt-1 sm:mt-2">{cert.issuer}</p>
+                      <h3 className="text-white font-bold text-xs sm:text-sm">{cert.title}</h3>
+                      <p className="text-[#d4af37] text-[11px] mt-1">{cert.issuer}</p>
                     </div>
-                    <span className="text-gray-400 text-xs sm:text-sm whitespace-nowrap">{cert.date}</span>
-                  </div>
-                </div>
-              ))}
+                    <span className="text-gray-400 text-[10px] mt-2">{cert.date}</span>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
 
-            <button
-              onClick={() => setShowAllCertifications(!showAllCertifications)}
-              className="flex items-center gap-2 mx-auto mt-6 sm:mt-10 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl border border-[#d4af37]/50 text-white text-xs sm:text-sm hover:text-[#d4af37] hover:border-[#d4af37] transition-all"
-            >
-              <span className="text-xs">{showAllCertifications ? "▲" : "▼"}</span>
-              {showAllCertifications ? "Show Less" : `View All ${certifications.length} Certifications`}
-            </button>
+            <div className="flex justify-center mt-7">
+              <motion.button
+                whileTap={{ scale: 0.92 }}
+                onClick={() => setShowAllCertifications(!showAllCertifications)}
+                className="px-6 py-2.5 border border-[#d4af37]/60 active:border-[#ffd95e] rounded-xl text-white text-xs sm:text-sm font-semibold active:shadow-[0_0_20px_#d4af37] hover:text-[#d4af37] transition-all cursor-pointer"
+              >
+                {showAllCertifications ? "▲ Show Less" : `▼ View All ${certifications.length} Certifications`}
+              </motion.button>
+            </div>
           </section>
 
           {/* RECOMMENDATION */}
-          <section id="Recommendation" className="py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+          <section id="Recommendation" className="py-6 md:py-20">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <FaRegCommentDots className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                 Recommendation
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -852,41 +868,42 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
-
-            <div className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-md">
-              <FaQuoteLeft className="text-[#d4af37] text-2xl sm:text-4xl mb-3 sm:mb-6 opacity-80" />
-              <p className="text-gray-200 text-sm sm:text-base md:text-xl leading-relaxed italic">
-                "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
-              </p>
-
-              <div className="mt-5 sm:mt-8 pt-4 border-t border-white/10">
-                <h3 className="text-white text-lg sm:text-2xl font-bold">John Smith</h3>
-                <p className="text-[#d4af37] text-sm sm:text-lg font-semibold mt-1 sm:mt-2">Senior Software Engineer | AI Research Mentor</p>
-                <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Technology Industry Professional</p>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6 text-[#ffd95e]">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
               </div>
             </div>
+
+            <motion.div
+              whileTap={{ scale: 0.98 }}
+              className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-md active:border-[#d4af37]/40 transition-colors"
+            >
+              <FaQuoteLeft className="text-[#d4af37] text-2xl mb-3 opacity-80" />
+              <p className="text-gray-200 text-xs sm:text-base leading-relaxed italic">
+                "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
+              </p>
+              <div className="mt-4 pt-3 border-t border-white/10">
+                <h3 className="text-white text-base sm:text-lg font-bold">John Smith</h3>
+                <p className="text-[#d4af37] text-xs font-semibold">Senior Software Engineer | AI Research Mentor</p>
+              </div>
+            </motion.div>
           </section>
 
           {/* CONTACT */}
-          <section id="contact" className="scroll-mt-28 pt-8 md:pt-16 pb-4">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+          <section id="contact" className="scroll-mt-28 pt-6 md:pt-16 pb-4">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
-
               <HiOutlineMail className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
                 Get in Touch
               </h2>
-
               <div className="flex items-center gap-1">
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
                 <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -894,65 +911,86 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
+            {/* Centered Stars shifted UP */}
+            <div className="flex items-center justify-center -mt-1 mb-5 md:mb-6 text-[#ffd95e]">
+              <div className="flex items-center gap-1.5 md:gap-2">
+                <span className="text-[11px] md:text-base">✦</span>
+                <span className="text-xs md:text-lg">◆</span>
+                <span className="text-[11px] md:text-base">✦</span>
+              </div>
             </div>
 
-            <div className="max-w-4xl mx-auto mt-4 sm:mt-12 text-center px-2">
-              <p className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed mb-6 sm:mb-10">
+            <div className="max-w-4xl mx-auto text-center px-2">
+              <p className="text-gray-300 text-xs sm:text-base leading-relaxed mb-6">
                 I'm always open to discussing new opportunities, collaborations, or just connecting. Feel free to reach out!
               </p>
 
-              <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6">
-                <a
+              <div className="flex flex-wrap justify-center items-center gap-3">
+                <motion.a
+                  whileTap={{ scale: 0.94 }}
                   href="mailto:parasgoswami1156@gmail.com"
-                  className="w-full sm:w-auto bg-[#ebb236] text-black px-4 sm:px-6 py-3 rounded-xl font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-300 hover:scale-105"
+                  className="w-full sm:w-auto bg-[#ebb236] text-black px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:shadow-[0_0_20px_#ebb236] transition-all"
                 >
-                  <HiOutlineMail className="text-lg sm:text-2xl" />
+                  <HiOutlineMail className="text-lg" />
                   parasgoswami1156@gmail.com
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  whileTap={{ scale: 0.94 }}
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ebb236] hover:text-[#ebb236]"
+                  className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:border-[#ebb236] transition-all"
                 >
-                  <FaLinkedin className="text-lg sm:text-2xl" />
+                  <FaLinkedin className="text-lg" />
                   Follow on LinkedIn
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  whileTap={{ scale: 0.94 }}
                   href="https://github.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ebb236] hover:text-[#ebb236]"
+                  className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:border-[#ebb236] transition-all"
                 >
-                  <FaGithub className="text-lg sm:text-2xl" />
+                  <FaGithub className="text-lg" />
                   GitHub
-                </a>
+                </motion.a>
               </div>
             </div>
           </section>
 
           {/* FOOTER */}
-          <div className="mt-8 md:mt-10 pt-4 border-t border-white/10 text-center pb-2">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-0">
-              <span className="text-[#d4af37] text-xs sm:text-sm">✦ ✦ ✦</span>
-              <h3 className="text-white text-lg sm:text-2xl font-serif font-semibold">
+          <div className="mt-8 pt-4 border-t border-white/10 text-center pb-2">
+            <div className="flex items-center justify-center gap-2 mb-0">
+              <span className="text-[#d4af37] text-xs">✦ ✦ ✦</span>
+              <h3 className="text-white text-lg sm:text-xl font-serif font-semibold">
                 Puneet Goswami
               </h3>
-              <span className="text-[#d4af37] text-xs sm:text-sm">✦ ✦ ✦</span>
+              <span className="text-[#d4af37] text-xs">✦ ✦ ✦</span>
             </div>
-
-            <p className="text-gray-400 text-xs sm:text-base mt-1 sm:mt-2">
+            <p className="text-gray-400 text-xs mt-1">
               © 2026 Puneet Goswami
             </p>
           </div>
-        </motion.section>
+        </section>
       </div>
+
+      {/* "THANK YOU FOR VISITING" SMOOTH TOAST POP-UP */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.4 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#161324]/90 backdrop-blur-md border border-[#e8cb76]/60 text-white px-5 py-3 rounded-2xl shadow-[0_0_25px_rgba(232,203,118,0.4)] flex items-center gap-3 text-xs sm:text-sm whitespace-nowrap pointer-events-none"
+          >
+            <FaCheckCircle className="text-[#e8cb76] text-base sm:text-lg flex-shrink-0" />
+            <span>Thank you for visiting my portfolio! ✨</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
