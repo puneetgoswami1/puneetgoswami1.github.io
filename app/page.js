@@ -233,7 +233,6 @@ export default function Home() {
         backgroundAttachment: "fixed",
       }}
     >
-      {/* Overlay */}
       <div className="min-h-screen bg-black/50">
 
         {/* Navbar */}
@@ -272,7 +271,7 @@ export default function Home() {
           </div>
         </nav>
 
-        {/* Hero */}
+        {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {[...Array(50)].map((_, i) => (
@@ -309,8 +308,9 @@ export default function Home() {
               Data Analyst • SQL • Python
             </p>
 
+            {/* Puneet Goswami - Line wrapping fixed with whitespace-nowrap */}
             <h1
-              className="text-4xl sm:text-6xl md:text-[75px] font-bold leading-tight md:leading-none mb-6 md:mb-8"
+              className="text-[34px] sm:text-6xl md:text-[75px] font-bold leading-tight md:leading-none mb-6 md:mb-8 whitespace-nowrap"
               style={{
                 textShadow: "0 0 50px rgba(255,255,255,0.35)",
               }}
@@ -346,7 +346,6 @@ export default function Home() {
               </span>
             </div>
 
-            {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-8 md:mb-10 px-4">
               <button
                 onClick={() =>
@@ -373,7 +372,6 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Down Arrow */}
             <div className="mt-10 md:mt-20 flex justify-center">
               <FaHandPointDown className="text-[#d4af37] text-3xl md:text-4xl animate-bounce" />
             </div>
@@ -404,16 +402,17 @@ export default function Home() {
             ᗐ
           </motion.div>
 
+          {/* About Heading */}
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="flex items-center justify-center gap-3 sm:gap-6 mb-6 md:mb-8"
+            className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-2 md:mb-4"
           >
             <div className="flex gap-1">
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
-            <FaBookOpen className="text-[#d4af37] text-xl sm:text-3xl" />
+            <FaBookOpen className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
             <motion.h2
               whileHover={{
                 scale: 1.08,
@@ -422,30 +421,29 @@ export default function Home() {
               }}
               whileTap={{ scale: 0.88, rotate: -1 }}
               transition={{ duration: 0.3 }}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap"
             >
               About Me
             </motion.h2>
             <div className="flex gap-1">
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
           </motion.div>
 
-          <div className="flex items-center justify-center -mt-6 md:-mt-8 mb-6 md:mb-8">
-            <div className="flex items-center mx-4">
-              <span className="text-[#d4af37] text-lg sm:text-xl">✦</span>
-              <span className="text-[#d4af37] text-xl sm:text-2xl mx-2">◆</span>
-              <span className="text-[#d4af37] text-lg sm:text-xl">✦</span>
+          {/* About Stars - Centered & Shifted Up */}
+          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8 ml-0 md:ml-4">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
+              <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
+              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
             </div>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-6 md:gap-8 mb-8">
-            {/* Profile Circle - Responsive size */}
             <div className="w-36 h-36 md:w-56 md:h-56 rounded-full border-[4px] md:border-[5px] border-[#d4af37]"></div>
 
-            {/* Summary Card */}
             <div className="max-w-2xl px-2">
               <p
                 initial={{ opacity: 0, y: 150 }}
@@ -465,7 +463,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Organizations Marquee */}
+          {/* Marquee */}
           <div className="mt-6 md:mt-8 text-center">
             <h3 className="tracking-[4px] sm:tracking-[6px] text-[#d4af37] uppercase text-xs sm:text-sm mb-6 md:mb-10">
               Organizations & Platforms
@@ -484,11 +482,6 @@ export default function Home() {
                 <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
                 <span className="flex items-center gap-2"><FaDatabase /> SQL</span>
                 <span className="flex items-center gap-2"><FaPython /> Python</span>
-                <span className="flex items-center gap-2"><FaLinkedin /> LinkedIn</span>
-                <span className="flex items-center gap-2"><FaGithub /> GitHub</span>
-                <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
-                <span className="flex items-center gap-2"><FaDatabase /> SQL</span>
-                <span className="flex items-center gap-2"><FaPython /> Python</span>
               </div>
             </div>
           </div>
@@ -496,14 +489,14 @@ export default function Home() {
           {/* Education Heading */}
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="flex items-center justify-center gap-3 sm:gap-6 mt-16 md:mt-28 mb-6 md:mb-8"
+            className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 md:mt-28 mb-2 md:mb-4"
           >
             <div className="flex gap-1">
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
-            <FaGraduationCap className="text-[#d4af37] text-xl sm:text-3xl" />
+            <FaGraduationCap className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
             <motion.h2
               whileHover={{
                 scale: 1.08,
@@ -512,22 +505,23 @@ export default function Home() {
               }}
               whileTap={{ scale: 0.88, rotate: -1 }}
               transition={{ duration: 0.3 }}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap"
             >
               Education
             </motion.h2>
             <div className="flex gap-1">
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
           </motion.div>
 
-          <div className="flex items-center justify-center -mt-6 md:-mt-8 mb-6 md:mb-8">
-            <div className="flex items-center mx-4">
-              <span className="text-[#d4af37] text-lg sm:text-xl">✦</span>
-              <span className="text-[#d4af37] text-xl sm:text-2xl mx-2">◆</span>
-              <span className="text-[#d4af37] text-lg sm:text-xl">✦</span>
+          {/* Education Stars - Centered & Shifted Up */}
+          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8 ml-0 md:ml-12">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
+              <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
+              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
             </div>
           </div>
 
@@ -569,35 +563,36 @@ export default function Home() {
 
           {/* EXPERIENCE */}
           <div id="experience" className="scroll-mt-28 text-center my-10 md:my-20">
-            <div className="flex items-center justify-center gap-3 sm:gap-4">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2">
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <FaBriefcase className="text-[#d4af37] text-xl sm:text-2xl" />
+              <FaBriefcase className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:drop-shadow-[0_0_15px_#d4af37] hover:scale-105 active:scale-95">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:drop-shadow-[0_0_15px_#d4af37] hover:scale-105 active:scale-95 whitespace-nowrap">
                 Experience
               </h2>
 
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="w-full flex justify-center">
-              <div className="flex items-center mx-4">
-                <span className="text-[#d4af37] text-lg sm:text-xl">✦</span>
-                <span className="text-[#d4af37] text-xl sm:text-2xl mx-2">◆</span>
-                <span className="text-[#d4af37] text-lg sm:text-xl">✦</span>
+            {/* Experience Stars */}
+            <div className="w-full flex justify-center mb-6 md:mb-8">
+              <div className="flex items-center justify-center gap-1.5 md:gap-2 ml-0 md:ml-12">
+                <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
+                <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
+                <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
               </div>
             </div>
 
-            <div className="relative max-w-6xl mx-auto py-8 md:py-20">
+            <div className="relative max-w-6xl mx-auto py-4 md:py-20">
               <div className="absolute left-1/2 top-[120px] h-[1050px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
 
               {experiences.map((exp, index) => (
@@ -607,7 +602,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
-                  className="relative mb-8 md:mb-16"
+                  className="relative mb-6 sm:mb-16"
                 >
                   <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-10">
                     <div className="w-14 h-14 rounded-full border-[3px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
@@ -632,7 +627,7 @@ export default function Home() {
                             {exp.role}
                           </p>
                         </div>
-                        <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[120px]">
+                        <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[110px]">
                           {exp.date}
                         </span>
                       </div>
@@ -641,9 +636,9 @@ export default function Home() {
                         {exp.points.map((point, i) => (
                           <li
                             key={i}
-                            className="flex items-start gap-3 sm:gap-4 text-gray-300 leading-6 sm:leading-8 text-xs sm:text-[15px]"
+                            className="flex items-start gap-2.5 sm:gap-4 text-gray-300 leading-6 sm:leading-8 text-xs sm:text-[15px]"
                           >
-                            <span className="text-[#d4af37] mt-[3px] sm:mt-[6px] text-base sm:text-lg flex-shrink-0">•</span>
+                            <span className="text-[#d4af37] mt-[2px] sm:mt-[6px] text-base sm:text-lg flex-shrink-0">•</span>
                             <p className="text-left max-w-[95%]">{point}</p>
                           </li>
                         ))}
@@ -667,34 +662,35 @@ export default function Home() {
           </div>
 
           {/* Research Section */}
-          <section id="research" className="py-10 md:py-24">
-            <div className="flex items-center justify-center gap-3 sm:gap-4 -mt-4 md:-mt-8">
-              <div className="flex items-center justify-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+          <section id="research" className="py-8 md:py-24">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+              <div className="flex items-center gap-1">
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <FaFlask className="text-[#d4af37] text-lg sm:text-xl" />
+              <FaFlask className="text-[#d4af37] text-base sm:text-xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
                 Research & Publications
               </h2>
 
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="flex justify-center gap-3 mt-1 text-[#ffd95e] text-xl sm:text-2xl">
-              <span>✦</span>
-              <span>◆</span>
-              <span>✦</span>
+            {/* Research Stars */}
+            <div className="flex justify-center items-center gap-1.5 md:gap-4 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
+              <span className="text-xs md:text-2xl">✦</span>
+              <span className="text-sm md:text-2xl">◆</span>
+              <span className="text-xs md:text-2xl">✦</span>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8 mt-6 sm:mt-8">
+            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
               {/* Card 3 */}
               <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-500">
                 <div className="flex justify-between items-start mb-3">
@@ -774,34 +770,35 @@ export default function Home() {
           </section>
 
           {/* Project Section */}
-          <section id="projects" className="scroll-mt-28 py-10 md:py-24">
-            <div className="flex items-center justify-center gap-3 sm:gap-4 -mt-4 md:-mt-8">
-              <div className="flex items-center justify-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+          <section id="projects" className="scroll-mt-28 py-8 md:py-24">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+              <div className="flex items-center gap-1">
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <FaLightbulb className="text-[#d4af37] text-xl sm:text-2xl" />
+              <FaLightbulb className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
                 Project
               </h2>
 
-              <div className="flex items-center justify-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="flex items-center gap-1">
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="flex justify-center gap-2 mt-1 text-[#ffd95e] text-xl sm:text-2xl">
-              <span>✦</span>
-              <span>◆</span>
-              <span>✦</span>
+            {/* Project Stars */}
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+              <span className="text-xs md:text-2xl">✦</span>
+              <span className="text-sm md:text-2xl">◆</span>
+              <span className="text-xs md:text-2xl">✦</span>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mt-6 sm:mt-8">
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
               {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
                 <motion.div
                   key={index}
@@ -849,34 +846,35 @@ export default function Home() {
           </section>
 
           {/* Leadership & Involvement Section */}
-          <section id="Leadership" className="py-10 md:py-24">
-            <div className="flex items-center justify-center gap-3 sm:gap-4 -mt-4 md:-mt-8">
-              <div className="flex items-center justify-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+          <section id="Leadership" className="py-8 md:py-24">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
+              <div className="flex items-center gap-1">
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <FaUsers className="text-[#d4af37] text-xl sm:text-2xl" />
+              <FaUsers className="text-[#d4af37] text-base sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 text-center">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
                 Leadership & Involvement
               </h2>
 
-              <div className="flex items-center justify-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="flex items-center gap-1">
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="flex justify-center gap-2 mt-1 text-[#ffd95e] text-xl sm:text-2xl">
-              <span>✦</span>
-              <span>◆</span>
-              <span>✦</span>
+            {/* Leadership Stars */}
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+              <span className="text-xs md:text-2xl">✦</span>
+              <span className="text-sm md:text-2xl">◆</span>
+              <span className="text-xs md:text-2xl">✦</span>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
+            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
               <motion.div
                 whileHover={{ y: -8 }}
                 className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_25px_#d4af37] hover:scale-105 transition-all duration-300"
@@ -916,150 +914,152 @@ export default function Home() {
           </section>
 
           {/* Technical Skills */}
-          <section id="skills" className="scroll-mt-28 py-10 md:py-24">
-            <div className="flex items-center justify-center gap-3 sm:gap-4 -mt-4 md:-mt-8">
+          <section id="skills" className="scroll-mt-28 py-8 md:py-24">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <FaUserSecret className="text-[#d4af37] text-xl sm:text-2xl" />
+              <FaUserSecret className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
                 Technical Skills
               </h2>
 
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="flex justify-center gap-2 mt-1 text-[#ffd95e] text-xl sm:text-2xl">
-              <span>✦</span>
-              <span>◆</span>
-              <span>✦</span>
+            {/* Skills Stars */}
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+              <span className="text-xs md:text-2xl">✦</span>
+              <span className="text-sm md:text-2xl">◆</span>
+              <span className="text-xs md:text-2xl">✦</span>
+            </div>
+
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+              {/* Languages */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
+              >
+                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Languages</h3>
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {["Java", "Python", "C++", "SQL", "JavaScript", "TypeScript", "PHP", "HTML/CSS", "Julia", "LaTeX", "MatLab", "LangChain"].map((item) => (
+                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Frameworks */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
+              >
+                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Frameworks</h3>
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {["React", "Node.js", "Next.js", "WordPress", "GraphQL", "Django", "Flask", "Express.js"].map((item) => (
+                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Developer Tools */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
+              >
+                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Developer Tools</h3>
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {["Git", "GitHub", "GitLab", "Docker", "Kubernetes", "VS Code", "JIRA"].map((item) => (
+                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Libraries */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
+              >
+                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Libraries</h3>
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {["Pandas", "NumPy", "Matplotlib", "Mayavi", "SciPy", "Seaborn", "OpenAI API"].map((item) => (
+                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Databases */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
+              >
+                <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Databases</h3>
+                <div className="flex flex-wrap gap-2 sm:gap-3">
+                  {["PostgreSQL", "MySQL", "Firebase", "SQLite"].map((item) => (
+                    <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </section>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mt-4 sm:mt-12">
-            {/* Languages */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-            >
-              <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Languages</h3>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {["Java", "Python", "C++", "SQL", "JavaScript", "TypeScript", "PHP", "HTML/CSS", "Julia", "LaTeX", "MatLab", "LangChain"].map((item) => (
-                  <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Frameworks */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-            >
-              <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Frameworks</h3>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {["React", "Node.js", "Next.js", "WordPress", "GraphQL", "Django", "Flask", "Express.js"].map((item) => (
-                  <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Developer Tools */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-            >
-              <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Developer Tools</h3>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {["Git", "GitHub", "GitLab", "Docker", "Kubernetes", "VS Code", "JIRA"].map((item) => (
-                  <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Libraries */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-            >
-              <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Libraries</h3>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {["Pandas", "NumPy", "Matplotlib", "Mayavi", "SciPy", "Seaborn", "OpenAI API"].map((item) => (
-                  <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Databases */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-              className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md"
-            >
-              <h3 className="text-[#d4af37] text-xl sm:text-2xl font-bold mb-4 sm:mb-5">Databases</h3>
-              <div className="flex flex-wrap gap-2 sm:gap-3">
-                {["PostgreSQL", "MySQL", "Firebase", "SQLite"].map((item) => (
-                  <span key={item} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-white text-xs sm:text-sm border border-white/10 hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-all">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
           {/* Certifications */}
-          <section id="certifications" className="scroll-mt-28 py-10 md:py-24">
-            <div className="flex items-center justify-center gap-3 sm:gap-4 -mt-4 md:-mt-8">
+          <section id="certifications" className="scroll-mt-28 py-8 md:py-24">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <FaAward className="text-[#d4af37] text-xl sm:text-2xl" />
+              <FaAward className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
                 Certifications
               </h2>
 
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="flex justify-center gap-2 mt-1 text-[#ffd95e] text-xl sm:text-2xl">
-              <span>✦</span>
-              <span>◆</span>
-              <span>✦</span>
+            {/* Certifications Stars */}
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+              <span className="text-xs md:text-2xl">✦</span>
+              <span className="text-sm md:text-2xl">◆</span>
+              <span className="text-xs md:text-2xl">✦</span>
             </div>
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
                 <motion.div
                   key={index}
@@ -1089,45 +1089,46 @@ export default function Home() {
           </section>
 
           {/* Recommendation Section */}
-          <section id="Recommendation" className="py-10 md:py-24">
-            <div className="flex items-center justify-center gap-3 sm:gap-4 -mt-4 md:-mt-8">
+          <section id="Recommendation" className="py-8 md:py-24">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <FaRegCommentDots className="text-[#d4af37] text-xl sm:text-2xl" />
+              <FaRegCommentDots className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
                 Recommendation
               </h2>
 
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="flex justify-center gap-2 mt-1 text-[#ffd95e] text-xl sm:text-2xl">
-              <span>✦</span>
-              <span>◆</span>
-              <span>✦</span>
+            {/* Recommendation Stars */}
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+              <span className="text-xs md:text-2xl">✦</span>
+              <span className="text-sm md:text-2xl">◆</span>
+              <span className="text-xs md:text-2xl">✦</span>
             </div>
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="max-w-6xl mx-auto mt-8 sm:mt-16 bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-md"
+              className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-md"
             >
-              <FaQuoteLeft className="text-[#d4af37] text-2xl sm:text-4xl mb-4 sm:mb-6 opacity-80" />
+              <FaQuoteLeft className="text-[#d4af37] text-2xl sm:text-4xl mb-3 sm:mb-6 opacity-80" />
               <p className="text-gray-200 text-sm sm:text-base md:text-xl leading-relaxed italic">
                 "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work. His ability to learn quickly and adapt to new technologies makes him a valuable contributor to any team."
               </p>
 
-              <div className="mt-6 sm:mt-8 pt-4 border-t border-white/10">
+              <div className="mt-5 sm:mt-8 pt-4 border-t border-white/10">
                 <h3 className="text-white text-lg sm:text-2xl font-bold">John Smith</h3>
                 <p className="text-[#d4af37] text-sm sm:text-lg font-semibold mt-1 sm:mt-2">Senior Software Engineer | AI Research Mentor</p>
                 <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Technology Industry Professional</p>
@@ -1136,34 +1137,35 @@ export default function Home() {
           </section>
 
           {/* Get in Touch */}
-          <section id="contact" className="scroll-mt-28 pt-10 md:pt-16 pb-4">
-            <div className="flex items-center justify-center gap-3 sm:gap-4 -mt-4 md:-mt-8">
+          <section id="contact" className="scroll-mt-28 pt-8 md:pt-16 pb-4">
+            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
 
-              <HiOutlineMail className="text-[#d4af37] text-xl sm:text-2xl" />
+              <HiOutlineMail className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
                 Get in Touch
               </h2>
 
               <div className="flex items-center gap-1">
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-3 md:w-4 h-1.5 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
               </div>
             </div>
 
-            <div className="flex justify-center gap-2 mt-1 text-[#ffd95e] text-xl sm:text-2xl">
-              <span>✦</span>
-              <span>◆</span>
-              <span>✦</span>
+            {/* Contact Stars */}
+            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e] ml-0 md:ml-8">
+              <span className="text-xs md:text-2xl">✦</span>
+              <span className="text-sm md:text-2xl">◆</span>
+              <span className="text-xs md:text-2xl">✦</span>
             </div>
 
-            <div className="max-w-4xl mx-auto mt-6 sm:mt-12 text-center px-2">
+            <div className="max-w-4xl mx-auto mt-4 sm:mt-12 text-center px-2">
               <p className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed mb-6 sm:mb-10">
                 I'm always open to discussing new opportunities, collaborations, or just connecting. Feel free to reach out!
               </p>
