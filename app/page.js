@@ -202,161 +202,167 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO SECTION - SHOOTING STAR ONLY INSIDE HERO SKY */}
-      <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-4 overflow-hidden">
-        {/* 1. REALISTIC SHOOTING METEOR (Sirf Upar Aasmaan Me - Text Se Dur) */}
-        <motion.div
-          className="absolute pointer-events-none z-0 transform -rotate-[30deg]"
-          style={{
-            width: "85px",
-            height: "1px",
-            background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.6) 60%, #ffffff 100%)",
-            boxShadow: "0 0 4px #ffd95e",
-          }}
-          initial={{ top: "3%", left: "85%", opacity: 0 }}
-          animate={{
-            top: ["3%", "14%"],
-            left: ["85%", "52%"],
-            opacity: [0, 0.9, 0.6, 0],
-          }}
-          transition={{
-            duration: 0.85,
-            repeat: Infinity,
-            repeatDelay: 5,
-            ease: "easeOut",
-          }}
-        />
+      {/* HERO SECTION - MOBILE SPACING & SKY ANIMATIONS FIXED */}
+        <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-20 sm:pt-28 pb-6 sm:pb-8 overflow-hidden">
+          
+          {/* 1. REALISTIC SHOOTING METEOR (Pura Sky Cross Karega Niche Tak) */}
+          <motion.div
+            className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
+            style={{
+              width: "130px",
+              height: "1.5px",
+              background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.7) 60%, #ffffff 100%)",
+              boxShadow: "0 0 8px rgba(255,217,94,0.9)",
+            }}
+            initial={{ top: "-5%", left: "95%", opacity: 0 }}
+            animate={{
+              top: ["-5%", "48%"],
+              left: ["95%", "5%"],
+              opacity: [0, 1, 0.8, 0],
+            }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+              repeatDelay: 5,
+              ease: "easeOut",
+            }}
+          />
 
-        {/* 2. BACKGROUND STARS (Sirf Upar Aasmaan Me 0% se 34% Tak) */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-          {[...Array(16)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute text-yellow-100/35 animate-pulse"
+          {/* 2. REALISTIC TWINKLING STARS IN SKY */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+            {[...Array(35)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute text-yellow-100/50 animate-pulse"
+                style={{
+                  left: `${(i * 13) % 94 + 3}%`,
+                  top: `${(i * 17) % 52 + 2}%`, // Sky area cover karega
+                  animationDuration: `${2 + (i % 4) * 0.8}s`,
+                  animationDelay: `${(i % 5) * 0.4}s`,
+                  fontSize: `${(i % 3 === 0 ? 3.5 : (i % 2 === 0 ? 2.5 : 1.5))}px`,
+                  opacity: (i % 3 === 0 ? 0.8 : 0.4),
+                }}
+              >
+                ✦
+              </div>
+            ))}
+          </div>
+
+          {/* 3. HERO CONTENT - PERFECT MOBILE SPACING */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl w-full my-auto z-10 flex flex-col items-center justify-center pt-2 sm:pt-0"
+          >
+            {/* Top 4-Point Sparkle Star */}
+            <motion.div variants={itemVariants} className="flex justify-center mb-3 sm:mb-4">
+              <span className="text-[#e8cb76] text-2xl sm:text-3xl drop-shadow-[0_0_14px_rgba(232,203,118,0.8)]">
+                ✦
+              </span>
+            </motion.div>
+
+            {/* Subtitle Role */}
+            <motion.p
+              variants={itemVariants}
+              className="uppercase tracking-[3.5px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3 sm:mb-4"
+            >
+              DATA ANALYST • SQL • PYTHON
+            </motion.p>
+
+            {/* Name - Elegant Golden Serif */}
+            <motion.h1
+              variants={itemVariants}
+              className="font-serif text-[38px] sm:text-6xl md:text-[76px] font-medium tracking-normal mb-3 sm:mb-4 leading-tight whitespace-nowrap"
               style={{
-                left: `${(i * 19) % 94 + 3}%`,
-                top: `${(i * 7) % 32 + 2}%`, // Sirf sky ke hisse me rahega
-                animationDuration: `${3 + (i % 3)}s`,
-                fontSize: `${(i % 2) + 2.5}px`,
+                color: "#e8cb76",
+                textShadow: "0 0 35px rgba(232,203,118,0.4)",
               }}
             >
-              ✦
-            </div>
-          ))}
-        </div>
+              Puneet Goswami
+            </motion.h1>
 
-        {/* Hero Content Stagger Motion on Load / Refresh */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl w-full my-auto z-10"
-        >
-          {/* Top Sparkle Star */}
-          <motion.div variants={itemVariants} className="flex justify-center mb-2.5">
-            <span className="text-[#e8cb76] text-2xl drop-shadow-[0_0_12px_rgba(232,203,118,0.7)]">
-              ✦
-            </span>
-          </motion.div>
+            {/* Tagline */}
+            <motion.h2
+              variants={itemVariants}
+              className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-5 sm:mb-6"
+            >
+              Data Analyst • AI Researcher
+            </motion.h2>
 
-          {/* Subtitle */}
-          <motion.p
-            variants={itemVariants}
-            className="uppercase tracking-[3px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3"
-          >
-            DATA ANALYST • SQL • PYTHON
-          </motion.p>
+            {/* Location & Degree Divider */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-6 sm:mb-7"
+            >
+              <span className="flex items-center gap-1.5">
+                <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
+                Rajasthan, India
+              </span>
+              <span className="text-gray-500">|</span>
+              <span className="flex items-center gap-1.5">
+                <FaGraduationCap className="text-[#e8cb76] text-sm" />
+                BCA ICFAI University
+              </span>
+            </motion.div>
 
-          {/* Golden Serif Name (Heba Alazzeh Style) */}
-          <motion.h1
-            variants={itemVariants}
-            className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-tight mb-2 sm:mb-3 leading-none whitespace-nowrap"
-            style={{
-              color: "#e8cb76",
-              textShadow: "0 0 35px rgba(232,203,118,0.35)",
-            }}
-          >
-            Puneet Goswami
-          </motion.h1>
+            {/* Tags / Pills */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-7 sm:mb-8"
+            >
+              {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
+                <motion.span
+                  key={item}
+                  whileTap={{ scale: 0.94 }}
+                  className="px-4 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/15 text-gray-200 cursor-pointer active:border-[#e8cb76] transition-colors"
+                >
+                  {item}
+                </motion.span>
+              ))}
+            </motion.div>
 
-          <motion.h2
-            variants={itemVariants}
-            className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-4 sm:mb-5"
-          >
-            Data Analyst • AI Researcher
-          </motion.h2>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-5"
-          >
-            <span className="flex items-center gap-1.5">
-              <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
-              Rajasthan, India
-            </span>
-            <span className="text-gray-500">|</span>
-            <span className="flex items-center gap-1.5">
-              <FaGraduationCap className="text-[#e8cb76] text-sm" />
-              BCA ICFAI University
-            </span>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-6"
-          >
-            {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
-              <motion.span
-                key={item}
-                whileTap={{ scale: 0.94 }}
-                className="px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/10 text-gray-200 cursor-pointer active:border-[#e8cb76]"
+            {/* Action Buttons */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 w-full max-w-[340px] sm:max-w-md mx-auto"
+            >
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-3 sm:py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
               >
-                {item}
-              </motion.span>
-            ))}
+                <span>☆</span> Explore My Work
+              </motion.button>
+
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() =>
+                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-3 sm:py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
+              >
+                Get In Touch
+              </motion.button>
+            </motion.div>
           </motion.div>
 
-          {/* Action Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 max-w-md mx-auto"
-          >
-            <motion.button
-              whileTap={{ scale: 0.95 }}
+          {/* Downward Chevron */}
+          <div className="z-20 mt-auto pt-2">
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
               onClick={() =>
-                document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" })
+                document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
               }
-              className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-2.5 sm:py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
+              className="cursor-pointer p-2 text-[#ebb236]/90 hover:text-[#ebb236]"
             >
-              <span>☆</span> Explore My Work
-            </motion.button>
-
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-2.5 sm:py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
-            >
-              Get In Touch
-            </motion.button>
-          </motion.div>
-        </motion.div>
-
-        {/* Minimalist Down Chevron */}
-        <div className="z-20 mt-auto pt-2">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            onClick={() =>
-              document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
-            }
-            className="cursor-pointer p-2 text-[#ebb236]/90 hover:text-[#ebb236]"
-          >
-            <FaChevronDown className="text-xl" />
-          </motion.div>
-        </div>
-      </section>
+              <FaChevronDown className="text-xl" />
+            </motion.div>
+          </div>
+        </section>
 
       {/* ABOUT ME */}
       <section
