@@ -155,7 +155,7 @@ export default function Home() {
       {/* FIXED BACKGROUND LAYER - ZERO ZOOM & ZERO LAG */}
       <div
         className="fixed inset-0 -z-20 bg-cover bg-center pointer-events-none transform-gpu"
-        style={{ backgroundImage: "url('/mosq.jpg')" }}
+        style={{ backgroundImage: "url('/kp.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]" />
       </div>
@@ -245,7 +245,7 @@ export default function Home() {
                   scale: [0.75, 1.25, 0.75],
                 }}
                 transition={{
-                  duration: 1.6 + (i % 4) * 0.4,
+                  duration: 3 + (i % 4) * 0.8,
                   repeat: Infinity,
                   delay: (i % 7) * 0.3,
                   ease: "easeInOut",
