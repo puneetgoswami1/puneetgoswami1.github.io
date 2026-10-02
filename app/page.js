@@ -34,12 +34,6 @@ export default function Home() {
   const toastShownRef = useRef(false);
 
   useEffect(() => {
-
-    const triggerHaptic = () => {
-  if (typeof window !== "undefined" && window.navigator && window.navigator.vibrate) {
-    window.navigator.vibrate(25); // 25ms ka light tactile vibration
-  }
-};
     history.scrollRestoration = "manual";
     if (window.location.hash) {
       history.replaceState(null, "", window.location.pathname);
@@ -49,7 +43,6 @@ export default function Home() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      // Toast popup detection at page bottom
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -65,25 +58,10 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // First Load / Refresh Stagger Animation
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-    },
+  const triggerHaptic = () => {
+    if (typeof window !== "undefined" && window.navigator && window.navigator.vibrate) {
+      window.navigator.vibrate(25);
+    }
   };
 
   const certifications = [
@@ -158,273 +136,288 @@ export default function Home() {
 
   return (
     <main className="min-h-screen text-white overflow-x-hidden relative select-none">
-    
-      {/* FIXED BACKGROUND LAYER - ZERO ZOOM & ZERO LAG */}
-     
-<div
-  className="fixed inset-0 -z-20 pointer-events-none"
-  style={{
-    backgroundImage: "url('/kp.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    transform: "translate3d(0, 0, 0)", // GPU compositor layer par lock
-    WebkitTransform: "translate3d(0, 0, 0)",
-    backfaceVisibility: "hidden",
-    WebkitBackfaceVisibility: "hidden",
-  }}
->
-  <div className="absolute inset-0 bg-black/55" />
-</div>
+      {/* 1. FIXED BACKGROUND LAYER (NO SHAKE / NO JITTER) */}
+      <div
+        className="fixed inset-0 -z-20 pointer-events-none"
+        style={{
+          backgroundImage: "url('/kp.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          transform: "translate3d(0, 0, 0)",
+          WebkitTransform: "translate3d(0, 0, 0)",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]" />
+      </div>
 
       {/* NAVBAR */}
       <nav
-        className={`fixed top-0 left-0 w-full px-5 sm:px-8 py-4 sm:py-5 flex justify-between items-center z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-black/80 backdrop-blur-md border-b border-white/10 shadow-lg"
+            ? "bg-black/75 backdrop-blur-md border-b border-white/10 shadow-lg"
             : "bg-transparent"
         }`}
       >
-        <h1 className="text-xl sm:text-2xl font-serif font-black tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] transition-colors">
+        <h1 className="text-xl sm:text-2xl font-black tracking-wide text-[#d4af37] cursor-pointer hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_20px_#facc15] transition-all duration-300">
           P.G.
         </h1>
         <ul className="hidden lg:flex items-center gap-6 text-sm text-white font-medium">
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#about">About</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#experience">Experience</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#projects">Projects</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#skills">Skills</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#certifications">Certifications</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#contact">Contact</a></li>
+          <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold">
+            <a href="#about">About</a>
+          </li>
+          <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold">
+            <a href="#experience">Experience</a>
+          </li>
+          <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold">
+            <a href="#projects">Projects</a>
+          </li>
+          <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold">
+            <a href="#skills">Skills</a>
+          </li>
+          <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold">
+            <a href="#certifications">Certifications</a>
+          </li>
+          <li className="hover:text-yellow-400 hover:scale-110 active:scale-95 hover:drop-shadow-[0_0_12px_#facc15] transition-all duration-200 cursor-pointer font-semibold">
+            <a href="#contact">Contact</a>
+          </li>
         </ul>
 
         <div className="flex items-center gap-4 sm:gap-5 text-lg sm:text-xl text-gray-300">
-          <motion.div whileTap={{ scale: 0.9 }}>
-            <FaLinkedin
-              onClick={() => window.open("https://www.linkedin.com/in/puneetgoswami-ai/", "_blank")}
-              className="hover:text-[#e8cb76] cursor-pointer transition-colors"
-            />
-          </motion.div>
-          <motion.div whileTap={{ scale: 0.9 }}>
-            <FaGithub
-              onClick={() => window.open("https://github.com/puneetgoswami1", "_blank")}
-              className="hover:text-[#e8cb76] cursor-pointer transition-colors"
-            />
-          </motion.div>
-          <motion.div whileTap={{ scale: 0.9 }}>
-            <FaEnvelope
-              onClick={() => window.location.href = "mailto:parasgoswami1156@gmail.com"}
-              className="hover:text-[#e8cb76] cursor-pointer transition-colors"
-            />
-          </motion.div>
+          <FaLinkedin
+            onClick={() => {
+              triggerHaptic();
+              window.open("https://www.linkedin.com/in/puneetgoswami-ai/", "_blank");
+            }}
+            className="hover:text-yellow-400 hover:scale-125 active:scale-90 hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.9)] transition-all duration-300 cursor-pointer"
+          />
+          <FaGithub
+            onClick={() => {
+              triggerHaptic();
+              window.open("https://github.com/puneetgoswami1", "_blank");
+            }}
+            className="hover:text-yellow-400 hover:scale-125 active:scale-90 hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.9)] transition-all duration-300 cursor-pointer"
+          />
+          <FaEnvelope
+            onClick={() => {
+              triggerHaptic();
+              window.location.href = "mailto:parasgoswami1156@gmail.com";
+            }}
+            className="hover:text-yellow-400 hover:scale-125 active:scale-90 hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.9)] transition-all duration-300 cursor-pointer"
+          />
         </div>
       </nav>
 
-      {/* HERO SECTION - MOBILE SPACING & SKY ANIMATIONS FIXED */}
-        <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-20 sm:pt-28 pb-6 sm:pb-8 overflow-hidden">
-          
-          {/* 1. REALISTIC SHOOTING METEOR (Chhota size + Smooth/Dheemi speed) */}
-          <motion.div
-            className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
-            style={{
-              width: "90px", // Size chhota kar diya (Pehle 130px tha)
-              height: "1.2px",
-              background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.85) 55%, #ffffff 100%)",
-              boxShadow: "0 0 6px #ffd95e",
-            }}
-            initial={{ top: "-5%", left: "90%", opacity: 0 }}
-            animate={{
-              top: ["-5%", "46%"],
-              left: ["90%", "10%"],
-              opacity: [0, 1, 0.8, 0],
-            }}
-            transition={{
-              duration: 1.6, // Speed halki si kam kardi (Pehle 1.2s tha)
-              repeat: Infinity,
-              repeatDelay: 5,
-              ease: "easeOut",
-            }}
-          />
+      {/* HERO SECTION */}
+      <section className="min-h-[100dvh] flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-6 sm:pb-8 overflow-hidden">
+        
+        {/* REALISTIC SHOOTING METEOR IN SKY */}
+        <motion.div
+          className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
+          style={{
+            width: "90px",
+            height: "1.2px",
+            background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.85) 55%, #ffffff 100%)",
+            boxShadow: "0 0 6px #ffd95e",
+          }}
+          initial={{ top: "-5%", left: "90%", opacity: 0 }}
+          animate={{
+            top: ["-5%", "46%"],
+            left: ["90%", "10%"],
+            opacity: [0, 1, 0.8, 0],
+          }}
+          transition={{
+            duration: 1.6,
+            repeat: Infinity,
+            repeatDelay: 5,
+            ease: "easeOut",
+          }}
+        />
 
-          {/* 2. REALISTIC BLINKING STARS (Quantity badhayi + Sharp blink + Bada size) */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-            {[...Array(55)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute text-yellow-100"
-                style={{
-                  left: `${(i * 11) % 94 + 3}%`,
-                  top: `${(i * 13) % 48 + 2}%`, // Sky area me rahega
-                  fontSize: `${i % 3 === 0 ? 5 : i % 2 === 0 ? 3.5 : 2.5}px`, // Size halka sa bada kiya
-                  textShadow: i % 2 === 0 ? "0 0 4px rgba(255, 217, 94, 0.9)" : "0 0 2px rgba(255, 255, 255, 0.8)",
-                }}
-                animate={{
-                  opacity: [0.15, 1, 0.15], // Real twinkling blink effect
-                  scale: [0.75, 1.25, 0.75],
-                }}
-                transition={{
-                  duration: 3 + (i % 4) * 0.8,
-                  repeat: Infinity,
-                  delay: (i % 7) * 0.3,
-                  ease: "easeInOut",
-                }}
+        {/* 55 REALISTIC BLINKING STARS */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+          {[...Array(55)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute text-yellow-100"
+              style={{
+                left: `${(i * 11) % 94 + 3}%`,
+                top: `${(i * 13) % 48 + 2}%`,
+                fontSize: `${i % 3 === 0 ? 5 : i % 2 === 0 ? 3.5 : 2.5}px`,
+                textShadow: i % 2 === 0 ? "0 0 4px rgba(255, 217, 94, 0.9)" : "0 0 2px rgba(255, 255, 255, 0.8)",
+              }}
+              animate={{
+                opacity: [0.15, 1, 0.15],
+                scale: [0.75, 1.25, 0.75],
+              }}
+              transition={{
+                duration: 3 + (i % 4) * 0.8,
+                repeat: Infinity,
+                delay: (i % 7) * 0.3,
+                ease: "easeInOut",
+              }}
+            >
+              ✦
+            </motion.div>
+          ))}
+        </div>
+
+        {/* DESKTOP AMBIENT BOTTOM GLOW (RESTORED FROM ORIGINAL) */}
+        <motion.div
+          className="absolute bottom-0 left-0 w-full h-80 pointer-events-none z-10 hidden md:block"
+          animate={{ x: [0, 40, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="w-full h-full bg-gradient-to-t from-yellow-300/20 via-yellow-200/5 to-transparent blur-3xl" />
+        </motion.div>
+
+        {/* HERO CONTENT */}
+        <div className="max-w-4xl w-full z-10 flex flex-col items-center justify-center my-auto pt-2 pb-4">
+          <div className="flex justify-center mb-3 sm:mb-4">
+            <span className="text-[#e8cb76] text-2xl sm:text-3xl drop-shadow-[0_0_14px_rgba(232,203,118,0.8)]">
+              ✦
+            </span>
+          </div>
+
+          <p className="uppercase tracking-[3.5px] sm:tracking-[6px] text-[#facc15] text-[11px] sm:text-xs md:text-sm font-semibold mb-3 sm:mb-4">
+            DATA ANALYST • SQL • PYTHON
+          </p>
+
+          <h1
+            className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-normal mb-3 sm:mb-4 leading-tight whitespace-nowrap"
+            style={{
+              color: "#e8cb76",
+              textShadow: "0 0 35px rgba(232,203,118,0.45)",
+            }}
+          >
+            Puneet Goswami
+          </h1>
+
+          <h2 className="font-serif italic text-sm sm:text-lg md:text-2xl text-gray-300 font-light mb-5 sm:mb-6">
+            Data Analyst • AI Researcher
+          </h2>
+
+          <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-gray-300 text-xs sm:text-base mb-6 sm:mb-7">
+            <span className="flex items-center gap-1.5">
+              <FaMapMarkerAlt className="text-[#e8cb76] text-xs sm:text-base" />
+              Rajasthan, India
+            </span>
+            <span className="text-gray-500">|</span>
+            <span className="flex items-center gap-1.5">
+              <FaGraduationCap className="text-[#e8cb76] text-sm sm:text-lg" />
+              BCA ICFAI University
+            </span>
+          </div>
+
+          {/* CHIPS (ORIGINAL DESKTOP HOVER SCALE & GLOW) */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
+            {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
+              <span
+                key={item}
+                onClick={triggerHaptic}
+                className="px-4 py-2 sm:px-5 sm:py-3 text-xs sm:text-base rounded-2xl bg-black/40 border border-white/20 text-gray-200 hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] hover:scale-110 hover:shadow-[0_0_30px_rgba(212,175,55,0.8)] active:scale-95 transition-all duration-300 cursor-pointer"
               >
-                ✦
-              </motion.div>
+                {item}
+              </span>
             ))}
           </div>
 
-          {/* CONTENT BLOCK - HEBA ALAZZEH STYLE BALANCED SPACING (STARS KO TOUCH NAHI KIYA) */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="max-w-4xl w-full z-10 flex flex-col items-center justify-center my-auto pt-2 pb-4"
-          >
-            {/* Top Sparkle Star */}
-            <motion.div variants={itemVariants} className="flex justify-center mb-3 sm:mb-4">
-              <span className="text-[#e8cb76] text-2xl sm:text-3xl drop-shadow-[0_0_14px_rgba(232,203,118,0.8)]">
-                ✦
-              </span>
-            </motion.div>
-
-            {/* Subtitle */}
-            <motion.p
-              variants={itemVariants}
-              className="uppercase tracking-[3.5px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3 sm:mb-4"
-            >
-              DATA ANALYST • SQL • PYTHON
-            </motion.p>
-
-            {/* Name */}
-            <motion.h1
-              variants={itemVariants}
-              className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-normal mb-3 sm:mb-4 leading-tight whitespace-nowrap"
-              style={{
-                color: "#e8cb76",
-                textShadow: "0 0 35px rgba(232,203,118,0.4)",
+          {/* BUTTONS (ORIGINAL DESKTOP HOVER SCALE & SHADOW) */}
+          <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 w-full max-w-[340px] sm:max-w-md mx-auto">
+            <button
+              onClick={() => {
+                triggerHaptic();
+                document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
               }}
+              className="flex-1 bg-[#d4af37] text-black px-4 sm:px-8 py-3.5 rounded-2xl font-bold border border-[#d4af37] hover:scale-110 hover:shadow-[0_0_40px_rgba(212,175,55,0.9)] active:scale-95 transition-all duration-300 text-xs sm:text-base cursor-pointer"
             >
-              Puneet Goswami
-            </motion.h1>
+              ✦ Explore My Work
+            </button>
 
-            {/* Tagline */}
-            <motion.h2
-              variants={itemVariants}
-              className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-5 sm:mb-6"
+            <button
+              onClick={() => {
+                triggerHaptic();
+                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="flex-1 border border-white/30 bg-black/40 text-white font-bold px-4 sm:px-8 py-3.5 rounded-2xl backdrop-blur-md hover:bg-[#d4af37] hover:text-black hover:border-[#d4af37] hover:scale-110 hover:shadow-[0_0_40px_rgba(212,175,55,0.8)] active:scale-95 transition-all duration-300 text-xs sm:text-base cursor-pointer"
             >
-              Data Analyst • AI Researcher
-            </motion.h2>
-
-            {/* Location & Degree Divider */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-6 sm:mb-7"
-            >
-              <span className="flex items-center gap-1.5">
-                <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
-                Rajasthan, India
-              </span>
-              <span className="text-gray-500">|</span>
-              <span className="flex items-center gap-1.5">
-                <FaGraduationCap className="text-[#e8cb76] text-sm" />
-                BCA ICFAI University
-              </span>
-            </motion.div>
-
-            {/* Chips (Lemon.io, etc.) - Iska margin badhaya taaki buttons neeche push ho sakein */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-10 sm:mb-12"
-            >
-              {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
-                <motion.span
-                  key={item}
-                  whileTap={{ scale: 0.94 }}
-                  className="px-4 py-2 text-xs rounded-xl bg-black/40 border border-white/15 text-gray-200 cursor-pointer active:border-[#e8cb76] transition-colors"
-                >
-                  {item}
-                </motion.span>
-              ))}
-            </motion.div>
-
-            {/* Action Buttons - Perfect Lower Position */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 w-full max-w-[340px] sm:max-w-md mx-auto"
-            >
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-  window.navigator?.vibrate?.(25);
-  document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
-}}
-                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
-              >
-                <span>☆</span> Explore My Work
-              </motion.button>
-
-              <motion.button
-                whileTap={{ scale: 0.95 }}
-                onClick={() => {
-  window.navigator?.vibrate?.(25);
-  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-}}
-                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
-              >
-                Get In Touch
-              </motion.button>
-            </motion.div>
-          </motion.div>
-
-          {/* Downward Chevron */}
-          <div className="z-20 mt-auto pt-2">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-              onClick={() =>
-                document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="cursor-pointer p-2 text-[#ebb236]/90 hover:text-[#ebb236]"
-            >
-              <FaChevronDown className="text-xl" />
-            </motion.div>
+              Get In Touch
+            </button>
           </div>
-        </section>
+        </div>
 
-      {/* ABOUT ME */}
+        {/* DOWN CHEVRON */}
+        <div className="z-20 mt-auto pt-2">
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            onClick={() => {
+              triggerHaptic();
+              document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="cursor-pointer p-2 text-[#ebb236]/90 hover:text-[#ebb236]"
+          >
+            <FaChevronDown className="text-xl sm:text-2xl" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ABOUT ME SECTION */}
       <section
         id="about"
         className="scroll-mt-24 pt-10 pb-2 px-4 sm:px-6 bg-[#06030f] relative overflow-hidden"
       >
-        {/* Subtle Rotating Shapes on SIDES (Faint & Non-distracting) */}
+        {/* DESKTOP FLOATING ROTATING DIAMONDS (ORIGINAL CODE) */}
         <motion.div
-          className="absolute -left-10 sm:left-6 top-32 w-32 h-32 sm:w-44 sm:h-44 border border-[#d4af37]/10 pointer-events-none"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+          className="absolute left-20 top-40 w-32 h-32 border border-yellow-400/5 rotate-45 pointer-events-none hidden md:block"
+          animate={{ rotate: [45, 405] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute -right-10 sm:right-8 top-48 w-36 h-36 sm:w-48 sm:h-48 rounded-full border border-dashed border-[#d4af37]/15 pointer-events-none"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+          className="absolute right-20 top-72 w-24 h-24 border border-yellow-400/10 rotate-45 pointer-events-none hidden md:block"
+          animate={{ rotate: [45, 405] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
         />
 
-        <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-1">
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="text-[#d4af37] text-2xl md:text-3xl text-center mb-6 md:mb-10"
+        >
+          ᗐ
+        </motion.div>
+
+        {/* HEADING (RESTORED HOVER GLOW & ROTATE TAP) */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-1"
+        >
           <div className="flex gap-1">
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
           </div>
           <FaBookOpen className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+          <motion.h2
+            whileHover={{
+              scale: 1.08,
+              textShadow: "0px 0px 10px rgba(212,175,55,0.8), 0px 0px 25px rgba(212,175,55,0.6)",
+            }}
+            whileTap={{ scale: 0.88, rotate: -1 }}
+            transition={{ duration: 0.3 }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap cursor-pointer select-none"
+          >
             About Me
-          </h2>
+          </motion.h2>
           <div className="flex gap-1">
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Centered Stars shifted UP */}
+        {/* CENTERED STARS */}
         <div className="flex items-center justify-center -mt-1 mb-6 text-[#d4af37]">
           <div className="flex items-center gap-1.5 md:gap-2">
             <span className="text-[11px] md:text-base">✦</span>
@@ -433,23 +426,20 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Profile Circle */}
-        <div className="flex flex-col items-center justify-center gap-6 mb-8 relative z-10">
-          <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-[3.5px] border-[#d4af37] bg-white/5 backdrop-blur-sm shadow-[0_0_25px_rgba(212,175,55,0.15)]"></div>
+        {/* PROFILE & SUMMARY CARD (ORIGINAL HOVER SCALING & SHADOW) */}
+        <div className="flex flex-col items-center justify-center gap-6 md:gap-8 mb-8 relative z-10">
+          <div className="w-36 h-36 md:w-56 md:h-56 rounded-full border-[4px] md:border-[5px] border-[#d4af37] bg-white/5 backdrop-blur-sm shadow-[0_0_25px_rgba(212,175,55,0.2)]"></div>
 
           <div className="max-w-2xl px-2">
-            <motion.div
-              whileTap={{ scale: 0.98 }}
-              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 text-gray-300 text-sm sm:text-base leading-relaxed active:border-[#d4af37]/40 transition-colors"
-            >
+            <p className="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 text-gray-300 text-sm sm:text-base leading-relaxed transition-all duration-500 hover:scale-[1.03] hover:border-[#d4af37] hover:shadow-[0_0_40px_rgba(212,175,55,0.25)]">
               Hi, my name is Puneet and I am an aspiring Data Analyst from Jaipur. I am passionate about data analytics, business intelligence, dashboard creation and transforming raw data into meaningful insights. I enjoy working with SQL, Python, Power BI and Excel to solve real-world business problems and help organizations make data-driven decisions.
-            </motion.div>
+            </p>
           </div>
         </div>
 
-        {/* Organizations Marquee - FASTER SPEED (7s) */}
+        {/* ORGANIZATIONS MARQUEE */}
         <div className="mt-4 text-center">
-          <h3 className="tracking-[4px] text-[#d4af37] uppercase text-xs sm:text-sm mb-4">
+          <h3 className="tracking-[4px] sm:tracking-[6px] text-[#d4af37] uppercase text-xs sm:text-sm mb-4 md:mb-8 font-semibold">
             Organizations & Platforms
           </h3>
         </div>
@@ -471,24 +461,34 @@ export default function Home() {
         </div>
 
         {/* EDUCATION */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 mb-1">
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 mb-1"
+        >
           <div className="flex gap-1">
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
           </div>
           <FaGraduationCap className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+          <motion.h2
+            whileHover={{
+              scale: 1.08,
+              textShadow: "0px 0px 10px rgba(212,175,55,0.8), 0px 0px 25px rgba(212,175,55,0.6)",
+            }}
+            whileTap={{ scale: 0.88, rotate: -1 }}
+            transition={{ duration: 0.3 }}
+            className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap cursor-pointer select-none"
+          >
             Education
-          </h2>
+          </motion.h2>
           <div className="flex gap-1">
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Centered Stars shifted UP */}
         <div className="flex items-center justify-center -mt-1 mb-6 text-[#d4af37]">
           <div className="flex items-center gap-1.5 md:gap-2">
             <span className="text-[11px] md:text-base">✦</span>
@@ -499,48 +499,48 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto space-y-4">
           <motion.div
-            whileTap={{ scale: 0.98 }}
-            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-7 active:border-[#d4af37]/40 transition-colors"
+            whileHover={{ scale: 1.01 }}
+            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300"
           >
             <div className="flex justify-between items-start flex-col sm:flex-row gap-2">
               <div>
-                <h3 className="text-lg sm:text-2xl font-bold text-white">ICFAI University, Jaipur</h3>
+                <h3 className="text-lg sm:text-3xl font-bold text-white">ICFAI University, Jaipur</h3>
                 <p className="text-[#d4af37] mt-1 text-xs sm:text-base">Bachelor of Computer Application, Computer Application</p>
               </div>
               <div className="flex gap-3 items-center">
-                <span className="px-3 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs">GPA: 8.0</span>
-                <span className="text-gray-300 text-xs">May 2020 - Sep 2023</span>
+                <span className="px-3 md:px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs sm:text-sm">GPA: 8.0</span>
+                <span className="text-gray-300 text-xs sm:text-sm">May 2020 - Sep 2023</span>
               </div>
             </div>
           </motion.div>
 
           <motion.div
-            whileTap={{ scale: 0.98 }}
-            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-7 active:border-[#d4af37]/40 transition-colors"
+            whileHover={{ scale: 1.01 }}
+            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300"
           >
             <div className="flex justify-between items-start flex-wrap gap-2">
               <div>
-                <h3 className="text-lg sm:text-2xl font-bold text-white">Royal International</h3>
+                <h3 className="text-lg sm:text-3xl font-bold text-white">Royal International</h3>
                 <p className="text-[#d4af37] mt-1 text-xs sm:text-base font-semibold">Senior Secondary(+2) — CS, Physics, Chemistry, Math</p>
               </div>
               <div className="flex gap-3 items-center flex-wrap">
-                <span className="px-3 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs">GPA: 7.0</span>
-                <span className="text-gray-300 text-xs">March 2019 - May 2020</span>
+                <span className="px-3 md:px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs sm:text-sm">GPA: 7.0</span>
+                <span className="text-gray-300 text-xs sm:text-sm">March 2019 - May 2020</span>
               </div>
             </div>
           </motion.div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6">
-            <p className="text-gray-200 text-xs sm:text-sm leading-relaxed">
+          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6 hover:border-[#d4af37]/50 transition-all duration-300">
+            <p className="text-gray-200 text-xs sm:text-base leading-relaxed">
               <span className="text-white font-semibold flex items-center gap-2 mb-1.5">
-                <FaBookOpen className="text-[#d4af37]" /> Relevant Coursework:
+                <FaBookOpen className="text-[#d4af37] text-lg sm:text-xl" /> Relevant Coursework:
               </span>
-              Advanced SQL, DBMS, Data Structures & Algorithms, Python for Analytics, Statistics, Linear Algebra, Machine Learning, Business Intelligence, Data Warehousing, Power BI.
+              Advanced SQL, Database Management Systems, Data Structures & Algorithms, Python for Data Analytics, Statistical Analysis, Probability & Statistics, Linear Algebra, Calculus I-III, Data Mining, Machine Learning, Deep Learning Fundamentals, Business Intelligence, Data Warehousing, ETL Pipelines, Big Data Technologies, Predictive Modeling, Data Visualization, Microsoft Power BI, Tableau, Advanced Excel Analytics, Cloud Data Engineering, Artificial Intelligence, Object-Oriented Programming, Computer Architecture, Operations Research.
             </p>
           </div>
         </div>
 
-        {/* EXPERIENCE WITH SMOOTH TIMELINE */}
+        {/* EXPERIENCE TIMELINE (ORIGINAL DESKTOP STAGGER SLIDE & BADGES) */}
         <div id="experience" className="scroll-mt-24 text-center my-12 md:my-20">
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
             <div className="flex items-center gap-1">
@@ -549,7 +549,7 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaBriefcase className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:drop-shadow-[0_0_15px_#d4af37] hover:scale-105 active:scale-95 whitespace-nowrap">
               Experience
             </h2>
             <div className="flex items-center gap-1">
@@ -567,51 +567,58 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative max-w-6xl mx-auto py-2 md:py-14">
-            <div className="absolute left-1/2 top-[40px] h-[85%] w-[2px] bg-[#d4af37]/25 -translate-x-1/2 hidden md:block"></div>
+          <div className="relative max-w-6xl mx-auto py-2 md:py-20">
+            {/* Desktop Center Timeline Bar */}
+            <div className="absolute left-1/2 top-[120px] h-[1050px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
 
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{
+                  opacity: 0,
+                  x: typeof window !== "undefined" && window.innerWidth >= 768 ? (exp.side === "left" ? -120 : 120) : 0,
+                  y: typeof window !== "undefined" && window.innerWidth < 768 ? 30 : 0,
+                }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileTap={{ scale: 0.98 }}
-                className="relative mb-6 sm:mb-12 cursor-pointer"
+                transition={{ duration: 0.8 }}
+                className="relative mb-8 md:mb-16 cursor-pointer"
               >
-                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-8">
-                  <div className="w-12 h-12 rounded-full border-[2.5px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-                    <FaCode className="text-[#39ff88] text-xl" />
+                {/* Desktop Center Badge Icon */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-10">
+                  <div className="w-14 h-14 rounded-full border-[3px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                    <FaCode className="text-[#39ff88] text-2xl drop-shadow-[0_0_8px_#39ff88]" />
                   </div>
                 </div>
 
                 <div
-                  className={`w-full md:w-[48%] ${
-                    exp.side === "left" ? "md:mr-auto text-left" : "md:ml-auto text-left"
+                  className={`w-full md:w-[50%] ${
+                    exp.side === "left"
+                      ? "md:mr-auto md:pr-4 md:translate-y-8 text-left"
+                      : "md:ml-auto md:pl-4 md:translate-y-8 text-left"
                   }`}
                 >
-                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:border-[#d4af37]/40 active:border-[#d4af37] transition-all">
-                    <div className="flex justify-between items-start mb-2">
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 hover:border-[#d4af37]/40 transition-all duration-500">
+                    <div className="flex justify-between items-start mb-3">
                       <div>
-                        <h3 className="text-lg sm:text-xl font-bold text-white">{exp.company}</h3>
-                        <p className="text-[#d4af37] font-semibold text-sm sm:text-base">{exp.role}</p>
+                        <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">{exp.company}</h3>
+                        <p className="text-[#d4af37] font-semibold text-sm sm:text-lg mt-1">{exp.role}</p>
                       </div>
-                      <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[100px]">{exp.date}</span>
+                      <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[120px]">{exp.date}</span>
                     </div>
 
-                    <ul className="space-y-2 mb-4 text-gray-300 text-xs sm:text-sm">
+                    <ul className="space-y-3 sm:space-y-6 mb-4 sm:mb-6 mt-3 sm:mt-5">
                       {exp.points.map((point, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-[#d4af37]">•</span>
-                          <span>{point}</span>
+                        <li key={i} className="flex items-start gap-3 sm:gap-4 text-gray-300 leading-6 sm:leading-8 text-xs sm:text-[15px]">
+                          <span className="text-[#d4af37] mt-[3px] sm:mt-[6px] text-base sm:text-lg flex-shrink-0">•</span>
+                          <p className="text-left max-w-[95%]">{point}</p>
                         </li>
                       ))}
                     </ul>
 
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {exp.skills.map((skill, i) => (
-                        <span key={i} className="px-2.5 py-0.5 rounded-lg bg-white/10 text-[11px] sm:text-xs text-white">
+                        <span key={i} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">
                           {skill}
                         </span>
                       ))}
@@ -624,7 +631,7 @@ export default function Home() {
         </div>
 
         {/* RESEARCH */}
-        <section id="research" className="py-6 md:py-16">
+        <section id="research" className="py-6 md:py-24">
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
             <div className="flex items-center gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -632,7 +639,7 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaFlask className="text-[#d4af37] text-base sm:text-xl flex-shrink-0" />
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
               Research & Publications
             </h2>
             <div className="flex items-center gap-1">
@@ -650,49 +657,49 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5 max-w-6xl mx-auto">
-            <motion.div
-              whileTap={{ scale: 0.98 }}
-              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 active:border-[#d4af37]/40 transition-colors"
-            >
-              <div className="flex justify-between items-start mb-2">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[28px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 hover:scale-[1.02] transition-all duration-500">
+              <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h3 className="text-lg font-bold text-white">Research Project Three</h3>
-                  <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">AI Researcher</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Three</h3>
+                  <p className="text-[#d4af37] font-semibold text-base sm:text-lg">AI Researcher</p>
                 </div>
-                <span className="text-gray-300 text-xs">June 2024 - Present</span>
+                <span className="text-gray-300 text-xs sm:text-sm">June 2024 - Present</span>
               </div>
-              <p className="text-gray-300 text-xs sm:text-sm mb-3">Developed scalable AI architectures for large-scale biomedical image segmentation.</p>
-              <div className="flex flex-wrap gap-1.5">
+              <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
+                <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Developed advanced AI systems using machine learning pipelines.</li>
+                <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Implemented scalable architectures for large-scale data processing.</li>
+              </ul>
+              <div className="flex flex-wrap gap-2">
                 {["Python", "TensorFlow", "NLP", "LLM"].map((tag) => (
-                  <span key={tag} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">{tag}</span>
+                  <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              whileTap={{ scale: 0.98 }}
-              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 active:border-[#d4af37]/40 transition-colors"
-            >
-              <div className="flex justify-between items-start mb-2">
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[28px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 hover:scale-[1.02] transition-all duration-500">
+              <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h3 className="text-lg font-bold text-white">Research Project Four</h3>
-                  <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">AI Researcher</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Four</h3>
+                  <p className="text-[#d4af37] font-semibold text-base sm:text-lg">AI Researcher</p>
                 </div>
-                <span className="text-gray-300 text-xs">June 2024 - Present</span>
+                <span className="text-gray-300 text-xs sm:text-sm">June 2024 - Present</span>
               </div>
-              <p className="text-gray-300 text-xs sm:text-sm mb-3">Optimized deep learning models using distributed computing and PyTorch.</p>
-              <div className="flex flex-wrap gap-1.5">
+              <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
+                <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Built intelligent systems for real-time prediction and analytics.</li>
+                <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Optimized model performance through distributed computing methods.</li>
+              </ul>
+              <div className="flex flex-wrap gap-2">
                 {["PyTorch", "Deep Learning", "CV", "AI"].map((tag) => (
-                  <span key={tag} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">{tag}</span>
+                  <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* PROJECTS */}
-        <section id="projects" className="scroll-mt-24 py-6 md:py-16">
+        <section id="projects" className="scroll-mt-24 py-6 md:py-24">
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
             <div className="flex items-center gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -700,8 +707,8 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaLightbulb className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
-              Projects
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
+              Project
             </h2>
             <div className="flex items-center gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -718,39 +725,40 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
             <AnimatePresence>
               {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: index * 0.04 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 flex flex-col justify-between hover:border-[#d4af37]/40 active:border-[#d4af37] transition-all"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:border-[#d4af37]/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.25)] flex flex-col justify-between"
                 >
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-1.5">{project.title}</h3>
-                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4">{project.desc}</p>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 transition-all duration-300 group-hover:text-[#ffd95e]">
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-300 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-5">
+                      {project.desc}
+                    </p>
                   </div>
 
                   <div>
-                    {/* Glowing GitHub Link Button */}
-                    <motion.button
-                      whileTap={{ scale: 0.92 }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        window.open("https://github.com/puneetgoswami1", "_blank");
-                      }}
-                      className="inline-flex items-center gap-1.5 text-[#ffd95e] hover:text-yellow-300 text-xs font-semibold mb-3 px-2.5 py-1 rounded-lg border border-[#ffd95e]/30 hover:border-[#ffd95e] active:shadow-[0_0_15px_#ffd95e] transition-all cursor-pointer"
+                    <a
+                      href="https://github.com/puneetgoswami1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={triggerHaptic}
+                      className="flex items-center gap-2 text-[#ffd95e] font-semibold text-xs sm:text-sm mb-3 sm:mb-4 transition-all duration-300 hover:scale-105 hover:text-[#fff176] hover:drop-shadow-[0_0_12px_#ffd95e]"
                     >
-                      <FaExternalLinkAlt className="text-[10px]" /> GitHub
-                    </motion.button>
+                      <FaExternalLinkAlt /> GitHub
+                    </a>
 
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech, i) => (
-                        <span key={i} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">
+                        <span key={i} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">
                           {tech}
                         </span>
                       ))}
@@ -761,20 +769,22 @@ export default function Home() {
             </AnimatePresence>
           </div>
 
-          {/* View All Button */}
-          <div className="flex justify-center mt-7">
-            <motion.button
-              whileTap={{ scale: 0.92 }}
-              onClick={() => setShowAllProjects(!showAllProjects)}
-              className="px-6 py-2.5 border border-[#d4af37]/60 active:border-[#ffd95e] rounded-xl text-white text-xs sm:text-sm font-semibold active:shadow-[0_0_20px_#d4af37] hover:text-[#d4af37] transition-all cursor-pointer"
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => {
+                triggerHaptic();
+                setShowAllProjects(!showAllProjects);
+              }}
+              className="px-6 py-2.5 border border-[#d4af37]/50 rounded-xl text-white text-xs sm:text-sm font-semibold flex items-center gap-2 hover:border-[#d4af37] hover:text-[#d4af37] hover:shadow-[0_0_20px_#d4af37] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
             >
-              {showAllProjects ? "▲ Show Less" : `▼ View All ${projects.length} Projects`}
-            </motion.button>
+              <span className="text-xs">{showAllProjects ? "▲" : "▼"}</span>
+              {showAllProjects ? "Show Less" : `View All ${projects.length} Projects`}
+            </button>
           </div>
         </section>
 
         {/* LEADERSHIP */}
-        <section id="Leadership" className="py-6 md:py-16">
+        <section id="Leadership" className="py-6 md:py-24">
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
             <div className="flex items-center gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -782,7 +792,7 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaUsers className="text-[#d4af37] text-base sm:text-2xl flex-shrink-0" />
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
               Leadership & Involvement
             </h2>
             <div className="flex items-center gap-1">
@@ -800,28 +810,28 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
             {[
               { title: "Stanford SERIS Scholar", org: "Stanford School of Engineering", date: "Dec 2024 - Feb 2025", desc: "1 of 23 undergraduates selected nationwide for research introduction." },
-              { title: "Break Through Tech Fellow", org: "Cornell University", date: "Mar 2025 - Jun 2025", desc: "Completed hands-on machine learning AI studio programs." },
-              { title: "Girls Who Code — President", org: "College of San Mateo", date: "Apr 2024 - May 2025", desc: "Organized technical workshops to promote diversity in STEM." }
+              { title: "Break Through Tech AI Fellow", org: "Cornell University", date: "Mar 2025 - Jun 2025", desc: "Completed hands-on machine learning AI studio programs." },
+              { title: "Girls Who Code Club — President", org: "College of San Mateo", date: "Apr 2024 - May 2025", desc: "Organized technical workshops to promote diversity in STEM." }
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                whileTap={{ scale: 0.98 }}
-                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 active:border-[#d4af37]/40 transition-colors"
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[28px] p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_25px_#d4af37] transition-all duration-300"
               >
-                <h3 className="text-white text-base font-bold mb-1">{item.title}</h3>
-                <p className="text-[#d4af37] text-xs font-semibold">{item.org}</p>
-                <p className="text-gray-400 text-[11px] mb-2">{item.date}</p>
-                <p className="text-gray-300 text-xs leading-relaxed">{item.desc}</p>
+                <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">{item.title}</h3>
+                <p className="text-[#d4af37] text-xs sm:text-sm font-semibold">{item.org}</p>
+                <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">{item.date}</p>
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </section>
 
         {/* SKILLS */}
-        <section id="skills" className="scroll-mt-24 py-6 md:py-16">
+        <section id="skills" className="scroll-mt-24 py-6 md:py-24">
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
             <div className="flex items-center gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -829,7 +839,7 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaUserSecret className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
               Technical Skills
             </h2>
             <div className="flex items-center gap-1">
@@ -847,34 +857,42 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
             {[
-              { title: "Languages", list: ["Python", "SQL", "Java", "C++", "JavaScript", "TypeScript", "HTML/CSS"] },
-              { title: "Frameworks", list: ["React", "Next.js", "Node.js", "Django", "Flask", "Express.js"] },
-              { title: "Developer Tools", list: ["Git", "GitHub", "Docker", "VS Code", "JIRA"] },
-              { title: "Libraries", list: ["Pandas", "NumPy", "Matplotlib", "SciPy", "Seaborn", "OpenAI API"] },
+              { title: "Languages", list: ["Java", "Python", "C++", "SQL", "JavaScript", "TypeScript", "PHP", "HTML/CSS", "Julia", "LaTeX", "MatLab", "LangChain"] },
+              { title: "Frameworks", list: ["React", "Node.js", "Next.js", "WordPress", "GraphQL", "Django", "Flask", "Express.js"] },
+              { title: "Developer Tools", list: ["Git", "GitHub", "GitLab", "Docker", "Kubernetes", "VS Code", "JIRA"] },
+              { title: "Libraries", list: ["Pandas", "NumPy", "Matplotlib", "Mayavi", "SciPy", "Seaborn", "OpenAI API"] },
               { title: "Databases", list: ["PostgreSQL", "MySQL", "Firebase", "SQLite"] },
             ].map((category, idx) => (
-              <div key={idx} className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5">
-                <h3 className="text-[#d4af37] text-base font-bold mb-3">{category.title}</h3>
-                <div className="flex flex-wrap gap-1.5">
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.08 }}
+                whileHover={{ y: -8, scale: 1.03, boxShadow: "0 0 25px rgba(212,175,55,0.25)" }}
+                className="bg-[#111827]/70 border border-white/10 rounded-2xl p-6 backdrop-blur-md"
+              >
+                <h3 className="text-[#d4af37] text-2xl font-bold mb-5">{category.title}</h3>
+                <div className="flex flex-wrap gap-3">
                   {category.list.map((item) => (
-                    <motion.span
+                    <span
                       key={item}
-                      whileTap={{ scale: 0.9 }}
-                      className="px-2.5 py-1 rounded-lg bg-white/10 text-xs text-white cursor-pointer active:border-[#d4af37]"
+                      onClick={triggerHaptic}
+                      className="px-3 py-1 rounded-lg bg-white/10 text-white text-sm border border-white/10 transition-all duration-300 cursor-pointer hover:bg-[#d4af37]/20 hover:text-[#d4af37] hover:border-[#d4af37]/50 hover:shadow-[0_0_15px_#d4af37] hover:scale-110 active:scale-95"
                     >
                       {item}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
 
         {/* CERTIFICATIONS */}
-        <section id="certifications" className="scroll-mt-24 py-6 md:py-16">
+        <section id="certifications" className="scroll-mt-24 py-6 md:py-24">
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
             <div className="flex items-center gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -882,7 +900,7 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaAward className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
               Certifications
             </h2>
             <div className="flex items-center gap-1">
@@ -900,41 +918,46 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <AnimatePresence>
               {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: index * 0.04 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="bg-[#111827]/70 border border-white/10 rounded-2xl p-4 flex flex-col justify-between active:border-[#d4af37]/50 transition-colors"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  whileHover={{ y: -8, scale: 1.03, boxShadow: "0 0 25px rgba(212,175,55,0.25)" }}
+                  className="bg-[#111827]/70 border border-white/10 rounded-2xl p-6 backdrop-blur-md flex flex-col justify-between"
                 >
-                  <div>
-                    <h3 className="text-white font-bold text-xs sm:text-sm">{cert.title}</h3>
-                    <p className="text-[#d4af37] text-[11px] mt-1">{cert.issuer}</p>
+                  <div className="flex justify-between items-start gap-4">
+                    <div>
+                      <h3 className="text-white font-bold text-base sm:text-lg">{cert.title}</h3>
+                      <p className="text-[#d4af37] font-semibold text-xs sm:text-sm mt-2">{cert.issuer}</p>
+                    </div>
+                    <span className="text-gray-400 text-xs sm:text-sm whitespace-nowrap">{cert.date}</span>
                   </div>
-                  <span className="text-gray-400 text-[10px] mt-2">{cert.date}</span>
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
 
-          <div className="flex justify-center mt-7">
-            <motion.button
-              whileTap={{ scale: 0.92 }}
-              onClick={() => setShowAllCertifications(!showAllCertifications)}
-              className="px-6 py-2.5 border border-[#d4af37]/60 active:border-[#ffd95e] rounded-xl text-white text-xs sm:text-sm font-semibold active:shadow-[0_0_20px_#d4af37] hover:text-[#d4af37] transition-all cursor-pointer"
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => {
+                triggerHaptic();
+                setShowAllCertifications(!showAllCertifications);
+              }}
+              className="px-6 py-3 rounded-xl border border-[#d4af37]/50 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 hover:text-[#d4af37] hover:border-[#d4af37] hover:shadow-[0_0_15px_#d4af37] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
             >
-              {showAllCertifications ? "▲ Show Less" : `▼ View All ${certifications.length} Certifications`}
-            </motion.button>
+              <span className="text-xs">{showAllCertifications ? "▲" : "▼"}</span>
+              {showAllCertifications ? "Show Less" : `View All ${certifications.length} Certifications`}
+            </button>
           </div>
         </section>
 
         {/* RECOMMENDATION */}
-        <section id="Recommendation" className="py-6 md:py-16">
+        <section id="Recommendation" className="py-6 md:py-24">
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
             <div className="flex items-center gap-1">
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -942,7 +965,7 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <FaRegCommentDots className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
               Recommendation
             </h2>
             <div className="flex items-center gap-1">
@@ -961,16 +984,22 @@ export default function Home() {
           </div>
 
           <motion.div
-            whileTap={{ scale: 0.98 }}
-            className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-7 backdrop-blur-md active:border-[#d4af37]/40 transition-colors"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ y: -6, scale: 1.01, boxShadow: "0 0 30px rgba(212,175,55,0.25)" }}
+            whileTap={{ scale: 0.98, boxShadow: "0 0 40px rgba(212,175,55,0.4)" }}
+            className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-md"
           >
-            <FaQuoteLeft className="text-[#d4af37] text-2xl mb-3 opacity-80" />
-            <p className="text-gray-200 text-xs sm:text-base leading-relaxed italic">
-              "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
+            <FaQuoteLeft className="text-[#d4af37] text-2xl sm:text-4xl mb-4 sm:mb-6 opacity-80" />
+            <p className="text-gray-200 text-sm sm:text-xl leading-relaxed italic">
+              "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work. His ability to learn quickly and adapt to new technologies makes him a valuable contributor to any team."
             </p>
-            <div className="mt-4 pt-3 border-t border-white/10">
-              <h3 className="text-white text-base sm:text-lg font-bold">John Smith</h3>
-              <p className="text-[#d4af37] text-xs font-semibold">Senior Software Engineer | AI Research Mentor</p>
+            <div className="mt-6 sm:mt-8 pt-4 border-t border-white/10">
+              <h3 className="text-white text-lg sm:text-2xl font-bold">John Smith</h3>
+              <p className="text-[#d4af37] text-sm sm:text-lg font-semibold mt-1 sm:mt-2">Senior Software Engineer | AI Research Mentor</p>
+              <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Technology Industry Professional</p>
             </div>
           </motion.div>
         </section>
@@ -984,7 +1013,7 @@ export default function Home() {
               <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
             <HiOutlineMail className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer transition-all duration-300 hover:scale-105 hover:drop-shadow-[0_0_20px_#ffd95e] active:scale-95 whitespace-nowrap">
               Get in Touch
             </h2>
             <div className="flex items-center gap-1">
@@ -1003,55 +1032,55 @@ export default function Home() {
           </div>
 
           <div className="max-w-4xl mx-auto text-center px-2">
-            <p className="text-gray-300 text-xs sm:text-base leading-relaxed mb-6">
+            <p className="text-gray-300 text-sm sm:text-xl leading-relaxed mb-6 sm:mb-10">
               I'm always open to discussing new opportunities, collaborations, or just connecting. Feel free to reach out!
             </p>
 
-            <div className="flex flex-wrap justify-center items-center gap-3">
-              <motion.a
-                whileTap={{ scale: 0.94 }}
+            <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+              <a
                 href="mailto:parasgoswami1156@gmail.com"
-                className="w-full sm:w-auto bg-[#ebb236] text-black px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:shadow-[0_0_20px_#ebb236] transition-all"
+                onClick={triggerHaptic}
+                className="w-full sm:w-auto bg-[#ffd95e] text-black px-6 py-3 rounded-xl font-medium text-sm sm:text-lg flex items-center justify-center gap-2 shadow-lg cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(255,217,94,0.8)] active:scale-95"
               >
-                <HiOutlineMail className="text-lg" />
+                <HiOutlineMail className="text-xl sm:text-2xl" />
                 parasgoswami1156@gmail.com
-              </motion.a>
+              </a>
 
-              <motion.a
-                whileTap={{ scale: 0.94 }}
+              <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:border-[#ebb236] transition-all"
+                onClick={triggerHaptic}
+                className="w-full sm:w-auto border border-white/20 px-6 py-3 rounded-xl text-white font-medium text-sm sm:text-lg flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 hover:border-[#ffd95e] hover:text-[#ffd95e] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] hover:scale-105 active:scale-95"
               >
-                <FaLinkedin className="text-lg" />
+                <FaLinkedin className="text-xl sm:text-2xl" />
                 Follow on LinkedIn
-              </motion.a>
+              </a>
 
-              <motion.a
-                whileTap={{ scale: 0.94 }}
+              <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:border-[#ebb236] transition-all"
+                onClick={triggerHaptic}
+                className="w-full sm:w-auto border border-white/20 px-6 py-3 rounded-xl text-white font-medium text-sm sm:text-lg flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 hover:border-[#ffd95e] hover:text-[#ffd95e] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)] hover:scale-105 active:scale-95"
               >
-                <FaGithub className="text-lg" />
+                <FaGithub className="text-xl sm:text-2xl" />
                 GitHub
-              </motion.a>
+              </a>
             </div>
           </div>
         </section>
 
         {/* FOOTER */}
-        <div className="mt-8 pt-4 border-t border-white/10 text-center pb-2">
+        <div className="mt-8 md:mt-12 pt-4 border-t border-white/10 text-center pb-4">
           <div className="flex items-center justify-center gap-2 mb-0">
-            <span className="text-[#d4af37] text-xs">✦ ✦ ✦</span>
-            <h3 className="text-white text-lg sm:text-xl font-serif font-semibold">
+            <span className="text-[#d4af37] text-xs sm:text-sm">✦ ✦ ✦</span>
+            <h3 className="text-white text-lg sm:text-2xl font-serif font-semibold">
               Puneet Goswami
             </h3>
-            <span className="text-[#d4af37] text-xs">✦ ✦ ✦</span>
+            <span className="text-[#d4af37] text-xs sm:text-sm">✦ ✦ ✦</span>
           </div>
-          <p className="text-gray-400 text-xs mt-1">
+          <p className="text-gray-400 text-xs sm:text-base mt-1 sm:mt-2">
             © 2026 Puneet Goswami
           </p>
         </div>
