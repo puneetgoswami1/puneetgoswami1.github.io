@@ -205,46 +205,54 @@ export default function Home() {
       {/* HERO SECTION - MOBILE SPACING & SKY ANIMATIONS FIXED */}
         <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-20 sm:pt-28 pb-6 sm:pb-8 overflow-hidden">
           
-          {/* 1. REALISTIC SHOOTING METEOR (Pura Sky Cross Karega Niche Tak) */}
+          {/* 1. REALISTIC SHOOTING METEOR (Chhota size + Smooth/Dheemi speed) */}
           <motion.div
             className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
             style={{
-              width: "130px",
-              height: "1.5px",
-              background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.7) 60%, #ffffff 100%)",
-              boxShadow: "0 0 8px rgba(255,217,94,0.9)",
+              width: "90px", // Size chhota kar diya (Pehle 130px tha)
+              height: "1.2px",
+              background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.85) 55%, #ffffff 100%)",
+              boxShadow: "0 0 6px #ffd95e",
             }}
-            initial={{ top: "-5%", left: "95%", opacity: 0 }}
+            initial={{ top: "-5%", left: "90%", opacity: 0 }}
             animate={{
-              top: ["-5%", "48%"],
-              left: ["95%", "5%"],
+              top: ["-5%", "46%"],
+              left: ["90%", "10%"],
               opacity: [0, 1, 0.8, 0],
             }}
             transition={{
-              duration: 1.2,
+              duration: 1.6, // Speed halki si kam kardi (Pehle 1.2s tha)
               repeat: Infinity,
               repeatDelay: 5,
               ease: "easeOut",
             }}
           />
 
-          {/* 2. REALISTIC TWINKLING STARS IN SKY */}
+          {/* 2. REALISTIC BLINKING STARS (Quantity badhayi + Sharp blink + Bada size) */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
-            {[...Array(35)].map((_, i) => (
-              <div
+            {[...Array(55)].map((_, i) => (
+              <motion.div
                 key={i}
-                className="absolute text-yellow-100/50 animate-pulse"
+                className="absolute text-yellow-100"
                 style={{
-                  left: `${(i * 13) % 94 + 3}%`,
-                  top: `${(i * 17) % 52 + 2}%`, // Sky area cover karega
-                  animationDuration: `${2 + (i % 4) * 0.8}s`,
-                  animationDelay: `${(i % 5) * 0.4}s`,
-                  fontSize: `${(i % 3 === 0 ? 3.5 : (i % 2 === 0 ? 2.5 : 1.5))}px`,
-                  opacity: (i % 3 === 0 ? 0.8 : 0.4),
+                  left: `${(i * 11) % 94 + 3}%`,
+                  top: `${(i * 13) % 48 + 2}%`, // Sky area me rahega
+                  fontSize: `${i % 3 === 0 ? 5 : i % 2 === 0 ? 3.5 : 2.5}px`, // Size halka sa bada kiya
+                  textShadow: i % 2 === 0 ? "0 0 4px rgba(255, 217, 94, 0.9)" : "0 0 2px rgba(255, 255, 255, 0.8)",
+                }}
+                animate={{
+                  opacity: [0.15, 1, 0.15], // Real twinkling blink effect
+                  scale: [0.75, 1.25, 0.75],
+                }}
+                transition={{
+                  duration: 1.6 + (i % 4) * 0.4,
+                  repeat: Infinity,
+                  delay: (i % 7) * 0.3,
+                  ease: "easeInOut",
                 }}
               >
                 ✦
-              </div>
+              </motion.div>
             ))}
           </div>
 
