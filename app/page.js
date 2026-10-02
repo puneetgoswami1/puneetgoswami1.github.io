@@ -166,7 +166,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen text-white overflow-x-hidden relative select-none bg-[#06030f]">
+    <main className="min-h-screen text-white overflow-x-hidden relative select-none">
       {/* 1. ZERO-SHAKE / ZERO-FLICKER HARDWARE GPU BACKGROUND */}
       <div
         className="fixed inset-0 -z-10 pointer-events-none"
@@ -403,7 +403,7 @@ export default function Home() {
       {/* ABOUT ME SECTION */}
       <section
         id="about"
-        className="scroll-mt-20 pt-10 md:pt-16 pb-4 px-4 md:px-6 relative overflow-hidden"
+        className="scroll-mt-20 pt-10 md:pt-16 pb-4 px-4 md:px-6 bg-[#06030f] relative overflow-hidden"
       >
         <div className="flex items-center justify-center gap-3 mb-1">
           <div className="flex gap-1">
