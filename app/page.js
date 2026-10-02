@@ -256,21 +256,21 @@ export default function Home() {
             ))}
           </div>
 
-          {/* 3. HERO CONTENT - PERFECT MOBILE SPACING */}
+          {/* CONTENT BLOCK - HEBA ALAZZEH STYLE BALANCED SPACING (STARS KO TOUCH NAHI KIYA) */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="max-w-4xl w-full my-auto z-10 flex flex-col items-center justify-center pt-2 sm:pt-0"
+            className="max-w-4xl w-full z-10 flex flex-col items-center justify-center my-auto pt-2 pb-4"
           >
-            {/* Top 4-Point Sparkle Star */}
+            {/* Top Sparkle Star */}
             <motion.div variants={itemVariants} className="flex justify-center mb-3 sm:mb-4">
               <span className="text-[#e8cb76] text-2xl sm:text-3xl drop-shadow-[0_0_14px_rgba(232,203,118,0.8)]">
                 ✦
               </span>
             </motion.div>
 
-            {/* Subtitle Role */}
+            {/* Subtitle */}
             <motion.p
               variants={itemVariants}
               className="uppercase tracking-[3.5px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3 sm:mb-4"
@@ -278,10 +278,10 @@ export default function Home() {
               DATA ANALYST • SQL • PYTHON
             </motion.p>
 
-            {/* Name - Elegant Golden Serif */}
+            {/* Name */}
             <motion.h1
               variants={itemVariants}
-              className="font-serif text-[38px] sm:text-6xl md:text-[76px] font-medium tracking-normal mb-3 sm:mb-4 leading-tight whitespace-nowrap"
+              className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-normal mb-3 sm:mb-4 leading-tight whitespace-nowrap"
               style={{
                 color: "#e8cb76",
                 textShadow: "0 0 35px rgba(232,203,118,0.4)",
@@ -314,23 +314,23 @@ export default function Home() {
               </span>
             </motion.div>
 
-            {/* Tags / Pills */}
+            {/* Chips (Lemon.io, etc.) - Iska margin badhaya taaki buttons neeche push ho sakein */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-7 sm:mb-8"
+              className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-10 sm:mb-12"
             >
               {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
                 <motion.span
                   key={item}
                   whileTap={{ scale: 0.94 }}
-                  className="px-4 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/15 text-gray-200 cursor-pointer active:border-[#e8cb76] transition-colors"
+                  className="px-4 py-2 text-xs rounded-xl bg-black/40 border border-white/15 text-gray-200 cursor-pointer active:border-[#e8cb76] transition-colors"
                 >
                   {item}
                 </motion.span>
               ))}
             </motion.div>
 
-            {/* Action Buttons */}
+            {/* Action Buttons - Perfect Lower Position */}
             <motion.div
               variants={itemVariants}
               className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 w-full max-w-[340px] sm:max-w-md mx-auto"
@@ -340,7 +340,7 @@ export default function Home() {
                 onClick={() =>
                   document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-3 sm:py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
+                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
               >
                 <span>☆</span> Explore My Work
               </motion.button>
@@ -350,7 +350,7 @@ export default function Home() {
                 onClick={() =>
                   document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
                 }
-                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-3 sm:py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
+                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
               >
                 Get In Touch
               </motion.button>
