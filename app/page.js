@@ -43,12 +43,12 @@ export default function Home() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      // Toast popup at the end of page
+      // Toast popup detection at page bottom
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-      if (scrollTop + windowHeight >= documentHeight - 100 && !toastShownRef.current) {
+      if (scrollTop + windowHeight >= documentHeight - 120 && !toastShownRef.current) {
         toastShownRef.current = true;
         setShowToast(true);
         setTimeout(() => setShowToast(false), 3500);
@@ -59,7 +59,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Refresh / Initial Load Entrance Animation Variants
+  // First Load / Refresh Stagger Animation
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -72,11 +72,11 @@ export default function Home() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 18 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
@@ -152,30 +152,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen text-white overflow-x-hidden relative select-none">
-      {/* 1. FIXED ULTRA-SMOOTH BACKGROUND (NO ZOOM ON MOBILE) */}
+      {/* FIXED BACKGROUND LAYER - ZERO ZOOM & ZERO LAG */}
       <div
         className="fixed inset-0 -z-20 bg-cover bg-center pointer-events-none transform-gpu"
         style={{ backgroundImage: "url('/mosq.jpg')" }}
       >
         <div className="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]" />
       </div>
-
-      {/* 2. SHOOTING METEOR ANIMATION (MATCHING VIDEO 21) */}
-      <motion.div
-        className="fixed h-[2px] w-[110px] sm:w-[150px] bg-gradient-to-r from-transparent via-[#ffd95e] to-white pointer-events-none transform -rotate-45 z-10"
-        initial={{ top: "-10%", left: "95%", opacity: 0 }}
-        animate={{
-          top: ["-5%", "60%"],
-          left: ["95%", "15%"],
-          opacity: [0, 1, 0.7, 0],
-        }}
-        transition={{
-          duration: 1.1,
-          repeat: Infinity,
-          repeatDelay: 5,
-          ease: "easeOut",
-        }}
-      />
 
       {/* NAVBAR */}
       <nav
@@ -219,9 +202,33 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO SECTION - REFRESH STAGGERED ENTRANCE */}
-      <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-4">
-        {/* Twinkling Stars */}
+      {/* HERO SECTION - SHOOTING STAR ONLY INSIDE HERO SKY */}
+      <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-4 overflow-hidden">
+        
+        {/* Realistic Shooting Meteor (Only in Hero - First Load + Every 5s) */}
+        <motion.div
+          className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
+          style={{
+            width: "115px",
+            height: "1.5px",
+            background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.7) 50%, #ffffff 100%)",
+            boxShadow: "0 0 6px #ffd95e",
+          }}
+          initial={{ top: "8%", left: "85%", opacity: 0 }}
+          animate={{
+            top: ["8%", "38%"],
+            left: ["85%", "18%"],
+            opacity: [0, 1, 0.7, 0],
+          }}
+          transition={{
+            duration: 0.9,
+            repeat: Infinity,
+            repeatDelay: 5,
+            ease: "easeOut",
+          }}
+        />
+
+        {/* Twinkling Background Stars in Hero */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
           {[...Array(20)].map((_, i) => (
             <div
@@ -239,14 +246,14 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Hero Content Stagger Motion */}
+        {/* Hero Content Stagger Motion on Load / Refresh */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           className="max-w-4xl w-full my-auto z-10"
         >
-          {/* Sparkle Icon */}
+          {/* Top Sparkle Star */}
           <motion.div variants={itemVariants} className="flex justify-center mb-2.5">
             <span className="text-[#e8cb76] text-2xl drop-shadow-[0_0_12px_rgba(232,203,118,0.7)]">
               ✦
@@ -261,7 +268,7 @@ export default function Home() {
             DATA ANALYST • SQL • PYTHON
           </motion.p>
 
-          {/* Title in Serif Font (Heba Alazzeh Style) */}
+          {/* Golden Serif Name (Heba Alazzeh Style) */}
           <motion.h1
             variants={itemVariants}
             className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-tight mb-2 sm:mb-3 leading-none whitespace-nowrap"
@@ -337,7 +344,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Minimalist Downward Chevron (Matching Video 21) */}
+        {/* Minimalist Down Chevron */}
         <div className="z-20 mt-auto pt-2">
           <motion.div
             animate={{ y: [0, 8, 0] }}
@@ -352,11 +359,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ABOUT ME - SLIDES UP SMOOTHLY OVER HERO */}
+      {/* ABOUT ME */}
       <section
         id="about"
         className="scroll-mt-24 pt-10 pb-2 px-4 sm:px-6 bg-[#06030f] relative overflow-hidden"
       >
+        {/* Subtle Rotating Shapes on SIDES (Faint & Non-distracting) */}
+        <motion.div
+          className="absolute -left-10 sm:left-6 top-32 w-32 h-32 sm:w-44 sm:h-44 border border-[#d4af37]/10 pointer-events-none"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute -right-10 sm:right-8 top-48 w-36 h-36 sm:w-48 sm:h-48 rounded-full border border-dashed border-[#d4af37]/15 pointer-events-none"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        />
+
         <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-1">
           <div className="flex gap-1">
             <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
@@ -383,24 +402,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Profile Circle with Rotating Geometric Shapes (Video 21) */}
-        <div className="flex flex-col items-center justify-center gap-6 mb-8">
-          <div className="relative flex items-center justify-center w-48 h-48 sm:w-60 sm:h-60">
-            {/* Rotating Diamond Border */}
-            <motion.div
-              className="absolute w-40 h-40 sm:w-52 sm:h-52 border border-[#d4af37]/25 pointer-events-none"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            />
-            {/* Rotating Circular Ring */}
-            <motion.div
-              className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-dashed border-[#d4af37]/35 pointer-events-none"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            />
-            {/* Main Profile Avatar Outline */}
-            <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-[3.5px] border-[#d4af37] bg-white/5 backdrop-blur-sm z-10 shadow-[0_0_30px_rgba(212,175,55,0.2)]"></div>
-          </div>
+        {/* Profile Circle */}
+        <div className="flex flex-col items-center justify-center gap-6 mb-8 relative z-10">
+          <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-[3.5px] border-[#d4af37] bg-white/5 backdrop-blur-sm shadow-[0_0_25px_rgba(212,175,55,0.15)]"></div>
 
           <div className="max-w-2xl px-2">
             <motion.div
@@ -412,7 +416,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Organizations Marquee */}
+        {/* Organizations Marquee - FASTER SPEED (7s) */}
         <div className="mt-4 text-center">
           <h3 className="tracking-[4px] text-[#d4af37] uppercase text-xs sm:text-sm mb-4">
             Organizations & Platforms
@@ -420,7 +424,7 @@ export default function Home() {
         </div>
         <div className="overflow-hidden w-full mb-8">
           <div className="marquee-wrapper">
-            <div className="marquee-track flex gap-8" style={{ animationDuration: "14s" }}>
+            <div className="marquee-track flex gap-8" style={{ animationDuration: "7s" }}>
               <span className="flex items-center gap-2"><FaLinkedin /> LinkedIn</span>
               <span className="flex items-center gap-2"><FaGithub /> GitHub</span>
               <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
@@ -701,7 +705,7 @@ export default function Home() {
                   </div>
 
                   <div>
-                    {/* Glowing GitHub Button */}
+                    {/* Glowing GitHub Link Button */}
                     <motion.button
                       whileTap={{ scale: 0.92 }}
                       onClick={(e) => {
