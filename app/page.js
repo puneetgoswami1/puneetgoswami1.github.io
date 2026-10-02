@@ -164,7 +164,7 @@ export default function Home() {
 <div
   className="fixed inset-0 -z-20 pointer-events-none"
   style={{
-    backgroundImage: "url('/mosq.jpg')",
+    backgroundImage: "url('/kp.jpg')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     transform: "translate3d(0, 0, 0)", // GPU compositor layer par lock
