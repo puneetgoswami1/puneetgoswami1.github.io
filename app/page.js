@@ -64,6 +64,27 @@ export default function Home() {
     }
   };
 
+  // REFRESH / FIRST LOAD STAGGERED ENTRANCE ANIMATION (DESKTOP & MOBILE)
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
   const certifications = [
     { title: "Google IT Automation with Python", issuer: "Google", date: "Apr 2025" },
     { title: "Introduction to AI in Digital Marketing", issuer: "HubSpot", date: "Mar 2025" },
@@ -145,20 +166,22 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen text-white overflow-x-hidden relative select-none">
-      {/* 1. GPU-LOCKED ULTRA-SMOOTH BACKGROUND */}
+    <main className="min-h-screen text-white overflow-x-hidden relative select-none bg-[#06030f]">
+      {/* 1. ZERO-SHAKE / ZERO-FLICKER HARDWARE GPU BACKGROUND */}
       <div
-        className="fixed inset-0 -z-20 pointer-events-none transform-gpu will-change-transform"
+        className="fixed inset-0 -z-50 pointer-events-none"
         style={{
           backgroundImage: "url('/kp.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          transform: "translateZ(0)",
-          WebkitTransform: "translateZ(0)",
+          backgroundRepeat: "no-repeat",
+          transform: "translate3d(0, 0, 0)",
+          WebkitTransform: "translate3d(0, 0, 0)",
           backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
         }}
       >
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px]" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* NAVBAR */}
@@ -173,12 +196,12 @@ export default function Home() {
           P.G.
         </h1>
         <ul className="hidden md:flex items-center gap-7 text-[13px] text-gray-300 font-medium">
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#about">About</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#experience">Experience</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#projects">Projects</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#skills">Skills</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#certifications">Certifications</a></li>
-          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#contact">Contact</a></li>
+          <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#about">About</a></li>
+          <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#experience">Experience</a></li>
+          <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#projects">Projects</a></li>
+          <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#skills">Skills</a></li>
+          <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#certifications">Certifications</a></li>
+          <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#contact">Contact</a></li>
         </ul>
 
         <div className="flex items-center gap-4 md:gap-5 text-base md:text-lg text-gray-300">
@@ -187,21 +210,21 @@ export default function Home() {
               triggerHaptic();
               window.open("https://www.linkedin.com/in/puneetgoswami-ai/", "_blank");
             }}
-            className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-transform duration-200"
+            className="hover:text-[#e8cb76] hover:scale-110 hover:drop-shadow-[0_0_12px_rgba(232,203,118,0.8)] cursor-pointer transition-all duration-200"
           />
           <FaGithub
             onClick={() => {
               triggerHaptic();
               window.open("https://github.com/puneetgoswami1", "_blank");
             }}
-            className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-transform duration-200"
+            className="hover:text-[#e8cb76] hover:scale-110 hover:drop-shadow-[0_0_12px_rgba(232,203,118,0.8)] cursor-pointer transition-all duration-200"
           />
           <FaEnvelope
             onClick={() => {
               triggerHaptic();
               window.location.href = "mailto:parasgoswami1156@gmail.com";
             }}
-            className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-transform duration-200"
+            className="hover:text-[#e8cb76] hover:scale-110 hover:drop-shadow-[0_0_12px_rgba(232,203,118,0.8)] cursor-pointer transition-all duration-200"
           />
         </div>
       </nav>
@@ -209,7 +232,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="min-h-[100dvh] flex flex-col justify-between items-center text-center px-4 md:px-6 relative pt-20 md:pt-28 pb-6 md:pb-8 overflow-hidden">
         
-        {/* SHOOTING METEOR (ONLY HERO SKY) */}
+        {/* SHOOTING METEOR */}
         <motion.div
           className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
           style={{
@@ -260,19 +283,31 @@ export default function Home() {
           ))}
         </div>
 
-        {/* HERO CONTENT */}
-        <div className="max-w-3xl w-full z-10 flex flex-col items-center justify-center my-auto pt-2 pb-4">
-          <div className="flex justify-center mb-2.5 md:mb-3">
+        {/* HERO CONTENT - REFRESH STAGGERED ENTRANCE MOTION */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-3xl w-full z-10 flex flex-col items-center justify-center my-auto pt-2 pb-4"
+        >
+          {/* Sparkle Icon */}
+          <motion.div variants={itemVariants} className="flex justify-center mb-2.5 md:mb-3">
             <span className="text-[#e8cb76] text-2xl md:text-2xl drop-shadow-[0_0_12px_rgba(232,203,118,0.8)]">
               ✦
             </span>
-          </div>
+          </motion.div>
 
-          <p className="uppercase tracking-[3px] md:tracking-[4px] text-[#e8cb76] text-[11px] md:text-xs font-semibold mb-2.5 md:mb-3">
+          {/* Subtitle */}
+          <motion.p
+            variants={itemVariants}
+            className="uppercase tracking-[3px] md:tracking-[4px] text-[#e8cb76] text-[11px] md:text-xs font-semibold mb-2.5 md:mb-3"
+          >
             DATA ANALYST • SQL • PYTHON
-          </p>
+          </motion.p>
 
-          <h1
+          {/* Name */}
+          <motion.h1
+            variants={itemVariants}
             className="font-serif text-[42px] md:text-[54px] font-medium tracking-tight mb-2 md:mb-2.5 leading-tight whitespace-nowrap"
             style={{
               color: "#e8cb76",
@@ -280,13 +315,21 @@ export default function Home() {
             }}
           >
             Puneet Goswami
-          </h1>
+          </motion.h1>
 
-          <h2 className="font-serif italic text-sm md:text-lg text-gray-300 font-light mb-4 md:mb-5">
+          {/* Tagline */}
+          <motion.h2
+            variants={itemVariants}
+            className="font-serif italic text-sm md:text-lg text-gray-300 font-light mb-4 md:mb-5"
+          >
             Data Analyst • AI Researcher
-          </h2>
+          </motion.h2>
 
-          <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm mb-5 md:mb-6">
+          {/* Location & University */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center items-center gap-2 md:gap-3 text-gray-300 text-xs md:text-sm mb-5 md:mb-6"
+          >
             <span className="flex items-center gap-1.5">
               <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
               Rajasthan, India
@@ -296,29 +339,35 @@ export default function Home() {
               <FaGraduationCap className="text-[#e8cb76] text-sm" />
               BCA ICFAI University
             </span>
-          </div>
+          </motion.div>
 
           {/* CHIPS */}
-          <div className="flex flex-wrap justify-center gap-2 mb-7 md:mb-8">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center gap-2 mb-7 md:mb-8"
+          >
             {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
               <span
                 key={item}
                 onClick={triggerHaptic}
-                className="px-3.5 py-1.5 md:px-4 md:py-1.5 text-xs rounded-xl bg-black/40 border border-white/15 text-gray-200 hover:border-[#e8cb76] transition-colors cursor-pointer"
+                className="px-3.5 py-1.5 md:px-4 md:py-1.5 text-xs rounded-xl bg-black/40 border border-white/15 text-gray-200 hover:border-[#e8cb76] hover:text-[#e8cb76] hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
               >
                 {item}
               </span>
             ))}
-          </div>
+          </motion.div>
 
-          {/* MINIMALIST BUTTONS (HEBA ALAZZEH COMPACT SCALE) */}
-          <div className="flex flex-row justify-center items-center gap-3 md:gap-4 px-2 w-full max-w-[340px] md:max-w-none mx-auto">
+          {/* ACTION BUTTONS WITH HOVER GLOW */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-row justify-center items-center gap-3 md:gap-4 px-2 w-full max-w-[340px] md:max-w-none mx-auto"
+          >
             <button
               onClick={() => {
                 triggerHaptic();
                 document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="flex-1 md:flex-initial bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 md:px-6 py-2.5 md:py-2.5 rounded-xl shadow-lg transition-all duration-300 text-xs md:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95"
+              className="flex-1 md:flex-initial bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 md:px-6 py-2.5 md:py-2.5 rounded-xl shadow-lg transition-all duration-300 text-xs md:text-sm flex items-center justify-center gap-1.5 cursor-pointer hover:scale-105 active:scale-95 hover:shadow-[0_0_25px_rgba(235,178,54,0.6)]"
             >
               <span>☆</span> Explore My Work
             </button>
@@ -328,12 +377,12 @@ export default function Home() {
                 triggerHaptic();
                 document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="flex-1 md:flex-initial border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 md:px-6 py-2.5 md:py-2.5 rounded-xl transition-all duration-300 text-xs md:text-sm cursor-pointer active:scale-95"
+              className="flex-1 md:flex-initial border border-white/20 hover:border-[#e8cb76] bg-black/40 text-white font-medium px-4 md:px-6 py-2.5 md:py-2.5 rounded-xl transition-all duration-300 text-xs md:text-sm cursor-pointer hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_rgba(232,203,118,0.3)]"
             >
               Get In Touch
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* DOWN CHEVRON */}
         <div className="z-20 mt-auto pt-2">
@@ -351,7 +400,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ABOUT ME SECTION (CLEAN SINGLE RENDER, DESKTOP BALANCED) */}
+      {/* ABOUT ME SECTION */}
       <section
         id="about"
         className="scroll-mt-20 pt-10 md:pt-16 pb-4 px-4 md:px-6 bg-[#06030f] relative overflow-hidden"
@@ -382,14 +431,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* HEBA STYLE DESKTOP ABOUT LAYOUT (PHOTO LEFT + BIO RIGHT) */}
+        {/* DESKTOP ABOUT LAYOUT */}
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-10 px-2">
           <div className="relative flex-shrink-0">
             <div className="w-36 h-36 md:w-44 md:h-44 rounded-full border-[3px] border-[#d4af37] bg-white/5 shadow-[0_0_25px_rgba(212,175,55,0.2)]"></div>
           </div>
 
           <div className="flex-1">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-5 md:p-6 text-gray-300 text-xs md:text-[14px] leading-relaxed">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-5 md:p-6 text-gray-300 text-xs md:text-[14px] leading-relaxed hover:border-[#d4af37]/40 transition-colors">
               Hi, my name is Puneet and I am an aspiring Data Analyst from Jaipur. I am passionate about data analytics, business intelligence, dashboard creation and transforming raw data into meaningful insights. I enjoy working with SQL, Python, Power BI and Excel to solve real-world business problems and help organizations make data-driven decisions.
             </div>
           </div>
@@ -444,7 +493,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-4xl mx-auto space-y-4">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all">
             <div className="flex justify-between items-start flex-col sm:flex-row gap-2">
               <div>
                 <h3 className="text-base md:text-xl font-bold text-white">ICFAI University, Jaipur</h3>
@@ -457,7 +506,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all">
             <div className="flex justify-between items-start flex-wrap gap-2">
               <div>
                 <h3 className="text-base md:text-xl font-bold text-white">Royal International</h3>
@@ -528,7 +577,7 @@ export default function Home() {
                       : "md:ml-auto text-left"
                   }`}
                 >
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/40 transition-colors">
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300">
                     <div className="flex justify-between items-start mb-2">
                       <div>
                         <h3 className="text-base md:text-lg font-bold text-white leading-tight">{exp.company}</h3>
@@ -588,7 +637,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/40 transition-colors">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300">
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <h3 className="text-base md:text-lg font-bold text-white">Research Project Three</h3>
@@ -606,7 +655,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/40 transition-colors">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300">
               <div className="flex justify-between items-start mb-2">
                 <div>
                   <h3 className="text-base md:text-lg font-bold text-white">Research Project Four</h3>
@@ -626,7 +675,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PROJECTS (3-COLUMN COMPACT DESKTOP) */}
+        {/* PROJECTS */}
         <section id="projects" className="scroll-mt-20 py-8 md:py-16">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
@@ -658,7 +707,7 @@ export default function Home() {
               {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
                 <div
                   key={index}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 flex flex-col justify-between hover:border-[#d4af37]/50 transition-colors"
+                  className="bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 flex flex-col justify-between hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300"
                 >
                   <div>
                     <h3 className="text-sm md:text-base font-bold text-white mb-1.5">
@@ -675,7 +724,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={triggerHaptic}
-                      className="inline-flex items-center gap-1.5 text-[#ffd95e] hover:text-yellow-300 text-[11px] font-semibold mb-2.5"
+                      className="inline-flex items-center gap-1.5 text-[#ffd95e] hover:text-yellow-300 text-[11px] font-semibold mb-2.5 transition-colors"
                     >
                       <FaExternalLinkAlt className="text-[9px]" /> GitHub
                     </a>
@@ -699,7 +748,7 @@ export default function Home() {
                 triggerHaptic();
                 setShowAllProjects(!showAllProjects);
               }}
-              className="px-5 py-2 border border-[#d4af37]/50 rounded-xl text-white text-xs font-semibold flex items-center gap-1.5 hover:border-[#d4af37] hover:text-[#d4af37] transition-colors cursor-pointer"
+              className="px-5 py-2 border border-[#d4af37]/50 rounded-xl text-white text-xs font-semibold flex items-center gap-1.5 hover:border-[#d4af37] hover:text-[#d4af37] hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
               <span className="text-[10px]">{showAllProjects ? "▲" : "▼"}</span>
               {showAllProjects ? "Show Less" : `View All ${projects.length} Projects`}
@@ -742,7 +791,7 @@ export default function Home() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/40 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300"
               >
                 <h3 className="text-white text-sm md:text-base font-bold mb-1">{item.title}</h3>
                 <p className="text-[#d4af37] text-xs font-semibold mb-1">{item.org}</p>
@@ -753,7 +802,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* TECHNICAL SKILLS (COMPACT 3-COL DESKTOP) */}
+        {/* TECHNICAL SKILLS */}
         <section id="skills" className="scroll-mt-20 py-8 md:py-16">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
@@ -790,7 +839,7 @@ export default function Home() {
             ].map((category, idx) => (
               <div
                 key={idx}
-                className="bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 hover:border-[#d4af37]/40 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300"
               >
                 <h3 className="text-[#d4af37] text-sm md:text-base font-bold mb-3">{category.title}</h3>
                 <div className="flex flex-wrap gap-1.5">
@@ -798,7 +847,7 @@ export default function Home() {
                     <span
                       key={item}
                       onClick={triggerHaptic}
-                      className="px-2.5 py-1 rounded-md bg-white/10 text-white text-[11px] md:text-xs cursor-pointer hover:bg-[#d4af37]/20 hover:text-[#d4af37] transition-colors"
+                      className="px-2.5 py-1 rounded-md bg-white/10 text-white text-[11px] md:text-xs cursor-pointer hover:bg-[#d4af37]/20 hover:text-[#d4af37] hover:scale-105 transition-all"
                     >
                       {item}
                     </span>
@@ -809,7 +858,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CERTIFICATIONS (3-COLUMN COMPACT DESKTOP) */}
+        {/* CERTIFICATIONS */}
         <section id="certifications" className="scroll-mt-20 py-8 md:py-16">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
@@ -841,7 +890,7 @@ export default function Home() {
               {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
                 <div
                   key={index}
-                  className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-between hover:border-[#d4af37]/40 transition-colors"
+                  className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-between hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300"
                 >
                   <div>
                     <h3 className="text-white font-bold text-xs md:text-sm">{cert.title}</h3>
@@ -859,7 +908,7 @@ export default function Home() {
                 triggerHaptic();
                 setShowAllCertifications(!showAllCertifications);
               }}
-              className="px-5 py-2 rounded-xl border border-[#d4af37]/50 text-white text-xs font-semibold flex items-center gap-1.5 hover:text-[#d4af37] hover:border-[#d4af37] transition-colors cursor-pointer"
+              className="px-5 py-2 rounded-xl border border-[#d4af37]/50 text-white text-xs font-semibold flex items-center gap-1.5 hover:text-[#d4af37] hover:border-[#d4af37] hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
               <span className="text-[10px]">{showAllCertifications ? "▲" : "▼"}</span>
               {showAllCertifications ? "Show Less" : `View All ${certifications.length} Certifications`}
@@ -894,7 +943,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-5 md:p-7">
+          <div className="max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-5 md:p-7 hover:border-[#d4af37]/40 transition-colors">
             <FaQuoteLeft className="text-[#d4af37] text-2xl mb-3 opacity-80" />
             <p className="text-gray-200 text-xs md:text-base leading-relaxed italic">
               "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
@@ -906,7 +955,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CONTACT (MINIMALIST BUTTONS) */}
+        {/* CONTACT */}
         <section id="contact" className="scroll-mt-20 pt-6 md:pt-12 pb-4">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
@@ -942,7 +991,7 @@ export default function Home() {
               <a
                 href="mailto:parasgoswami1156@gmail.com"
                 onClick={triggerHaptic}
-                className="w-full sm:w-auto bg-[#ebb236] text-black px-5 py-2.5 rounded-xl font-medium text-xs md:text-sm flex items-center justify-center gap-2 shadow-lg hover:bg-[#f5be42] transition-colors"
+                className="w-full sm:w-auto bg-[#ebb236] text-black px-5 py-2.5 rounded-xl font-medium text-xs md:text-sm flex items-center justify-center gap-2 shadow-lg hover:bg-[#f5be42] hover:scale-105 active:scale-95 transition-all"
               >
                 <HiOutlineMail className="text-base md:text-lg" />
                 parasgoswami1156@gmail.com
@@ -953,7 +1002,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={triggerHaptic}
-                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs md:text-sm flex items-center justify-center gap-2 hover:border-[#ebb236] hover:text-[#ebb236] transition-colors"
+                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs md:text-sm flex items-center justify-center gap-2 hover:border-[#ebb236] hover:text-[#ebb236] hover:scale-105 active:scale-95 transition-all"
               >
                 <FaLinkedin className="text-base md:text-lg" />
                 Follow on LinkedIn
@@ -964,7 +1013,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={triggerHaptic}
-                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs md:text-sm flex items-center justify-center gap-2 hover:border-[#ebb236] hover:text-[#ebb236] transition-colors"
+                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs md:text-sm flex items-center justify-center gap-2 hover:border-[#ebb236] hover:text-[#ebb236] hover:scale-105 active:scale-95 transition-all"
               >
                 <FaGithub className="text-base md:text-lg" />
                 GitHub
