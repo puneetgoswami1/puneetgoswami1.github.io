@@ -1,13 +1,11 @@
 "use client";
 import { HiOutlineMail } from "react-icons/hi";
-import { FaHandPointDown } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaGithub,
   FaLinkedin,
   FaEnvelope,
   FaMapMarkerAlt,
-  FaBars,
   FaBookOpen,
   FaGraduationCap,
   FaDatabase,
@@ -18,29 +16,69 @@ import {
   FaFlask,
   FaLightbulb,
   FaChevronDown,
-  FaChevronUp,
-  FaExternalLinkAlt,
   FaUsers,
   FaUserSecret,
   FaAward,
   FaRegCommentDots,
-  FaQuoteLeft
+  FaQuoteLeft,
+  FaCheckCircle,
+  FaExternalLinkAlt
 } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Home() {
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllCertifications, setShowAllCertifications] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const toastShownRef = useRef(false);
+
   useEffect(() => {
     history.scrollRestoration = "manual";
-
     if (window.location.hash) {
       history.replaceState(null, "", window.location.pathname);
     }
-
     window.scrollTo(0, 0);
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+
+      // Toast popup at the end of page
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollTop + windowHeight >= documentHeight - 100 && !toastShownRef.current) {
+        toastShownRef.current = true;
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3500);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [showAllProjects, setShowAllProjects] = useState(false);
-  const [showAllCertifications, setShowAllCertifications] = useState(false);
+  // Refresh / Initial Load Entrance Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   const certifications = [
     { title: "Google IT Automation with Python", issuer: "Google", date: "Apr 2025" },
@@ -112,857 +150,887 @@ export default function Home() {
     }
   ];
 
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <main
-      className="min-h-screen text-white overflow-x-hidden"
-      style={{
-        backgroundImage: "url('/mosq.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundAttachment: "fixed",
-      }}
-    >
-      <div className="min-h-screen bg-black/50">
+    <main className="min-h-screen text-white overflow-x-hidden relative select-none">
+      {/* 1. FIXED ULTRA-SMOOTH BACKGROUND (NO ZOOM ON MOBILE) */}
+      <div
+        className="fixed inset-0 -z-20 bg-cover bg-center pointer-events-none transform-gpu"
+        style={{ backgroundImage: "url('/mosq.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]" />
+      </div>
 
-        {/* Navbar */}
-        <nav
-          className={`fixed top-0 left-0 w-full px-4 sm:px-6 py-4 sm:py-6 flex justify-between items-center z-50 transition-all duration-300 ${
-            scrolled
-              ? "bg-black/70 backdrop-blur-md border-b border-white/10"
-              : "bg-transparent"
-          }`}
-        >
-          <h1 className="text-xl sm:text-2xl font-serif font-black tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] hover:scale-105 active:scale-95 transition-all duration-300">
-            P.G.
-          </h1>
-          <ul className="hidden lg:flex items-center gap-6 text-sm text-white font-medium">
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#about">About</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#experience">Experience</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#projects">Projects</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#skills">Skills</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#certifications">Certifications</a></li>
-            <li className="hover:text-[#e8cb76] transition-all duration-200 cursor-pointer font-semibold"><a href="#contact">Contact</a></li>
-          </ul>
+      {/* 2. SHOOTING METEOR ANIMATION (MATCHING VIDEO 21) */}
+      <motion.div
+        className="fixed h-[2px] w-[110px] sm:w-[150px] bg-gradient-to-r from-transparent via-[#ffd95e] to-white pointer-events-none transform -rotate-45 z-10"
+        initial={{ top: "-10%", left: "95%", opacity: 0 }}
+        animate={{
+          top: ["-5%", "60%"],
+          left: ["95%", "15%"],
+          opacity: [0, 1, 0.7, 0],
+        }}
+        transition={{
+          duration: 1.1,
+          repeat: Infinity,
+          repeatDelay: 5,
+          ease: "easeOut",
+        }}
+      />
 
-          <div className="flex items-center gap-4 sm:gap-5 text-lg sm:text-xl text-gray-300">
+      {/* NAVBAR */}
+      <nav
+        className={`fixed top-0 left-0 w-full px-5 sm:px-8 py-4 sm:py-5 flex justify-between items-center z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-black/80 backdrop-blur-md border-b border-white/10 shadow-lg"
+            : "bg-transparent"
+        }`}
+      >
+        <h1 className="text-xl sm:text-2xl font-serif font-black tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] transition-colors">
+          P.G.
+        </h1>
+        <ul className="hidden lg:flex items-center gap-6 text-sm text-white font-medium">
+          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#about">About</a></li>
+          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#experience">Experience</a></li>
+          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#projects">Projects</a></li>
+          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#skills">Skills</a></li>
+          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#certifications">Certifications</a></li>
+          <li className="hover:text-[#e8cb76] transition-colors cursor-pointer"><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div className="flex items-center gap-4 sm:gap-5 text-lg sm:text-xl text-gray-300">
+          <motion.div whileTap={{ scale: 0.9 }}>
             <FaLinkedin
               onClick={() => window.open("https://www.linkedin.com/in/puneetgoswami-ai/", "_blank")}
-              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
+              className="hover:text-[#e8cb76] cursor-pointer transition-colors"
             />
+          </motion.div>
+          <motion.div whileTap={{ scale: 0.9 }}>
             <FaGithub
               onClick={() => window.open("https://github.com/puneetgoswami1", "_blank")}
-              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
+              className="hover:text-[#e8cb76] cursor-pointer transition-colors"
             />
+          </motion.div>
+          <motion.div whileTap={{ scale: 0.9 }}>
             <FaEnvelope
               onClick={() => window.location.href = "mailto:parasgoswami1156@gmail.com"}
-              className="hover:text-[#e8cb76] hover:scale-110 cursor-pointer transition-all duration-200"
+              className="hover:text-[#e8cb76] cursor-pointer transition-colors"
             />
-          </div>
-        </nav>
+          </motion.div>
+        </div>
+      </nav>
 
-        {/* HERO SECTION - Style matching Heba Alazzeh */}
-        <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-6 sm:pb-8">
-          
-          {/* Lightweight Background Stars to Remove Lag */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className="star opacity-60"
-                style={{
-                  left: `${(i * 19) % 100}%`,
-                  top: `${(i * 23) % 90}%`,
-                  animationDelay: `${i * 0.4}s`,
-                  fontSize: `${(i % 3) + 3}px`,
-                }}
-              >
-                ✦
-              </div>
-            ))}
-          </div>
-
-          {/* Smooth Background Ambient Glow */}
-          <div className="absolute bottom-0 left-0 w-full h-72 pointer-events-none z-0 transform-gpu bg-gradient-to-t from-[#e8cb76]/10 via-transparent to-transparent blur-2xl" />
-
-          {/* Center Content */}
-          <div className="max-w-4xl w-full my-auto z-10">
-            
-            {/* Top Sparkle Star */}
-            <div className="flex justify-center mb-3">
-              <span className="text-[#e8cb76] text-2xl drop-shadow-[0_0_12px_rgba(232,203,118,0.7)] animate-pulse">
-                ✦
-              </span>
-            </div>
-
-            {/* Subtitle in exact Heba Alazzeh style */}
-            <p className="uppercase tracking-[3px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3 sm:mb-4">
-              DATA ANALYST • SQL • PYTHON
-            </p>
-
-            {/* Name - Exact Serif Typography and Golden Color from Image 1 */}
-            <h1
-              className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-tight text-[#f5deb3] mb-3 sm:mb-4 leading-none"
+      {/* HERO SECTION - REFRESH STAGGERED ENTRANCE */}
+      <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-4">
+        {/* Twinkling Stars */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute text-yellow-100/40 animate-pulse"
               style={{
-                color: "#e8cb76",
-                textShadow: "0 0 35px rgba(232,203,118,0.35)",
+                left: `${(i * 17) % 100}%`,
+                top: `${(i * 23) % 85}%`,
+                animationDuration: `${2.5 + (i % 3)}s`,
+                fontSize: `${(i % 3) + 3}px`,
               }}
             >
-              Puneet Goswami
-            </h1>
-
-            {/* Role Tagline */}
-            <h2 className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-5 sm:mb-6">
-              Data Analyst • AI Researcher
-            </h2>
-
-            {/* Details with icons */}
-            <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-6">
-              <span className="flex items-center gap-1.5">
-                <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
-                Rajasthan, India
-              </span>
-              <span className="text-gray-500">|</span>
-              <span className="flex items-center gap-1.5">
-                <FaGraduationCap className="text-[#e8cb76] text-sm" />
-                BCA ICFAI University
-              </span>
+              ✦
             </div>
+          ))}
+        </div>
 
-            {/* Company / Platform Tags */}
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-7 sm:mb-8">
-              {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
-                <span
-                  key={item}
-                  className="px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/10 text-gray-200 hover:border-[#e8cb76]/60 transition-all duration-300"
-                >
-                  {item}
-                </span>
-              ))}
-            </div>
-
-            {/* Action Buttons matching Heba Alazzeh */}
-            <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 max-w-md mx-auto">
-              <button
-                onClick={() =>
-                  document.querySelector("#experience")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
-                }
-                className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl shadow-lg transition-all duration-300 text-xs sm:text-sm flex items-center justify-center gap-1.5 active:scale-95 cursor-pointer"
-              >
-                <span>☆</span> Explore My Work
-              </button>
-
-              <button
-                onClick={() =>
-                  document.querySelector("#contact")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  })
-                }
-                className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 backdrop-blur-md text-white font-medium px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl transition-all duration-300 text-xs sm:text-sm active:scale-95 cursor-pointer"
-              >
-                Get In Touch
-              </button>
-            </div>
-          </div>
-
-          {/* Hand Icon - Screen ke ekdum bottom edge par pinned on Mobile */}
-          <div className="z-20 mt-auto pt-4 md:pt-0">
-            <FaHandPointDown
-              onClick={() =>
-                document.querySelector("#about")?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                })
-              }
-              className="text-[#ebb236] text-2xl sm:text-3xl animate-bounce cursor-pointer opacity-90 hover:opacity-100 transition-opacity"
-            />
-          </div>
-        </section>
-
-        {/* ABOUT */}
-        <motion.section
-          id="about"
-          className="scroll-mt-28 pt-4 pb-2 px-4 sm:px-6 bg-[#06030f] relative overflow-hidden"
+        {/* Hero Content Stagger Motion */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-4xl w-full my-auto z-10"
         >
-          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-2 md:mb-4">
-            <div className="flex gap-1">
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-            </div>
-            <FaBookOpen className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap">
-              About Me
-            </h2>
-            <div className="flex gap-1">
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-            </div>
+          {/* Sparkle Icon */}
+          <motion.div variants={itemVariants} className="flex justify-center mb-2.5">
+            <span className="text-[#e8cb76] text-2xl drop-shadow-[0_0_12px_rgba(232,203,118,0.7)]">
+              ✦
+            </span>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.p
+            variants={itemVariants}
+            className="uppercase tracking-[3px] sm:tracking-[5px] text-[#e8cb76] text-[11px] sm:text-xs md:text-sm font-medium mb-3"
+          >
+            DATA ANALYST • SQL • PYTHON
+          </motion.p>
+
+          {/* Title in Serif Font (Heba Alazzeh Style) */}
+          <motion.h1
+            variants={itemVariants}
+            className="font-serif text-[42px] sm:text-6xl md:text-[76px] font-medium tracking-tight mb-2 sm:mb-3 leading-none whitespace-nowrap"
+            style={{
+              color: "#e8cb76",
+              textShadow: "0 0 35px rgba(232,203,118,0.35)",
+            }}
+          >
+            Puneet Goswami
+          </motion.h1>
+
+          <motion.h2
+            variants={itemVariants}
+            className="font-serif italic text-sm sm:text-lg md:text-xl text-gray-300 font-light mb-4 sm:mb-5"
+          >
+            Data Analyst • AI Researcher
+          </motion.h2>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 text-gray-300 text-xs sm:text-sm mb-5"
+          >
+            <span className="flex items-center gap-1.5">
+              <FaMapMarkerAlt className="text-[#e8cb76] text-xs" />
+              Rajasthan, India
+            </span>
+            <span className="text-gray-500">|</span>
+            <span className="flex items-center gap-1.5">
+              <FaGraduationCap className="text-[#e8cb76] text-sm" />
+              BCA ICFAI University
+            </span>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-6"
+          >
+            {["Lemon.io", "Data Annotation", "Contra"].map((item) => (
+              <motion.span
+                key={item}
+                whileTap={{ scale: 0.94 }}
+                className="px-3.5 py-1.5 sm:px-4 sm:py-2 text-[11px] sm:text-xs rounded-xl bg-black/40 border border-white/10 text-gray-200 cursor-pointer active:border-[#e8cb76]"
+              >
+                {item}
+              </motion.span>
+            ))}
+          </motion.div>
+
+          {/* Action Buttons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-row justify-center items-center gap-3 sm:gap-4 px-2 max-w-md mx-auto"
+          >
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() =>
+                document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-2.5 sm:py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
+            >
+              <span>☆</span> Explore My Work
+            </motion.button>
+
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              onClick={() =>
+                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-2.5 sm:py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
+            >
+              Get In Touch
+            </motion.button>
+          </motion.div>
+        </motion.div>
+
+        {/* Minimalist Downward Chevron (Matching Video 21) */}
+        <div className="z-20 mt-auto pt-2">
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            onClick={() =>
+              document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="cursor-pointer p-2 text-[#ebb236]/90 hover:text-[#ebb236]"
+          >
+            <FaChevronDown className="text-xl" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ABOUT ME - SLIDES UP SMOOTHLY OVER HERO */}
+      <section
+        id="about"
+        className="scroll-mt-24 pt-10 pb-2 px-4 sm:px-6 bg-[#06030f] relative overflow-hidden"
+      >
+        <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-1">
+          <div className="flex gap-1">
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+          </div>
+          <FaBookOpen className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            About Me
+          </h2>
+          <div className="flex gap-1">
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+          </div>
+        </div>
+
+        {/* Centered Stars shifted UP */}
+        <div className="flex items-center justify-center -mt-1 mb-6 text-[#d4af37]">
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <span className="text-[11px] md:text-base">✦</span>
+            <span className="text-xs md:text-lg">◆</span>
+            <span className="text-[11px] md:text-base">✦</span>
+          </div>
+        </div>
+
+        {/* Profile Circle with Rotating Geometric Shapes (Video 21) */}
+        <div className="flex flex-col items-center justify-center gap-6 mb-8">
+          <div className="relative flex items-center justify-center w-48 h-48 sm:w-60 sm:h-60">
+            {/* Rotating Diamond Border */}
+            <motion.div
+              className="absolute w-40 h-40 sm:w-52 sm:h-52 border border-[#d4af37]/25 pointer-events-none"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Rotating Circular Ring */}
+            <motion.div
+              className="absolute w-44 h-44 sm:w-56 sm:h-56 rounded-full border border-dashed border-[#d4af37]/35 pointer-events-none"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Main Profile Avatar Outline */}
+            <div className="w-36 h-36 sm:w-48 sm:h-48 rounded-full border-[3.5px] border-[#d4af37] bg-white/5 backdrop-blur-sm z-10 shadow-[0_0_30px_rgba(212,175,55,0.2)]"></div>
           </div>
 
-          {/* About Stars */}
-          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8">
-            <div className="flex items-center gap-1.5 md:gap-2">
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-              <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
+          <div className="max-w-2xl px-2">
+            <motion.div
+              whileTap={{ scale: 0.98 }}
+              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 text-gray-300 text-sm sm:text-base leading-relaxed active:border-[#d4af37]/40 transition-colors"
+            >
+              Hi, my name is Puneet and I am an aspiring Data Analyst from Jaipur. I am passionate about data analytics, business intelligence, dashboard creation and transforming raw data into meaningful insights. I enjoy working with SQL, Python, Power BI and Excel to solve real-world business problems and help organizations make data-driven decisions.
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Organizations Marquee */}
+        <div className="mt-4 text-center">
+          <h3 className="tracking-[4px] text-[#d4af37] uppercase text-xs sm:text-sm mb-4">
+            Organizations & Platforms
+          </h3>
+        </div>
+        <div className="overflow-hidden w-full mb-8">
+          <div className="marquee-wrapper">
+            <div className="marquee-track flex gap-8" style={{ animationDuration: "14s" }}>
+              <span className="flex items-center gap-2"><FaLinkedin /> LinkedIn</span>
+              <span className="flex items-center gap-2"><FaGithub /> GitHub</span>
+              <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
+              <span className="flex items-center gap-2"><FaDatabase /> SQL</span>
+              <span className="flex items-center gap-2"><FaPython /> Python</span>
+              <span className="flex items-center gap-2"><FaLinkedin /> LinkedIn</span>
+              <span className="flex items-center gap-2"><FaGithub /> GitHub</span>
+              <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
+              <span className="flex items-center gap-2"><FaDatabase /> SQL</span>
+              <span className="flex items-center gap-2"><FaPython /> Python</span>
             </div>
           </div>
+        </div>
 
-          <div className="flex flex-col items-center justify-center gap-6 md:gap-8 mb-8">
-            <div className="w-36 h-36 md:w-56 md:h-56 rounded-full border-[4px] md:border-[5px] border-[#d4af37]"></div>
-
-            <div className="max-w-2xl px-2">
-              <p className="max-w-2xl mx-auto rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 text-gray-300 text-sm sm:text-base leading-relaxed">
-                Hi, my name is Puneet and I am an aspiring Data Analyst from Jaipur. I am passionate about data analytics, business intelligence, dashboard creation and transforming raw data into meaningful insights. I enjoy working with SQL, Python, Power BI and Excel to solve real-world business problems and help organizations make data-driven decisions.
-              </p>
-            </div>
+        {/* EDUCATION */}
+        <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 mb-1">
+          <div className="flex gap-1">
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
           </div>
-
-          {/* Marquee */}
-          <div className="mt-6 md:mt-8 text-center">
-            <h3 className="tracking-[4px] sm:tracking-[6px] text-[#d4af37] uppercase text-xs sm:text-sm mb-6 md:mb-10">
-              Organizations & Platforms
-            </h3>
+          <FaGraduationCap className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+            Education
+          </h2>
+          <div className="flex gap-1">
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
           </div>
-          <div className="overflow-hidden w-full">
-            <div className="marquee-wrapper">
-              <div className="marquee-track">
-                <span className="flex items-center gap-2"><FaLinkedin /> LinkedIn</span>
-                <span className="flex items-center gap-2"><FaGithub /> GitHub</span>
-                <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
-                <span className="flex items-center gap-2"><FaDatabase /> SQL</span>
-                <span className="flex items-center gap-2"><FaPython /> Python</span>
-                <span className="flex items-center gap-2"><FaLinkedin /> LinkedIn</span>
-                <span className="flex items-center gap-2"><FaGithub /> GitHub</span>
-                <span className="flex items-center gap-2"><FaChartBar /> Power BI</span>
-                <span className="flex items-center gap-2"><FaDatabase /> SQL</span>
-                <span className="flex items-center gap-2"><FaPython /> Python</span>
-              </div>
-            </div>
-          </div>
+        </div>
 
-          {/* EDUCATION */}
-          <div className="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 mt-14 md:mt-28 mb-2 md:mb-4">
-            <div className="flex gap-1">
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-            </div>
-            <FaGraduationCap className="text-[#d4af37] text-lg sm:text-2xl md:text-3xl flex-shrink-0" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer select-none about-glow whitespace-nowrap">
-              Education
-            </h2>
-            <div className="flex gap-1">
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-            </div>
+        {/* Centered Stars shifted UP */}
+        <div className="flex items-center justify-center -mt-1 mb-6 text-[#d4af37]">
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <span className="text-[11px] md:text-base">✦</span>
+            <span className="text-xs md:text-lg">◆</span>
+            <span className="text-[11px] md:text-base">✦</span>
           </div>
+        </div>
 
-          {/* Education Stars */}
-          <div className="flex items-center justify-center mt-0 mb-6 md:mb-8">
-            <div className="flex items-center gap-1.5 md:gap-2">
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-              <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
-              <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-            </div>
-          </div>
-
-          <div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
-            <div className="flex justify-between items-start flex-col sm:flex-row gap-3">
+        <div className="max-w-6xl mx-auto space-y-4">
+          <motion.div
+            whileTap={{ scale: 0.98 }}
+            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-7 active:border-[#d4af37]/40 transition-colors"
+          >
+            <div className="flex justify-between items-start flex-col sm:flex-row gap-2">
               <div>
-                <h3 className="text-xl sm:text-3xl font-bold text-white">ICFAI University, Jaipur</h3>
-                <p className="text-[#d4af37] mt-1 text-sm sm:text-base">Bachelor of Computer Application, Computer Application</p>
+                <h3 className="text-lg sm:text-2xl font-bold text-white">ICFAI University, Jaipur</h3>
+                <p className="text-[#d4af37] mt-1 text-xs sm:text-base">Bachelor of Computer Application, Computer Application</p>
               </div>
               <div className="flex gap-3 items-center">
-                <span className="px-3 md:px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs sm:text-sm">GPA: 8.0</span>
-                <span className="text-gray-300 text-xs sm:text-sm">May 2020 - Sep 2023</span>
+                <span className="px-3 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs">GPA: 8.0</span>
+                <span className="text-gray-300 text-xs">May 2020 - Sep 2023</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="max-w-6xl mx-auto mb-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 hover:border-[#d4af37]/50 transition-all duration-300">
-            <div className="flex justify-between items-start flex-wrap gap-3">
+          <motion.div
+            whileTap={{ scale: 0.98 }}
+            className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-7 active:border-[#d4af37]/40 transition-colors"
+          >
+            <div className="flex justify-between items-start flex-wrap gap-2">
               <div>
-                <h3 className="text-xl sm:text-3xl font-bold text-white">Royal International</h3>
-                <p className="text-[#d4af37] mt-1 text-sm sm:text-base font-semibold">Senior Secondary(+2) — Computer Science, Physics, Chemistry, and Mathematics</p>
+                <h3 className="text-lg sm:text-2xl font-bold text-white">Royal International</h3>
+                <p className="text-[#d4af37] mt-1 text-xs sm:text-base font-semibold">Senior Secondary(+2) — CS, Physics, Chemistry, Math</p>
               </div>
               <div className="flex gap-3 items-center flex-wrap">
-                <span className="px-3 md:px-4 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs sm:text-sm">GPA: 7.0</span>
-                <span className="text-gray-300 text-xs sm:text-sm">March 2019 - May 2020</span>
+                <span className="px-3 py-1 bg-[#d4af37] text-black font-semibold rounded-full text-xs">GPA: 7.0</span>
+                <span className="text-gray-300 text-xs">March 2019 - May 2020</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="max-w-6xl mx-auto mt-6 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6 hover:border-[#d4af37]/50 transition-all duration-300">
-            <p className="text-gray-200 text-xs sm:text-base leading-relaxed">
-              <span className="text-white font-semibold flex items-center gap-2 mb-2">
-                <FaBookOpen className="text-[#d4af37] text-lg sm:text-xl" />
-                <span className="tracking-wide">Relevant Coursework:</span>
+          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-6">
+            <p className="text-gray-200 text-xs sm:text-sm leading-relaxed">
+              <span className="text-white font-semibold flex items-center gap-2 mb-1.5">
+                <FaBookOpen className="text-[#d4af37]" /> Relevant Coursework:
               </span>
-              Advanced SQL, Database Management Systems, Data Structures & Algorithms, Python for Data Analytics, Statistical Analysis, Probability & Statistics, Linear Algebra, Machine Learning, Deep Learning, Business Intelligence, Data Warehousing, Microsoft Power BI.
+              Advanced SQL, DBMS, Data Structures & Algorithms, Python for Analytics, Statistics, Linear Algebra, Machine Learning, Business Intelligence, Data Warehousing, Power BI.
             </p>
           </div>
+        </div>
 
-          {/* EXPERIENCE */}
-          <div id="experience" className="scroll-mt-28 text-center my-10 md:my-20">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <FaBriefcase className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Experience
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
+        {/* EXPERIENCE WITH SMOOTH TIMELINE */}
+        <div id="experience" className="scroll-mt-24 text-center my-12 md:my-20">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
-
-            {/* Experience Stars */}
-            <div className="w-full flex justify-center mb-6 md:mb-8">
-              <div className="flex items-center justify-center gap-1.5 md:gap-2">
-                <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-                <span className="text-[#d4af37] text-sm md:text-2xl">◆</span>
-                <span className="text-[#d4af37] text-xs md:text-xl">✦</span>
-              </div>
-            </div>
-
-            <div className="relative max-w-6xl mx-auto py-4 md:py-20">
-              <div className="absolute left-1/2 top-[120px] h-[1050px] w-[2px] bg-[#d4af37]/20 -translate-x-1/2 hidden md:block"></div>
-
-              {experiences.map((exp, index) => (
-                <div
-                  key={index}
-                  className="relative mb-6 sm:mb-16"
-                >
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-10">
-                    <div className="w-14 h-14 rounded-full border-[3px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                      <FaCode className="text-[#39ff88] text-2xl drop-shadow-[0_0_8px_#39ff88]" />
-                    </div>
-                  </div>
-
-                  <div
-                    className={`w-full md:w-[50%] ${
-                      exp.side === "left"
-                        ? "md:mr-auto md:pr-4 md:translate-y-8"
-                        : "md:ml-auto md:pl-4 md:translate-y-8"
-                    }`}
-                  >
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:shadow-[#d4af37]/20 transition-all duration-300">
-                      <div className="flex justify-between items-start mb-3">
-                        <div className="flex-1 text-left">
-                          <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight">
-                            {exp.company}
-                          </h3>
-                          <p className="text-[#d4af37] font-semibold text-base sm:text-lg mt-1">
-                            {exp.role}
-                          </p>
-                        </div>
-                        <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[110px]">
-                          {exp.date}
-                        </span>
-                      </div>
-
-                      <ul className="space-y-3 sm:space-y-6 mb-4 sm:mb-6 mt-3 sm:mt-5">
-                        {exp.points.map((point, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2.5 sm:gap-4 text-gray-300 leading-6 sm:leading-8 text-xs sm:text-[15px]"
-                          >
-                            <span className="text-[#d4af37] mt-[2px] sm:mt-[6px] text-base sm:text-lg flex-shrink-0">•</span>
-                            <p className="text-left max-w-[95%]">{point}</p>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <div className="flex flex-wrap gap-2">
-                        {exp.skills.map((skill, i) => (
-                          <span
-                            key={i}
-                            className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <FaBriefcase className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Experience
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
             </div>
           </div>
 
-          {/* RESEARCH */}
-          <section id="research" className="py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <FaFlask className="text-[#d4af37] text-base sm:text-xl flex-shrink-0" />
-
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Research & Publications
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
+          <div className="flex items-center justify-center -mt-1 mb-8 text-[#d4af37]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
             </div>
+          </div>
 
-            <div className="flex justify-center items-center gap-1.5 md:gap-4 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
+          <div className="relative max-w-6xl mx-auto py-2 md:py-14">
+            <div className="absolute left-1/2 top-[40px] h-[85%] w-[2px] bg-[#d4af37]/25 -translate-x-1/2 hidden md:block"></div>
 
-            <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Three</h3>
-                    <p className="text-[#d4af37] font-semibold text-base sm:text-lg">AI Researcher</p>
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative mb-6 sm:mb-12 cursor-pointer"
+              >
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-8">
+                  <div className="w-12 h-12 rounded-full border-[2.5px] border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                    <FaCode className="text-[#39ff88] text-xl" />
                   </div>
-                  <span className="text-gray-300 text-xs sm:text-sm">June 2024 - Present</span>
                 </div>
 
-                <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Developed advanced AI systems using machine learning pipelines.</li>
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Implemented scalable architectures for large-scale data processing.</li>
-                </ul>
-
-                <a href="#" className="inline-flex items-center gap-2 text-[#d4af37] font-semibold text-xs sm:text-base mb-4">
-                  <FaGithub /> View on GitHub
-                </a>
-
-                <div className="flex flex-wrap gap-2">
-                  {["Python", "TensorFlow", "NLP", "LLM"].map((tag) => (
-                    <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[32px] p-5 sm:p-6 shadow-xl">
-                <div className="flex justify-between items-start mb-3">
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Research Project Four</h3>
-                    <p className="text-[#d4af37] font-semibold text-base sm:text-lg">AI Researcher</p>
-                  </div>
-                  <span className="text-gray-300 text-xs sm:text-sm">June 2024 - Present</span>
-                </div>
-
-                <ul className="space-y-2 sm:space-y-3 mb-4 sm:mb-5 text-gray-300 text-xs sm:text-base">
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Built intelligent systems for real-time prediction and analytics.</li>
-                  <li className="flex gap-2"><span className="text-[#d4af37]">•</span> Optimized model performance through distributed computing methods.</li>
-                </ul>
-
-                <a href="#" className="inline-flex items-center gap-2 text-[#d4af37] font-semibold text-xs sm:text-base mb-4">
-                  <FaGithub /> View on GitHub
-                </a>
-
-                <div className="flex flex-wrap gap-2">
-                  {["PyTorch", "Deep Learning", "Computer Vision", "AI"].map((tag) => (
-                    <span key={tag} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">{tag}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* PROJECTS */}
-          <section id="projects" className="scroll-mt-28 py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <FaLightbulb className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Project
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-              {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
                 <div
-                  key={index}
-                  className="group bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6 flex flex-col justify-between"
+                  className={`w-full md:w-[48%] ${
+                    exp.side === "left" ? "md:mr-auto text-left" : "md:ml-auto text-left"
+                  }`}
                 >
-                  <div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-[#ffd95e] transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed text-xs sm:text-sm mb-4 sm:mb-5">
-                      {project.desc}
-                    </p>
-                  </div>
+                  <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 shadow-xl hover:border-[#d4af37]/40 active:border-[#d4af37] transition-all">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-bold text-white">{exp.company}</h3>
+                        <p className="text-[#d4af37] font-semibold text-sm sm:text-base">{exp.role}</p>
+                      </div>
+                      <span className="text-gray-300 text-xs sm:text-sm text-right min-w-[100px]">{exp.date}</span>
+                    </div>
 
-                  <div>
-                    <a href="#" className="flex items-center gap-2 text-[#ffd95e] font-semibold text-xs sm:text-sm mb-3 sm:mb-4">
-                      <FaExternalLinkAlt /> GitHub
-                    </a>
+                    <ul className="space-y-2 mb-4 text-gray-300 text-xs sm:text-sm">
+                      {exp.points.map((point, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-[#d4af37]">•</span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                    <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech, i) => (
-                        <span key={i} className="px-2.5 sm:px-3 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">
-                          {tech}
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                      {exp.skills.map((skill, i) => (
+                        <span key={i} className="px-2.5 py-0.5 rounded-lg bg-white/10 text-[11px] sm:text-xs text-white">
+                          {skill}
                         </span>
                       ))}
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="flex justify-center mt-6 sm:mt-8">
-              <button
-                onClick={() => setShowAllProjects(!showAllProjects)}
-                className="px-5 sm:px-6 py-2.5 border border-[#d4af37]/50 rounded-xl text-white text-xs sm:text-sm font-semibold flex items-center gap-2 hover:border-[#d4af37] hover:text-[#d4af37] transition-all"
-              >
-                <span className="text-xs">{showAllProjects ? "▲" : "▼"}</span>
-                {showAllProjects ? "Show Less" : `View All ${projects.length} Projects`}
-              </button>
-            </div>
-          </section>
-
-          {/* LEADERSHIP */}
-          <section id="Leadership" className="py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <FaUsers className="text-[#d4af37] text-base sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Leadership & Involvement
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8">
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
-                <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Stanford SERIS Scholar</h3>
-                <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">Stanford University School of Engineering</p>
-                <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Dec 2024 - Feb 2025</p>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                  Competitively selected as 1 of 23 undergraduates across the U.S. for Stanford’s Engineering Research Introduction Scholar Program.
-                </p>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
-                <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Break Through Tech AI Fellow</h3>
-                <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">Break Through Tech (Cornell University)</p>
-                <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Mar 2025 - Jun 2025</p>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                  Selected as one of 1,000 fellows nationwide for a rigorous AI/ML program. Completed ML coursework and AI Studio projects.
-                </p>
-              </div>
-
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-[24px] sm:rounded-[28px] p-5 sm:p-6">
-                <h3 className="text-white text-lg sm:text-xl font-bold mb-1.5">Girls Who Code Club — President</h3>
-                <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">College of San Mateo</p>
-                <p className="text-gray-300 text-xs sm:text-sm font-semibold mb-3">Apr 2024 - May 2025</p>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
-                  Founded and led the Girls Who Code Club, organizing coding workshops and community outreach to promote diversity in STEM.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* SKILLS */}
-          <section id="skills" className="scroll-mt-28 py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <FaUserSecret className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Technical Skills
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
-
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-              {[
-                { title: "Languages", list: ["Python", "SQL", "Java", "C++", "JavaScript", "TypeScript", "HTML/CSS"] },
-                { title: "Frameworks", list: ["React", "Next.js", "Node.js", "Django", "Flask", "Express.js"] },
-                { title: "Developer Tools", list: ["Git", "GitHub", "Docker", "VS Code", "JIRA"] },
-                { title: "Libraries", list: ["Pandas", "NumPy", "Matplotlib", "SciPy", "Seaborn", "OpenAI API"] },
-                { title: "Databases", list: ["PostgreSQL", "MySQL", "Firebase", "SQLite"] },
-              ].map((category, idx) => (
-                <div key={idx} className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-md">
-                  <h3 className="text-[#d4af37] text-xl font-bold mb-4">{category.title}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {category.list.map((item) => (
-                      <span key={item} className="px-2.5 py-1 rounded-lg bg-white/10 text-xs sm:text-sm text-white">
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* CERTIFICATIONS */}
-          <section id="certifications" className="scroll-mt-28 py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <FaAward className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Certifications
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
-
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-              {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
-                <div
-                  key={index}
-                  className="bg-[#111827]/70 border border-white/10 rounded-2xl p-4 sm:p-6 flex flex-col justify-between"
-                >
-                  <div className="flex justify-between items-start gap-3 sm:gap-4">
-                    <div>
-                      <h3 className="text-white font-bold text-sm sm:text-lg">{cert.title}</h3>
-                      <p className="text-[#d4af37] font-semibold text-xs sm:text-sm mt-1 sm:mt-2">{cert.issuer}</p>
-                    </div>
-                    <span className="text-gray-400 text-xs sm:text-sm whitespace-nowrap">{cert.date}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <button
-              onClick={() => setShowAllCertifications(!showAllCertifications)}
-              className="flex items-center gap-2 mx-auto mt-6 sm:mt-10 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl border border-[#d4af37]/50 text-white text-xs sm:text-sm hover:text-[#d4af37] hover:border-[#d4af37] transition-all"
-            >
-              <span className="text-xs">{showAllCertifications ? "▲" : "▼"}</span>
-              {showAllCertifications ? "Show Less" : `View All ${certifications.length} Certifications`}
-            </button>
-          </section>
-
-          {/* RECOMMENDATION */}
-          <section id="Recommendation" className="py-8 md:py-24">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <FaRegCommentDots className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Recommendation
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
-
-            <div className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-8 backdrop-blur-md">
-              <FaQuoteLeft className="text-[#d4af37] text-2xl sm:text-4xl mb-3 sm:mb-6 opacity-80" />
-              <p className="text-gray-200 text-sm sm:text-base md:text-xl leading-relaxed italic">
-                "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
-              </p>
-
-              <div className="mt-5 sm:mt-8 pt-4 border-t border-white/10">
-                <h3 className="text-white text-lg sm:text-2xl font-bold">John Smith</h3>
-                <p className="text-[#d4af37] text-sm sm:text-lg font-semibold mt-1 sm:mt-2">Senior Software Engineer | AI Research Mentor</p>
-                <p className="text-gray-400 text-xs sm:text-sm mt-1 sm:mt-2">Technology Industry Professional</p>
-              </div>
-            </div>
-          </section>
-
-          {/* CONTACT */}
-          <section id="contact" className="scroll-mt-28 pt-8 md:pt-16 pb-4">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 md:-mt-8 mb-2">
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-
-              <HiOutlineMail className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white cursor-pointer whitespace-nowrap">
-                Get in Touch
-              </h2>
-
-              <div className="flex items-center gap-1">
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-                <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
-              </div>
-            </div>
-
-            <div className="flex justify-center items-center gap-1.5 md:gap-2 mt-0 mb-6 md:mb-8 text-[#ffd95e]">
-              <span className="text-xs md:text-2xl">✦</span>
-              <span className="text-sm md:text-2xl">◆</span>
-              <span className="text-xs md:text-2xl">✦</span>
-            </div>
-
-            <div className="max-w-4xl mx-auto mt-4 sm:mt-12 text-center px-2">
-              <p className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed mb-6 sm:mb-10">
-                I'm always open to discussing new opportunities, collaborations, or just connecting. Feel free to reach out!
-              </p>
-
-              <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6">
-                <a
-                  href="mailto:parasgoswami1156@gmail.com"
-                  className="w-full sm:w-auto bg-[#ebb236] text-black px-4 sm:px-6 py-3 rounded-xl font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 shadow-lg transition-all duration-300 hover:scale-105"
-                >
-                  <HiOutlineMail className="text-lg sm:text-2xl" />
-                  parasgoswami1156@gmail.com
-                </a>
-
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ebb236] hover:text-[#ebb236]"
-                >
-                  <FaLinkedin className="text-lg sm:text-2xl" />
-                  Follow on LinkedIn
-                </a>
-
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto border border-white/20 px-4 sm:px-6 py-3 rounded-xl text-white font-medium text-xs sm:text-base md:text-lg flex items-center justify-center gap-2 transition-all duration-300 hover:border-[#ebb236] hover:text-[#ebb236]"
-                >
-                  <FaGithub className="text-lg sm:text-2xl" />
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </section>
-
-          {/* FOOTER */}
-          <div className="mt-8 md:mt-10 pt-4 border-t border-white/10 text-center pb-2">
-            <div className="flex items-center justify-center gap-2 sm:gap-4 mb-0">
-              <span className="text-[#d4af37] text-xs sm:text-sm">✦ ✦ ✦</span>
-              <h3 className="text-white text-lg sm:text-2xl font-serif font-semibold">
-                Puneet Goswami
-              </h3>
-              <span className="text-[#d4af37] text-xs sm:text-sm">✦ ✦ ✦</span>
-            </div>
-
-            <p className="text-gray-400 text-xs sm:text-base mt-1 sm:mt-2">
-              © 2026 Puneet Goswami
-            </p>
+              </motion.div>
+            ))}
           </div>
-        </motion.section>
-      </div>
+        </div>
 
-      {/* "THANK YOU FOR VISITING" SMOOTH TOAST POP-UP */}
+        {/* RESEARCH */}
+        <section id="research" className="py-6 md:py-16">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+            <FaFlask className="text-[#d4af37] text-base sm:text-xl flex-shrink-0" />
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Research & Publications
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center -mt-1 mb-6 text-[#ffd95e]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-5 max-w-6xl mx-auto">
+            <motion.div
+              whileTap={{ scale: 0.98 }}
+              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 active:border-[#d4af37]/40 transition-colors"
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h3 className="text-lg font-bold text-white">Research Project Three</h3>
+                  <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">AI Researcher</p>
+                </div>
+                <span className="text-gray-300 text-xs">June 2024 - Present</span>
+              </div>
+              <p className="text-gray-300 text-xs sm:text-sm mb-3">Developed scalable AI architectures for large-scale biomedical image segmentation.</p>
+              <div className="flex flex-wrap gap-1.5">
+                {["Python", "TensorFlow", "NLP", "LLM"].map((tag) => (
+                  <span key={tag} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">{tag}</span>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              whileTap={{ scale: 0.98 }}
+              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 sm:p-6 active:border-[#d4af37]/40 transition-colors"
+            >
+              <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h3 className="text-lg font-bold text-white">Research Project Four</h3>
+                  <p className="text-[#d4af37] font-semibold text-xs sm:text-sm">AI Researcher</p>
+                </div>
+                <span className="text-gray-300 text-xs">June 2024 - Present</span>
+              </div>
+              <p className="text-gray-300 text-xs sm:text-sm mb-3">Optimized deep learning models using distributed computing and PyTorch.</p>
+              <div className="flex flex-wrap gap-1.5">
+                {["PyTorch", "Deep Learning", "CV", "AI"].map((tag) => (
+                  <span key={tag} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">{tag}</span>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* PROJECTS */}
+        <section id="projects" className="scroll-mt-24 py-6 md:py-16">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+            <FaLightbulb className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Projects
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center -mt-1 mb-6 text-[#ffd95e]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            <AnimatePresence>
+              {(showAllProjects ? projects : projects.slice(0, 6)).map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35, delay: index * 0.04 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 flex flex-col justify-between hover:border-[#d4af37]/40 active:border-[#d4af37] transition-all"
+                >
+                  <div>
+                    <h3 className="text-lg font-bold text-white mb-1.5">{project.title}</h3>
+                    <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4">{project.desc}</p>
+                  </div>
+
+                  <div>
+                    {/* Glowing GitHub Button */}
+                    <motion.button
+                      whileTap={{ scale: 0.92 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open("https://github.com/puneetgoswami1", "_blank");
+                      }}
+                      className="inline-flex items-center gap-1.5 text-[#ffd95e] hover:text-yellow-300 text-xs font-semibold mb-3 px-2.5 py-1 rounded-lg border border-[#ffd95e]/30 hover:border-[#ffd95e] active:shadow-[0_0_15px_#ffd95e] transition-all cursor-pointer"
+                    >
+                      <FaExternalLinkAlt className="text-[10px]" /> GitHub
+                    </motion.button>
+
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tech.map((tech, i) => (
+                        <span key={i} className="px-2 py-0.5 rounded-lg bg-white/10 text-[11px] text-white">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+
+          {/* View All Button */}
+          <div className="flex justify-center mt-7">
+            <motion.button
+              whileTap={{ scale: 0.92 }}
+              onClick={() => setShowAllProjects(!showAllProjects)}
+              className="px-6 py-2.5 border border-[#d4af37]/60 active:border-[#ffd95e] rounded-xl text-white text-xs sm:text-sm font-semibold active:shadow-[0_0_20px_#d4af37] hover:text-[#d4af37] transition-all cursor-pointer"
+            >
+              {showAllProjects ? "▲ Show Less" : `▼ View All ${projects.length} Projects`}
+            </motion.button>
+          </div>
+        </section>
+
+        {/* LEADERSHIP */}
+        <section id="Leadership" className="py-6 md:py-16">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+            <FaUsers className="text-[#d4af37] text-base sm:text-2xl flex-shrink-0" />
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Leadership & Involvement
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center -mt-1 mb-6 text-[#ffd95e]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            {[
+              { title: "Stanford SERIS Scholar", org: "Stanford School of Engineering", date: "Dec 2024 - Feb 2025", desc: "1 of 23 undergraduates selected nationwide for research introduction." },
+              { title: "Break Through Tech Fellow", org: "Cornell University", date: "Mar 2025 - Jun 2025", desc: "Completed hands-on machine learning AI studio programs." },
+              { title: "Girls Who Code — President", org: "College of San Mateo", date: "Apr 2024 - May 2025", desc: "Organized technical workshops to promote diversity in STEM." }
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                whileTap={{ scale: 0.98 }}
+                className="bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-5 active:border-[#d4af37]/40 transition-colors"
+              >
+                <h3 className="text-white text-base font-bold mb-1">{item.title}</h3>
+                <p className="text-[#d4af37] text-xs font-semibold">{item.org}</p>
+                <p className="text-gray-400 text-[11px] mb-2">{item.date}</p>
+                <p className="text-gray-300 text-xs leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* SKILLS */}
+        <section id="skills" className="scroll-mt-24 py-6 md:py-16">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+            <FaUserSecret className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Technical Skills
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center -mt-1 mb-6 text-[#ffd95e]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-6xl mx-auto">
+            {[
+              { title: "Languages", list: ["Python", "SQL", "Java", "C++", "JavaScript", "TypeScript", "HTML/CSS"] },
+              { title: "Frameworks", list: ["React", "Next.js", "Node.js", "Django", "Flask", "Express.js"] },
+              { title: "Developer Tools", list: ["Git", "GitHub", "Docker", "VS Code", "JIRA"] },
+              { title: "Libraries", list: ["Pandas", "NumPy", "Matplotlib", "SciPy", "Seaborn", "OpenAI API"] },
+              { title: "Databases", list: ["PostgreSQL", "MySQL", "Firebase", "SQLite"] },
+            ].map((category, idx) => (
+              <div key={idx} className="bg-[#111827]/70 border border-white/10 rounded-2xl p-5">
+                <h3 className="text-[#d4af37] text-base font-bold mb-3">{category.title}</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {category.list.map((item) => (
+                    <motion.span
+                      key={item}
+                      whileTap={{ scale: 0.9 }}
+                      className="px-2.5 py-1 rounded-lg bg-white/10 text-xs text-white cursor-pointer active:border-[#d4af37]"
+                    >
+                      {item}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CERTIFICATIONS */}
+        <section id="certifications" className="scroll-mt-24 py-6 md:py-16">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+            <FaAward className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Certifications
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center -mt-1 mb-6 text-[#ffd95e]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
+            <AnimatePresence>
+              {(showAllCertifications ? certifications : certifications.slice(0, 6)).map((cert, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.35, delay: index * 0.04 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-[#111827]/70 border border-white/10 rounded-2xl p-4 flex flex-col justify-between active:border-[#d4af37]/50 transition-colors"
+                >
+                  <div>
+                    <h3 className="text-white font-bold text-xs sm:text-sm">{cert.title}</h3>
+                    <p className="text-[#d4af37] text-[11px] mt-1">{cert.issuer}</p>
+                  </div>
+                  <span className="text-gray-400 text-[10px] mt-2">{cert.date}</span>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+
+          <div className="flex justify-center mt-7">
+            <motion.button
+              whileTap={{ scale: 0.92 }}
+              onClick={() => setShowAllCertifications(!showAllCertifications)}
+              className="px-6 py-2.5 border border-[#d4af37]/60 active:border-[#ffd95e] rounded-xl text-white text-xs sm:text-sm font-semibold active:shadow-[0_0_20px_#d4af37] hover:text-[#d4af37] transition-all cursor-pointer"
+            >
+              {showAllCertifications ? "▲ Show Less" : `▼ View All ${certifications.length} Certifications`}
+            </motion.button>
+          </div>
+        </section>
+
+        {/* RECOMMENDATION */}
+        <section id="Recommendation" className="py-6 md:py-16">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+            <FaRegCommentDots className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Recommendation
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center -mt-1 mb-6 text-[#ffd95e]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
+            </div>
+          </div>
+
+          <motion.div
+            whileTap={{ scale: 0.98 }}
+            className="max-w-6xl mx-auto bg-[#111827]/60 border border-white/10 rounded-2xl p-5 sm:p-7 backdrop-blur-md active:border-[#d4af37]/40 transition-colors"
+          >
+            <FaQuoteLeft className="text-[#d4af37] text-2xl mb-3 opacity-80" />
+            <p className="text-gray-200 text-xs sm:text-base leading-relaxed italic">
+              "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
+            </p>
+            <div className="mt-4 pt-3 border-t border-white/10">
+              <h3 className="text-white text-base sm:text-lg font-bold">John Smith</h3>
+              <p className="text-[#d4af37] text-xs font-semibold">Senior Software Engineer | AI Research Mentor</p>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="scroll-mt-24 pt-6 md:pt-16 pb-4">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-1">
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+            <HiOutlineMail className="text-[#d4af37] text-lg sm:text-2xl flex-shrink-0" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
+              Get in Touch
+            </h2>
+            <div className="flex items-center gap-1">
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+              <div className="w-2.5 md:w-4 h-1 md:h-2 border border-[#d4af37]/40 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center -mt-1 mb-6 text-[#ffd95e]">
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <span className="text-[11px] md:text-base">✦</span>
+              <span className="text-xs md:text-lg">◆</span>
+              <span className="text-[11px] md:text-base">✦</span>
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto text-center px-2">
+            <p className="text-gray-300 text-xs sm:text-base leading-relaxed mb-6">
+              I'm always open to discussing new opportunities, collaborations, or just connecting. Feel free to reach out!
+            </p>
+
+            <div className="flex flex-wrap justify-center items-center gap-3">
+              <motion.a
+                whileTap={{ scale: 0.94 }}
+                href="mailto:parasgoswami1156@gmail.com"
+                className="w-full sm:w-auto bg-[#ebb236] text-black px-5 py-2.5 rounded-xl font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:shadow-[0_0_20px_#ebb236] transition-all"
+              >
+                <HiOutlineMail className="text-lg" />
+                parasgoswami1156@gmail.com
+              </motion.a>
+
+              <motion.a
+                whileTap={{ scale: 0.94 }}
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:border-[#ebb236] transition-all"
+              >
+                <FaLinkedin className="text-lg" />
+                Follow on LinkedIn
+              </motion.a>
+
+              <motion.a
+                whileTap={{ scale: 0.94 }}
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto border border-white/20 px-5 py-2.5 rounded-xl text-white font-medium text-xs sm:text-sm flex items-center justify-center gap-2 active:border-[#ebb236] transition-all"
+              >
+                <FaGithub className="text-lg" />
+                GitHub
+              </motion.a>
+            </div>
+          </div>
+        </section>
+
+        {/* FOOTER */}
+        <div className="mt-8 pt-4 border-t border-white/10 text-center pb-2">
+          <div className="flex items-center justify-center gap-2 mb-0">
+            <span className="text-[#d4af37] text-xs">✦ ✦ ✦</span>
+            <h3 className="text-white text-lg sm:text-xl font-serif font-semibold">
+              Puneet Goswami
+            </h3>
+            <span className="text-[#d4af37] text-xs">✦ ✦ ✦</span>
+          </div>
+          <p className="text-gray-400 text-xs mt-1">
+            © 2026 Puneet Goswami
+          </p>
+        </div>
+      </section>
+
+      {/* THANK YOU POPUP */}
       <AnimatePresence>
         {showToast && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.4 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#161324]/90 backdrop-blur-md border border-[#e8cb76]/60 text-white px-5 py-3 rounded-2xl shadow-[0_0_25px_rgba(232,203,118,0.4)] flex items-center gap-3 text-xs sm:text-sm whitespace-nowrap pointer-events-none"
+            transition={{ duration: 0.35 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#161324]/95 border border-[#e8cb76]/60 text-white px-5 py-3 rounded-2xl shadow-[0_0_25px_rgba(232,203,118,0.4)] flex items-center gap-3 text-xs sm:text-sm whitespace-nowrap pointer-events-none"
           >
             <FaCheckCircle className="text-[#e8cb76] text-base sm:text-lg flex-shrink-0" />
             <span>Thank you for visiting my portfolio! ✨</span>
