@@ -204,41 +204,40 @@ export default function Home() {
 
       {/* HERO SECTION - SHOOTING STAR ONLY INSIDE HERO SKY */}
       <section className="min-h-screen flex flex-col justify-between items-center text-center px-4 sm:px-6 relative pt-24 sm:pt-28 pb-4 overflow-hidden">
-        
-        {/* Realistic Shooting Meteor (Only in Hero - First Load + Every 5s) */}
+        {/* 1. REALISTIC SHOOTING METEOR (Sirf Upar Aasmaan Me - Text Se Dur) */}
         <motion.div
-          className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
+          className="absolute pointer-events-none z-0 transform -rotate-[30deg]"
           style={{
-            width: "115px",
-            height: "1.5px",
-            background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.7) 50%, #ffffff 100%)",
-            boxShadow: "0 0 6px #ffd95e",
+            width: "85px",
+            height: "1px",
+            background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.6) 60%, #ffffff 100%)",
+            boxShadow: "0 0 4px #ffd95e",
           }}
-          initial={{ top: "8%", left: "85%", opacity: 0 }}
+          initial={{ top: "3%", left: "85%", opacity: 0 }}
           animate={{
-            top: ["8%", "38%"],
-            left: ["85%", "18%"],
-            opacity: [0, 1, 0.7, 0],
+            top: ["3%", "14%"],
+            left: ["85%", "52%"],
+            opacity: [0, 0.9, 0.6, 0],
           }}
           transition={{
-            duration: 0.9,
+            duration: 0.85,
             repeat: Infinity,
             repeatDelay: 5,
             ease: "easeOut",
           }}
         />
 
-        {/* Twinkling Background Stars in Hero */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none transform-gpu">
-          {[...Array(20)].map((_, i) => (
+        {/* 2. BACKGROUND STARS (Sirf Upar Aasmaan Me 0% se 34% Tak) */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
+          {[...Array(16)].map((_, i) => (
             <div
               key={i}
-              className="absolute text-yellow-100/40 animate-pulse"
+              className="absolute text-yellow-100/35 animate-pulse"
               style={{
-                left: `${(i * 17) % 100}%`,
-                top: `${(i * 23) % 85}%`,
-                animationDuration: `${2.5 + (i % 3)}s`,
-                fontSize: `${(i % 3) + 3}px`,
+                left: `${(i * 19) % 94 + 3}%`,
+                top: `${(i * 7) % 32 + 2}%`, // Sirf sky ke hisse me rahega
+                animationDuration: `${3 + (i % 3)}s`,
+                fontSize: `${(i % 2) + 2.5}px`,
               }}
             >
               ✦
