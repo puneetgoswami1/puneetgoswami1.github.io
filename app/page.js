@@ -34,6 +34,12 @@ export default function Home() {
   const toastShownRef = useRef(false);
 
   useEffect(() => {
+
+    const triggerHaptic = () => {
+  if (typeof window !== "undefined" && window.navigator && window.navigator.vibrate) {
+    window.navigator.vibrate(25); // 25ms ka light tactile vibration
+  }
+};
     history.scrollRestoration = "manual";
     if (window.location.hash) {
       history.replaceState(null, "", window.location.pathname);
@@ -152,13 +158,23 @@ export default function Home() {
 
   return (
     <main className="min-h-screen text-white overflow-x-hidden relative select-none">
+    
       {/* FIXED BACKGROUND LAYER - ZERO ZOOM & ZERO LAG */}
-      <div
-        className="fixed inset-0 -z-20 bg-cover bg-center pointer-events-none transform-gpu"
-        style={{ backgroundImage: "url('/kp.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-black/55 backdrop-blur-[0.5px]" />
-      </div>
+     
+<div
+  className="fixed inset-0 -z-20 pointer-events-none"
+  style={{
+    backgroundImage: "url('/mosq.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    transform: "translate3d(0, 0, 0)", // GPU compositor layer par lock
+    WebkitTransform: "translate3d(0, 0, 0)",
+    backfaceVisibility: "hidden",
+    WebkitBackfaceVisibility: "hidden",
+  }}
+>
+  <div className="absolute inset-0 bg-black/55" />
+</div>
 
       {/* NAVBAR */}
       <nav
@@ -337,9 +353,10 @@ export default function Home() {
             >
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => {
+  window.navigator?.vibrate?.(25);
+  document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
+}}
                 className="flex-1 bg-[#ebb236] hover:bg-[#f5be42] text-black font-semibold px-4 sm:px-8 py-3.5 rounded-xl shadow-lg transition-all text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:shadow-[0_0_20px_#ebb236]"
               >
                 <span>☆</span> Explore My Work
@@ -347,9 +364,10 @@ export default function Home() {
 
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
-                }
+                onClick={() => {
+  window.navigator?.vibrate?.(25);
+  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+}}
                 className="flex-1 border border-white/20 hover:border-white/40 bg-black/40 text-white font-medium px-4 sm:px-8 py-3.5 rounded-xl transition-all text-xs sm:text-sm cursor-pointer active:border-[#e8cb76]"
               >
                 Get In Touch
