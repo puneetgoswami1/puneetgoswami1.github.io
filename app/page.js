@@ -169,20 +169,16 @@ export default function Home() {
     <main className="min-h-screen text-white overflow-x-hidden relative select-none">
       {/* 1. ZERO-SHAKE / ZERO-FLICKER HARDWARE GPU BACKGROUND */}
       <div
-        className="fixed inset-0 -z-10 pointer-events-none"
-        style={{
-          backgroundImage: "url('/kp.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          transform: "translate3d(0, 0, 0)",
-          WebkitTransform: "translate3d(0, 0, 0)",
-          backfaceVisibility: "hidden",
-          WebkitBackfaceVisibility: "hidden",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60" />
-      </div>
+  className="fixed inset-0 -z-30 pointer-events-none"
+  style={{
+    backgroundImage: "url('/kp.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
+  <div className="absolute inset-0 bg-black/60" />
+</div>
 
       {/* NAVBAR */}
       <nav
@@ -455,7 +451,7 @@ export default function Home() {
           <motion.div
             className="flex gap-8 whitespace-nowrap will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 16, ease: "linear", repeat: Infinity }}
+            transition={{ duration: 8, ease: "linear", repeat: Infinity }}
           >
             {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
               <span key={idx} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 px-3 py-1">
