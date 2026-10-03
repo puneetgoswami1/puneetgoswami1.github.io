@@ -442,7 +442,7 @@ export default function Home() {
         </div>
 
         {/* DESKTOP ABOUT LAYOUT */}
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-10 px-2">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-24 px-2">
           <div className="relative flex-shrink-0">
             <div className="w-36 h-36 md:w-44 md:h-44 rounded-full border-[3px] border-[#d4af37] bg-white/5 shadow-[0_0_25px_rgba(212,175,55,0.2)]"></div>
           </div>
@@ -455,13 +455,13 @@ export default function Home() {
         </div>
 
        {/* CONTINUOUS ZERO-GAP INFINITE MARQUEE (PHONE + DESKTOP) */}
-        <div className="mt-8 text-center">
+        <div className="mt-8 md:mt-16 text-center">
           <h3 className="tracking-[3px] md:tracking-[5px] text-[#d4af37] uppercase text-xs mb-5 font-semibold">
             ORGANIZATIONS & PLATFORMS
           </h3>
         </div>
 
-        <div className="overflow-hidden w-full max-w-5xl mx-auto relative mb-12 [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
+        <div className="overflow-hidden w-full max-w-5xl mx-auto relative mb-12 md:mb-28 [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
           <motion.div
             className="flex w-max will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
@@ -490,7 +490,7 @@ export default function Home() {
         </div>
 
         {/* EDUCATION */}
-        <div className="flex items-center justify-center gap-3 mt-14 mb-1">
+        <div className="flex items-center justify-center gap-3 mt-14 md:mt-24 mb-1">
           <div className="flex gap-1">
             <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
             <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -515,7 +515,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-4">
+        <div className="max-w-4xl mx-auto space-y-4 md:space-y-6 mb-14 md:mb-28">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-5 md:p-6 hover:border-[#d4af37]/40 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all">
             <div className="flex justify-between items-start flex-col sm:flex-row gap-2">
               <div>
@@ -553,7 +553,7 @@ export default function Home() {
         </div>
 
         {/* EXPERIENCE TIMELINE */}
-        <div id="experience" className="scroll-mt-20 text-center my-14 md:my-20">
+        <div id="experience" className="scroll-mt-20 text-center my-14 md:my-28">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -633,7 +633,7 @@ export default function Home() {
         </div>
 
         {/* RESEARCH */}
-        <section id="research" className="py-8 md:py-16">
+        <section id="research" className="py-8 md:py-24">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -699,7 +699,7 @@ export default function Home() {
         </section>
 
         {/* PROJECTS */}
-        <section id="projects" className="scroll-mt-20 py-8 md:py-16">
+        <section id="projects" className="scroll-mt-20 py-8 md:py-24">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -780,7 +780,7 @@ export default function Home() {
         </section>
 
         {/* LEADERSHIP */}
-        <section id="Leadership" className="py-8 md:py-16">
+        <section id="Leadership" className="py-8 md:py-24">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -826,7 +826,7 @@ export default function Home() {
         </section>
 
         {/* TECHNICAL SKILLS */}
-        <section id="skills" className="scroll-mt-20 py-8 md:py-16">
+        <section id="skills" className="scroll-mt-20 py-8 md:py-24">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -882,7 +882,7 @@ export default function Home() {
         </section>
 
         {/* CERTIFICATIONS */}
-        <section id="certifications" className="scroll-mt-20 py-8 md:py-16">
+        <section id="certifications" className="scroll-mt-20 py-8 md:py-24">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -940,7 +940,7 @@ export default function Home() {
         </section>
 
         {/* RECOMMENDATION */}
-        <section id="Recommendation" className="py-8 md:py-16">
+        <section id="Recommendation" className="py-8 md:py-24">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -979,7 +979,7 @@ export default function Home() {
         </section>
 
         {/* CONTACT */}
-        <section id="contact" className="scroll-mt-20 pt-6 md:pt-12 pb-4">
+        <section id="contact" className="scroll-mt-20 pt-6 md:pt-20 pb-8 md:pb-12">
           <div className="flex items-center justify-center gap-3 mb-1">
             <div className="flex gap-1">
               <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
