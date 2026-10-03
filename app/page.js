@@ -401,6 +401,20 @@ export default function Home() {
         id="about"
         className="scroll-mt-20 pt-10 md:pt-16 pb-4 px-4 md:px-6 bg-[#06030f] relative overflow-hidden"
       >
+{/* 1. Left Side Moving Object (Faded & Slow) */}
+        <motion.div
+          className="absolute -left-10 md:left-8 top-28 md:top-32 w-32 h-32 md:w-44 md:h-44 border border-[#d4af37]/10 pointer-events-none"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* 2. Right Side Moving Object (Faded & Slow) */}
+        <motion.div
+          className="absolute -right-10 md:right-10 top-36 md:top-40 w-36 h-36 md:w-48 md:h-48 rounded-full border border-dashed border-[#d4af37]/15 pointer-events-none"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
+        />
+
         <div className="flex items-center justify-center gap-3 mb-1">
           <div className="flex gap-1">
             <div className="w-2.5 md:w-3.5 h-1 md:h-1.5 border border-[#d4af37]/40 rounded-full"></div>
@@ -451,7 +465,7 @@ export default function Home() {
           <motion.div
             className="flex gap-8 whitespace-nowrap will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 8, ease: "linear", repeat: Infinity }}
+            transition={{ duration: 4, ease: "linear", repeat: Infinity }}
           >
             {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
               <span key={idx} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 px-3 py-1">
