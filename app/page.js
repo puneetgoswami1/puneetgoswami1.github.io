@@ -116,12 +116,13 @@ export default function Home() {
     { title: "Automated Attendance System", desc: "Attendance management system using image recognition and automation workflows.", tech: ["Python", "SikuliX", "Automation"] }
   ];
 
-  const experiences = [
+ const experiences = [
     {
       company: "Contra",
       role: "Data Analyst Intern",
       date: "April 2023 - June 2024",
       side: "right",
+      logo: <span className="text-[10px] md:text-[11px] font-extrabold text-white tracking-tight">Contra</span>,
       points: [
         "Supported analytics projects using SQL, Excel and Power BI for business reporting.",
         "Cleaned, transformed and validated datasets to improve reporting accuracy.",
@@ -134,10 +135,11 @@ export default function Home() {
       role: "Data Analyst",
       date: "December 2024 - May 2025",
       side: "left",
+      logo: <span className="text-[10px] md:text-[11px] font-extrabold text-white tracking-tight">Vmayo</span>,
       points: [
         "Analyzed business datasets using SQL, Excel and Power BI to identify trends and KPIs.",
         "Designed interactive dashboards and automated reports for operational decision-making.",
-        "Performed data cleaning, validation and transformation to improve data quality."
+        "Perform data cleaning, validation and transformation to improve data quality."
       ],
       skills: ["SQL", "Excel", "Power BI", "Data Analysis", "Dashboard Development"]
     },
@@ -146,6 +148,7 @@ export default function Home() {
       role: "Data Analyst",
       date: "January 2024 - November 2024",
       side: "right",
+      logo: <span className="text-[10px] md:text-[11px] font-black text-[#facc15] tracking-tight">Lemon</span>,
       points: [
         "Performed advanced data analysis to identify business trends and growth opportunities.",
         "Developed Power BI dashboards and optimized SQL queries for KPI monitoring.",
@@ -154,7 +157,6 @@ export default function Home() {
       skills: ["SQL", "Python", "Power BI", "Excel", "Business Intelligence"]
     }
   ];
-
   const marqueeItems = [
     { name: "LinkedIn", icon: <FaLinkedin /> },
     { name: "GitHub", icon: <FaGithub /> },
@@ -580,19 +582,25 @@ export default function Home() {
           </div>
 
           <div className="relative max-w-4xl mx-auto py-2">
-            <div className="absolute left-1/2 top-4 bottom-4 w-[1px] bg-[#d4af37]/25 -translate-x-1/2 hidden md:block"></div>
+            <div className="absolute left-1/2 top-4 bottom-4 w-[1px] bg-[#d4af37]/25 -translate-x-1/2 hidden md:block"></div>  
 
-            {experiences.map((exp, index) => (
-              <div
-                key={index}
-                className="relative mb-6 md:mb-10 cursor-pointer"
-              >
-                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-6">
-                  <div className="w-9 h-9 rounded-full border-2 border-[#d4af37] bg-[#111] flex items-center justify-center shadow-[0_0_12px_rgba(212,175,55,0.3)]">
-                    <FaCode className="text-[#39ff88] text-sm" />
-                  </div>
+{experiences.map((exp, index) => (
+            <div
+              key={index}
+              className="relative mb-6 md:mb-16 cursor-pointer"
+            >
+              {/* 1. SEAMLESS TIMELINE LINE (Lemon.io par exact rukegi, neeche bleed nahi hogi) */}
+              {index < experiences.length - 1 && (
+                <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-[1.5px] bg-[#d4af37]/40 top-6 -bottom-16 z-0 pointer-events-none" />
+              )}
+
+              {/* 2. HEBA STYLE COMPANY LOGO BADGE */}
+              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-4">
+                <div className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#d4af37] bg-[#0c0915] flex items-center justify-center shadow-[0_0_14px_rgba(212,175,55,0.45)] select-none">
+                  {exp.logo}
                 </div>
-
+              </div>
+              
                 <div
                   className={`w-full md:w-[47%] ${
                     exp.side === "left"
