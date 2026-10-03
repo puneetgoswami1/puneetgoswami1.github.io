@@ -454,25 +454,38 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CONTINUOUS ZERO-GAP INFINITE MARQUEE */}
+       {/* CONTINUOUS ZERO-GAP INFINITE MARQUEE (PHONE + DESKTOP) */}
         <div className="mt-8 text-center">
-          <h3 className="tracking-[3px] md:tracking-[5px] text-[#d4af37] uppercase text-xs md:text-xs mb-5 font-semibold">
+          <h3 className="tracking-[3px] md:tracking-[5px] text-[#d4af37] uppercase text-xs mb-5 font-semibold">
             ORGANIZATIONS & PLATFORMS
           </h3>
         </div>
 
         <div className="overflow-hidden w-full max-w-5xl mx-auto relative mb-12 [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
           <motion.div
-            className="flex gap-8 whitespace-nowrap will-change-transform"
+            className="flex w-max will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 4, ease: "linear", repeat: Infinity }}
+            transition={{ duration: 12, ease: "linear", repeat: Infinity }}
           >
-            {[...marqueeItems, ...marqueeItems, ...marqueeItems, ...marqueeItems].map((item, idx) => (
-              <span key={idx} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 px-3 py-1">
-                <span className="text-[#d4af37]">{item.icon}</span>
-                {item.name}
-              </span>
-            ))}
+            {/* Track 1 */}
+            <div className="flex items-center gap-8 pr-8 shrink-0">
+              {marqueeItems.map((item, idx) => (
+                <span key={`t1-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300">
+                  <span className="text-[#d4af37]">{item.icon}</span>
+                  {item.name}
+                </span>
+              ))}
+            </div>
+
+            {/* Track 2 (Exact Duplicate for Seamless Infinite Loop) */}
+            <div className="flex items-center gap-8 pr-8 shrink-0">
+              {marqueeItems.map((item, idx) => (
+                <span key={`t2-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300">
+                  <span className="text-[#d4af37]">{item.icon}</span>
+                  {item.name}
+                </span>
+              ))}
+            </div>
           </motion.div>
         </div>
 
