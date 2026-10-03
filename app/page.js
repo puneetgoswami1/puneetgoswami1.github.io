@@ -465,7 +465,7 @@ export default function Home() {
           <motion.div
             className="flex w-max will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 12, ease: "linear", repeat: Infinity }}
+            transition={{ duration: 4, ease: "linear", repeat: Infinity }}
           >
             {/* Track 1 */}
             <div className="flex items-center gap-8 pr-8 shrink-0">
