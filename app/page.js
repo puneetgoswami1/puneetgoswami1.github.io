@@ -456,33 +456,38 @@ export default function Home() {
           </div>
         </div>
 
-       {/* CONTINUOUS ZERO-GAP INFINITE MARQUEE (PHONE + DESKTOP) */}
+       {/* CONTINUOUS ZERO-GAP INFINITE MARQUEE (PHONE UNTOUCHED, DESKTOP SMOOTH) */}
         <div className="mt-8 md:mt-16 text-center">
-          <h3 className="tracking-[3px] md:tracking-[5px] text-[#d4af37] uppercase text-xs mb-5 font-semibold">
+          <h3 className="tracking-[3px] md:tracking-[5px] text-[#d4af37] uppercase text-xs mb-5 md:mb-8 font-semibold">
             ORGANIZATIONS & PLATFORMS
           </h3>
         </div>
 
-        <div className="overflow-hidden w-full max-w-5xl mx-auto relative mb-12 md:mb-28 [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]">
+        <div className="overflow-hidden w-full max-w-5xl md:max-w-6xl mx-auto relative mb-12 md:mb-28">
           <motion.div
-            className="flex w-max will-change-transform"
+            className="flex w-max transform-gpu will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 4, ease: "linear", repeat: Infinity }}
+            transition={{
+              duration: 20,
+              ease: "linear",
+              repeat: Infinity,
+              repeatType: "loop",
+            }}
           >
-            {/* Track 1 */}
-            <div className="flex items-center gap-8 pr-8 shrink-0">
+            {/* Track 1 (Phone par gap-6, Desktop par gap-8) */}
+            <div className="flex items-center gap-6 md:gap-8 pr-6 md:pr-8 shrink-0">
               {marqueeItems.map((item, idx) => (
-                <span key={`t1-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300">
+                <span key={`t1-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 select-none">
                   <span className="text-[#d4af37]">{item.icon}</span>
                   {item.name}
                 </span>
               ))}
             </div>
 
-            {/* Track 2 (Exact Duplicate for Seamless Infinite Loop) */}
-            <div className="flex items-center gap-8 pr-8 shrink-0">
+            {/* Track 2 (Exact Duplicate for Non-Stop Infinite Loop) */}
+            <div className="flex items-center gap-6 md:gap-8 pr-6 md:pr-8 shrink-0">
               {marqueeItems.map((item, idx) => (
-                <span key={`t2-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300">
+                <span key={`t2-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 select-none">
                   <span className="text-[#d4af37]">{item.icon}</span>
                   {item.name}
                 </span>
