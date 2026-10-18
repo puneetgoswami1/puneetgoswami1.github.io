@@ -593,28 +593,27 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative max-w-4xl mx-auto py-2">
-            <div className="absolute left-1/2 top-4 bottom-4 w-[1px] bg-[#d4af37]/25 -translate-x-1/2 hidden md:block"></div>  
+          <div className="relative max-w-5xl mx-auto py-2">
+            {experiences.map((exp, index) => (
+              <div
+                key={index}
+                className="relative mb-6 md:mb-16 cursor-pointer"
+              >
+                {/* 1. TIMELINE LINE (Sirf cards ke beech chalegi - Upar Contra se bahar nahi jayegi aur Lemon par end ho jayegi) */}
+                {index < experiences.length - 1 && (
+                  <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-[1.5px] bg-[#d4af37]/40 top-5 -bottom-20 z-0 pointer-events-none" />
+                )}
 
-{experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="relative mb-6 md:mb-16 cursor-pointer"
-            >
-              {/* 1. SEAMLESS TIMELINE LINE (Lemon.io par exact rukegi, neeche bleed nahi hogi) */}
-              {index < experiences.length - 1 && (
-                <div className="hidden md:block absolute left-1/2 -translate-x-1/2 w-[1.5px] bg-[#d4af37]/40 top-6 -bottom-16 z-0 pointer-events-none" />
-              )}
-
-              {/* 2. HEBA STYLE COMPANY LOGO BADGE */}
-              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-4">
-                <div className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#d4af37] bg-[#0c0915] flex items-center justify-center shadow-[0_0_14px_rgba(212,175,55,0.45)] select-none">
-                  {exp.logo}
+                {/* 2. HEBA STYLE BADGE (Box ke bilkul Top par aligned) */}
+                <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-20 top-0">
+                  <div className="w-11 h-11 md:w-12 md:h-12 rounded-full border-2 border-[#d4af37] bg-[#0c0915] flex items-center justify-center shadow-[0_0_12px_rgba(212,175,55,0.45)] select-none">
+                    {exp.logo}
+                  </div>
                 </div>
-              </div>
-              
+
+                {/* 3. CARD CONTAINER (Circle ko touch karega - Beech ka gap khatam) */}
                 <div
-                  className={`w-full md:w-[47%] ${
+                  className={`w-full md:w-[calc(50%-24px)] ${
                     exp.side === "left"
                       ? "md:mr-auto text-left"
                       : "md:ml-auto text-left"
