@@ -168,19 +168,19 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen text-white overflow-x-hidden relative select-none">
-      {/* 1. ZERO-SHAKE / ZERO-FLICKER HARDWARE GPU BACKGROUND */}
+    <main className="min-h-screen text-white overflow-x-hidden relative select-none bg-[#06030f]">
+      {/* HERO BACKGROUND (CONSTRAINED TO 100VH - ZERO SCROLL LAG, NO BLEED BEHIND BLACK SECTIONS) */}
       <div
-  className="fixed inset-0 -z-30 pointer-events-none"
-  style={{
-    backgroundImage: "url('/kp.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-  <div className="absolute inset-0 bg-black/60" />
-</div>
+        className="absolute top-0 left-0 w-full h-[100dvh] pointer-events-none z-0 overflow-hidden"
+        style={{
+          backgroundImage: "url('/kp.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
 
       {/* NAVBAR */}
       <nav
