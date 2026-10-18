@@ -468,7 +468,7 @@ export default function Home() {
             className="flex w-max transform-gpu will-change-transform"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
-              duration: 20,
+              duration: 40,
               ease: "linear",
               repeat: Infinity,
               repeatType: "loop",
