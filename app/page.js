@@ -22,7 +22,9 @@ import {
   FaRegCommentDots,
   FaQuoteLeft,
   FaCheckCircle,
-  FaExternalLinkAlt
+  FaExternalLinkAlt,
+FaChevronLeft,
+FaChevronRight
 } from "react-icons/fa";
 import { useEffect, useState, useRef } from "react";
 
@@ -32,7 +34,31 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const toastShownRef = useRef(false);
+// CAROUSEL STATE & RECOMMENDATIONS DATA
+  const [currentRec, setCurrentRec] = useState(0);
 
+  const recommendations = [
+    {
+      quote: "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work.",
+      name: "John Smith",
+      role: "Senior Software Engineer | AI Research Mentor"
+    },
+    {
+      quote: "Puneet is a highly analytical and dedicated professional. His expertise in SQL, data visualization, and building actionable dashboards consistently drove efficiency across our business intelligence initiatives.",
+      name: "Sarah Jenkins",
+      role: "Lead Analytics Manager | Tech Solutions"
+    }
+  ];
+
+  const prevRec = () => {
+    triggerHaptic();
+    setCurrentRec((prev) => (prev === 0 ? recommendations.length - 1 : prev - 1));
+  };
+
+  const nextRec = () => {
+    triggerHaptic();
+    setCurrentRec((prev) => (prev === recommendations.length - 1 ? 0 : prev + 1));
+  };
   useEffect(() => {
     history.scrollRestoration = "manual";
     if (window.location.hash) {
@@ -1011,15 +1037,69 @@ export default function Home() {
               <span className="text-[11px] md:text-sm">✦</span>
             </div>
           </div>
+{/* HEBA ALAZZEH STYLE RECOMMENDATION SLIDER WITH ARROWS & DOTS */}
+          <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-[#d4af37]/40 transition-colors">
+            <FaQuoteLeft className="text-[#d4af37] text-2xl md:text-3xl mb-3 opacity-80" />
 
-          <div className="max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-5 md:p-7 hover:border-[#d4af37]/40 transition-colors">
-            <FaQuoteLeft className="text-[#d4af37] text-2xl mb-3 opacity-80" />
-            <p className="text-gray-200 text-xs md:text-base leading-relaxed italic">
-              "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work."
-            </p>
-            <div className="mt-4 pt-3 border-t border-white/10">
-              <h3 className="text-white text-sm md:text-base font-bold">John Smith</h3>
-              <p className="text-[#d4af37] text-xs font-semibold">Senior Software Engineer | AI Research Mentor</p>
+            {/* Smooth Text Display */}
+            <div className="min-h-[110px] md:min-h-[90px] flex items-center">
+              <p className="text-gray-200 text-xs md:text-[15px] leading-relaxed italic transition-all duration-300">
+                "{recommendations[currentRec].quote}"
+              </p>
+            </div>
+
+            <div className="mt-4 pt-4 border-t border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h3 className="text-white text-sm md:text-base font-bold">
+                  {recommendations[currentRec].name}
+                </h3>
+                <p className="text-[#d4af37] text-xs font-semibold mt-0.5">
+                  {recommendations[currentRec].role}
+                </p>
+              </div>
+
+              {/* HEBA STYLE ARROW CONTROLS + DOTS (PHONE + DESKTOP) */}
+              <div className="flex items-center justify-center md:justify-end gap-3 select-none">
+                {/* Left Arrow Button */}
+                <button
+                  type="button"
+                  onClick={prevRec}
+                  className="w-8 h-8 rounded-full border border-white/20 bg-white/5 text-gray-300 hover:border-[#d4af37] hover:text-[#d4af37] hover:scale-105 active:scale-90 flex items-center justify-center transition-all cursor-pointer"
+                  aria-label="Previous recommendation"
+                >
+                  <FaChevronLeft className="text-[10px]" />
+                </button>
+
+                {/* Indicator Dots */}
+                <div className="flex items-center gap-1.5 px-1">
+                  {recommendations.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={() => {
+                        triggerHaptic();
+                        setCurrentRec(idx);
+                      }}
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        currentRec === idx
+                          ? "w-4 bg-[#d4af37] shadow-[0_0_8px_rgba(212,175,55,0.7)]"
+                          : "w-2 bg-white/25 hover:bg-white/50"
+                      }`}
+                      aria-label={`Slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                {/* Right Arrow Button */}
+                <button
+                  type="button"
+                  onClick={nextRec}
+                  className="w-8 h-8 rounded-full border border-white/20 bg-white/5 text-gray-300 hover:border-[#d4af37] hover:text-[#d4af37] hover:scale-105 active:scale-90 flex items-center justify-center transition-all cursor-pointer"
+                  aria-label="Next recommendation"
+                >
+                  <FaChevronRight className="text-[10px]" />
+                </button>
+              </div>
             </div>
           </div>
         </section>
