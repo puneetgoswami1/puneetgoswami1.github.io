@@ -173,7 +173,7 @@ export default function Home() {
       <div
         className="absolute top-0 left-0 w-full h-[100dvh] pointer-events-none z-0 overflow-hidden"
         style={{
-          backgroundImage: "url('/kp.jpg')",
+          backgroundImage: "url('/nj.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -193,7 +193,7 @@ export default function Home() {
         <h1 className="text-xl md:text-xl font-serif font-bold tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] transition-colors">
           P.G.
         </h1>
-        <ul className="hidden md:flex items-center gap-7 text-[13px] text-gray-300 font-medium">
+        <ul className="hidden md:flex items-center gap-9 text-[14.5px] tracking-wide text-gray-300 font-medium">
           <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#about">About</a></li>
           <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#experience">Experience</a></li>
           <li className="hover:text-[#e8cb76] hover:scale-105 transition-all cursor-pointer"><a href="#projects">Projects</a></li>
