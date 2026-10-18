@@ -456,44 +456,51 @@ export default function Home() {
           </div>
         </div>
 
-       {/* CONTINUOUS ZERO-GAP INFINITE MARQUEE (PHONE UNTOUCHED, DESKTOP SMOOTH) */}
+      {/* CONTINUOUS ZERO-GAP HARDWARE MARQUEE (DESKTOP ZERO-LAG + NO BREAK) */}
         <div className="mt-8 md:mt-16 text-center">
-          <h3 className="tracking-[3px] md:tracking-[5px] text-[#d4af37] uppercase text-xs mb-5 md:mb-8 font-semibold">
+          <h3 className="tracking-[3px] md:tracking-[5px] text-[#d4af37] uppercase text-xs mb-6 md:mb-8 font-semibold">
             ORGANIZATIONS & PLATFORMS
           </h3>
         </div>
 
-        <div className="overflow-hidden w-full max-w-5xl md:max-w-6xl mx-auto relative mb-12 md:mb-28">
-          <motion.div
-            className="flex w-max transform-gpu will-change-transform"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 10,
-              ease: "linear",
-              repeat: Infinity,
-              repeatType: "loop",
-            }}
-          >
-            {/* Track 1 (Phone par gap-6, Desktop par gap-8) */}
-            <div className="flex items-center gap-6 md:gap-8 pr-6 md:pr-8 shrink-0">
-              {marqueeItems.map((item, idx) => (
-                <span key={`t1-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 select-none">
-                  <span className="text-[#d4af37]">{item.icon}</span>
+        {/* Embedded Pure CSS Animation (GPU Compositor Thread par 60FPS scroll-lag free) */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes marqueeInfinite {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+          }
+          .gpu-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeInfinite 12s linear infinite;
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+          }
+        `}} />
+
+        <div className="overflow-hidden w-full max-w-5xl md:max-w-6xl mx-auto relative mb-12 md:mb-28 pointer-events-none">
+          <div className="gpu-marquee-track">
+            {/* Track 1 (Double items taaki desktop screen par kabhi blank gap na bane) */}
+            <div className="flex items-center gap-8 md:gap-10 pr-8 md:pr-10 shrink-0">
+              {[...marqueeItems, ...marqueeItems].map((item, idx) => (
+                <span key={`track1-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 select-none">
+                  <span className="text-[#d4af37] text-sm md:text-base">{item.icon}</span>
                   {item.name}
                 </span>
               ))}
             </div>
 
-            {/* Track 2 (Exact Duplicate for Non-Stop Infinite Loop) */}
-            <div className="flex items-center gap-6 md:gap-8 pr-6 md:pr-8 shrink-0">
-              {marqueeItems.map((item, idx) => (
-                <span key={`t2-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 select-none">
-                  <span className="text-[#d4af37]">{item.icon}</span>
+            {/* Track 2 (Exact Duplicate - Jaise hi Track 1 aage jayega, Track 2 bina kisi gap ke loop karega) */}
+            <div className="flex items-center gap-8 md:gap-10 pr-8 md:pr-10 shrink-0">
+              {[...marqueeItems, ...marqueeItems].map((item, idx) => (
+                <span key={`track2-${idx}`} className="flex items-center gap-2 text-xs md:text-sm text-gray-300 select-none">
+                  <span className="text-[#d4af37] text-sm md:text-base">{item.icon}</span>
                   {item.name}
                 </span>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* EDUCATION */}
