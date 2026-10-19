@@ -1041,21 +1041,42 @@ export default function Home() {
           <div className="max-w-5xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 hover:border-[#d4af37]/40 transition-colors">
             <FaQuoteLeft className="text-[#d4af37] text-2xl md:text-3xl mb-3 opacity-80" />
 
-            {/* Smooth Text Display */}
-            <div className="min-h-[110px] md:min-h-[90px] flex items-center">
-              <p className="text-gray-200 text-xs md:text-[15px] leading-relaxed italic transition-all duration-300">
-                "{recommendations[currentRec].quote}"
-              </p>
+            {/* SMOOTH FADE + SLIDE ANIMATED QUOTE (PHONE + DESKTOP) */}
+            <div className="min-h-[115px] md:min-h-[95px] flex items-center overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={currentRec}
+                  initial={{ opacity: 0, x: 18 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -18 }}
+                  transition={{ duration: 0.24, ease: "easeOut" }}
+                  className="text-gray-200 text-xs md:text-[15px] leading-relaxed italic transform-gpu select-none"
+                >
+                  "{recommendations[currentRec].quote}"
+                </motion.p>
+              </AnimatePresence>
             </div>
 
             <div className="mt-4 pt-4 border-t border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <h3 className="text-white text-sm md:text-base font-bold">
-                  {recommendations[currentRec].name}
-                </h3>
-                <p className="text-[#d4af37] text-xs font-semibold mt-0.5">
-                  {recommendations[currentRec].role}
-                </p>
+              {/* SMOOTH ANIMATED AUTHOR NAME & ROLE */}
+              <div className="min-h-[40px] flex flex-col justify-center overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentRec}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="transform-gpu select-none"
+                  >
+                    <h3 className="text-white text-sm md:text-base font-bold">
+                      {recommendations[currentRec].name}
+                    </h3>
+                    <p className="text-[#d4af37] text-xs font-semibold mt-0.5">
+                      {recommendations[currentRec].role}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               {/* HEBA STYLE ARROW CONTROLS + DOTS (PHONE + DESKTOP) */}
