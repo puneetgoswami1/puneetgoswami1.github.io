@@ -266,10 +266,10 @@ export default function Home() {
               0.4% {
                 opacity: 0.8;
               }
-              2.8% {
+              4.5% {
   opacity: 0.7;
 }
-3.2% {
+5.0% {
   transform: translate3d(-850px, 580px, 0) rotate(-35deg);
   opacity: 0;
 }
