@@ -638,20 +638,43 @@ export default function Home() {
                 </div>
 
                 {/* 3. CARD CONTAINER (Circle ko touch karega - Beech ka gap khatam) */}
-                <div
-                  className={`w-full md:w-[calc(50%-24px)] ${
+                {/* 3. CARD CONTAINER (DIRECTION-AWARE SLIDE - SIRF EK BAAR CHALEGA) */}
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    x: exp.side === "left" ? -40 : 40,
+                    y: 20,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
+                    y: 0,
+                  }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    duration: 0.55,
+                    ease: "easeOut",
+                    delay: index * 0.12,
+                  }}
+                  className={`w-full md:w-[calc(50%-24px)] transform-gpu will-change-transform ${
                     exp.side === "left"
                       ? "md:mr-auto text-left"
                       : "md:ml-auto text-left"
                   }`}
                 >
-                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300">
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] transition-all duration-300">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <h3 className="text-base md:text-lg font-bold text-white leading-tight">{exp.company}</h3>
-                        <p className="text-[#d4af37] font-semibold text-xs md:text-sm mt-0.5">{exp.role}</p>
+                        <h3 className="text-base md:text-lg font-bold text-white leading-tight">
+                          {exp.company}
+                        </h3>
+                        <p className="text-[#d4af37] font-semibold text-xs md:text-sm mt-0.5">
+                          {exp.role}
+                        </p>
                       </div>
-                      <span className="text-gray-400 text-xs text-right whitespace-nowrap">{exp.date}</span>
+                      <span className="text-gray-400 text-xs text-right whitespace-nowrap">
+                        {exp.date}
+                      </span>
                     </div>
 
                     <ul className="space-y-1.5 mb-3.5 text-gray-300 text-xs md:text-[13px]">
@@ -665,13 +688,16 @@ export default function Home() {
 
                     <div className="flex flex-wrap gap-1.5">
                       {exp.skills.map((skill, i) => (
-                        <span key={i} className="px-2 py-0.5 rounded-md bg-white/10 text-[11px] text-white">
+                        <span
+                          key={i}
+                          className="px-2 py-0.5 rounded-md bg-white/10 text-[11px] text-white"
+                        >
                           {skill}
                         </span>
                       ))}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             ))}
           </div>
