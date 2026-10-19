@@ -256,61 +256,99 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="min-h-[100dvh] flex flex-col justify-between items-center text-center px-4 md:px-6 relative pt-20 md:pt-28 pb-6 md:pb-8 overflow-hidden">
         
-       {/* HEBA STYLE REALISTIC 10S SHOOTING METEOR (PURE GPU CSS - ZERO LAG) */}
+       {/* REALISTIC RANDOM HEBA-STYLE METEORS (LINEAR SPEED - ZERO BRAKING/DELAY) */}
           <style dangerouslySetInnerHTML={{ __html: `
-            @keyframes realisticMeteor {
+            @keyframes meteorStreak {
               0% {
                 transform: translate3d(0, 0, 0) rotate(-35deg);
                 opacity: 0;
               }
-              1.2% {
-                opacity: 1;
+              0.4% {
+                opacity: 0.8;
               }
-              10% {
-                transform: translate3d(-340px, 238px, 0) rotate(-35deg);
-                opacity: 1;
+              2.0% {
+                opacity: 0.7;
               }
-              12% {
-                transform: translate3d(-420px, 294px, 0) rotate(-35deg);
+              2.5% {
+                transform: translate3d(-340px, 230px, 0) rotate(-35deg);
                 opacity: 0;
               }
               100% {
-                transform: translate3d(-420px, 294px, 0) rotate(-35deg);
+                transform: translate3d(-340px, 230px, 0) rotate(-35deg);
                 opacity: 0;
               }
             }
-            .heba-meteor {
+
+            @media (max-width: 767px) {
+              @keyframes meteorStreak {
+                0% {
+                  transform: translate3d(0, 0, 0) rotate(-35deg);
+                  opacity: 0;
+                }
+                0.4% {
+                  opacity: 0.8;
+                }
+                2.0% {
+                  opacity: 0.7;
+                }
+                2.5% {
+                  transform: translate3d(-210px, 140px, 0) rotate(-35deg);
+                  opacity: 0;
+                }
+                100% {
+                  transform: translate3d(-210px, 140px, 0) rotate(-35deg);
+                  opacity: 0;
+                }
+              }
+            }
+
+            .meteor-base {
               position: absolute;
-              height: 1.5px;
-              width: 85px;
-              background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,230,160,0.65) 65%, #ffffff 100%);
+              height: 1px;
+              width: 50px;
+              background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(212,175,55,0.4) 50%, rgba(255,255,255,0.85) 100%);
               border-radius: 9999px;
-              filter: drop-shadow(0 0 5px rgba(212,175,55,0.85));
-              animation: realisticMeteor 10s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+              filter: drop-shadow(0 0 3px rgba(212,175,55,0.6));
+              animation: meteorStreak 24s linear infinite;
               will-change: transform, opacity;
               pointer-events: none;
+              opacity: 0;
             }
-            .heba-meteor::after {
+
+            .meteor-base::after {
               content: '';
               position: absolute;
               right: 0;
               top: 50%;
               transform: translateY(-50%);
-              width: 3px;
-              height: 3px;
+              width: 2px;
+              height: 2px;
               border-radius: 50%;
               background: #ffffff;
-              box-shadow: 0 0 6px 1px #ffffff, 0 0 12px 2.5px rgba(212,175,55,0.9);
+              box-shadow: 0 0 4px 1px rgba(255,255,255,0.8), 0 0 7px 1px rgba(212,175,55,0.5);
             }
+
             @media (min-width: 768px) {
-              .heba-meteor {
-                width: 120px;
+              .meteor-base {
+                width: 75px;
               }
             }
           `}} />
 
-          <div className="absolute top-[12%] md:top-[16%] right-[8%] md:right-[22%] z-0 pointer-events-none">
-            <div className="heba-meteor" />
+          {/* 3 RANDOM SKY POSITIONS (STAGGERED EVERY 8 SECONDS) */}
+          {/* Position 1: Top Right */}
+          <div className="absolute top-[8%] right-[14%] z-0 pointer-events-none">
+            <div className="meteor-base" style={{ animationDelay: "0s" }} />
+          </div>
+
+          {/* Position 2: Mid-Sky (Thoda Niche & Left) */}
+          <div className="absolute top-[22%] right-[28%] z-0 pointer-events-none">
+            <div className="meteor-base" style={{ animationDelay: "8s" }} />
+          </div>
+
+          {/* Position 3: High Sky (Upar Beech Me) */}
+          <div className="absolute top-[6%] right-[38%] z-0 pointer-events-none">
+            <div className="meteor-base" style={{ animationDelay: "16s" }} />
           </div>
 
         {/* 55 REALISTIC BLINKING STARS */}
