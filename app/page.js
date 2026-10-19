@@ -256,28 +256,62 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="min-h-[100dvh] flex flex-col justify-between items-center text-center px-4 md:px-6 relative pt-20 md:pt-28 pb-6 md:pb-8 overflow-hidden">
         
-        {/* SHOOTING METEOR */}
-        <motion.div
-          className="absolute pointer-events-none z-0 transform -rotate-[35deg]"
-          style={{
-            width: "90px",
-            height: "1.2px",
-            background: "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(232,203,118,0.85) 55%, #ffffff 100%)",
-            boxShadow: "0 0 6px #ffd95e",
-          }}
-          initial={{ top: "-5%", left: "90%", opacity: 0 }}
-          animate={{
-            top: ["-5%", "46%"],
-            left: ["90%", "10%"],
-            opacity: [0, 1, 0.8, 0],
-          }}
-          transition={{
-            duration: 1.6,
-            repeat: Infinity,
-            repeatDelay: 5,
-            ease: "easeOut",
-          }}
-        />
+       {/* HEBA STYLE REALISTIC 10S SHOOTING METEOR (PURE GPU CSS - ZERO LAG) */}
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes realisticMeteor {
+              0% {
+                transform: translate3d(0, 0, 0) rotate(-35deg);
+                opacity: 0;
+              }
+              1.2% {
+                opacity: 1;
+              }
+              10% {
+                transform: translate3d(-340px, 238px, 0) rotate(-35deg);
+                opacity: 1;
+              }
+              12% {
+                transform: translate3d(-420px, 294px, 0) rotate(-35deg);
+                opacity: 0;
+              }
+              100% {
+                transform: translate3d(-420px, 294px, 0) rotate(-35deg);
+                opacity: 0;
+              }
+            }
+            .heba-meteor {
+              position: absolute;
+              height: 1.5px;
+              width: 85px;
+              background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,230,160,0.65) 65%, #ffffff 100%);
+              border-radius: 9999px;
+              filter: drop-shadow(0 0 5px rgba(212,175,55,0.85));
+              animation: realisticMeteor 10s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+              will-change: transform, opacity;
+              pointer-events: none;
+            }
+            .heba-meteor::after {
+              content: '';
+              position: absolute;
+              right: 0;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 3px;
+              height: 3px;
+              border-radius: 50%;
+              background: #ffffff;
+              box-shadow: 0 0 6px 1px #ffffff, 0 0 12px 2.5px rgba(212,175,55,0.9);
+            }
+            @media (min-width: 768px) {
+              .heba-meteor {
+                width: 120px;
+              }
+            }
+          `}} />
+
+          <div className="absolute top-[12%] md:top-[16%] right-[8%] md:right-[22%] z-0 pointer-events-none">
+            <div className="heba-meteor" />
+          </div>
 
         {/* 55 REALISTIC BLINKING STARS */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
