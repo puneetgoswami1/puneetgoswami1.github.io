@@ -266,17 +266,17 @@ export default function Home() {
               0.4% {
                 opacity: 0.8;
               }
-              2.0% {
-                opacity: 0.7;
-              }
-              2.5% {
-                transform: translate3d(-340px, 230px, 0) rotate(-35deg);
-                opacity: 0;
-              }
-              100% {
-                transform: translate3d(-340px, 230px, 0) rotate(-35deg);
-                opacity: 0;
-              }
+              2.8% {
+  opacity: 0.7;
+}
+3.2% {
+  transform: translate3d(-850px, 580px, 0) rotate(-35deg);
+  opacity: 0;
+}
+100% {
+  transform: translate3d(-850px, 580px, 0) rotate(-35deg);
+  opacity: 0;
+}
             }
 
             @media (max-width: 767px) {
