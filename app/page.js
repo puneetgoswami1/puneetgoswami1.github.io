@@ -209,13 +209,14 @@ export default function Home() {
       </div>
 
       {/* NAVBAR */}
-      <nav
-        className={`fixed top-0 left-0 w-full px-5 md:px-12 py-3.5 md:py-4 flex justify-between items-center z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-black/80 backdrop-blur-md border-b border-white/10 shadow-lg"
-            : "bg-transparent"
-        }`}
-      >
+      // PEHLE LAGBHAG AISA THA (Line 180 - 186 ke paas):
+<nav
+  className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    scrolled
+      ? "bg-black/80 backdrop-blur-md border-b border-white/10"
+      : "bg-transparent"
+  }`}
+>
         <h1 className="text-xl md:text-xl font-serif font-bold tracking-wider text-[#e8cb76] cursor-pointer hover:text-[#ffd978] transition-colors">
           P.G.
         </h1>
@@ -264,7 +265,7 @@ export default function Home() {
                 opacity: 0;
               }
               0.4% {
-                opacity: 0.8;
+                opacity: 0.8;  
               }
               4.5% {
   opacity: 0.7;
