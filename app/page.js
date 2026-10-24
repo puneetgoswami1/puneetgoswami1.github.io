@@ -351,6 +351,116 @@ export default function Home() {
             <div className="meteor-base" style={{ animationDelay: "16s" }} />
           </div>
 
+
+
+{/* 3 FLYING BIRDS ANIMATION (MICRO1 STYLE - RUNS ONCE ON PAGE LOAD) */}
+          <style dangerouslySetInnerHTML={{ __html: `
+            @keyframes flockAcrossScreen {
+              0% {
+                transform: translate3d(0, 0, 0);
+                opacity: 0;
+              }
+              4% {
+                opacity: 0.9;
+              }
+              22% {
+                transform: translate3d(calc(-25vw), -15px, 0);
+              }
+              45% {
+                transform: translate3d(calc(-55vw), 14px, 0);
+              }
+              68% {
+                transform: translate3d(calc(-85vw), -18px, 0);
+              }
+              88% {
+                transform: translate3d(calc(-110vw), 10px, 0);
+                opacity: 0.9;
+              }
+              98% {
+                opacity: 0;
+              }
+              100% {
+                transform: translate3d(calc(-128vw), -5px, 0);
+                opacity: 0;
+              }
+            }
+
+            @keyframes wingFlapSlow {
+              0%, 100% {
+                transform: scaleY(1);
+              }
+              50% {
+                transform: scaleY(-0.7);
+              }
+            }
+
+            @keyframes wingFlapFast {
+              0%, 100% {
+                transform: scaleY(1);
+              }
+              50% {
+                transform: scaleY(-0.65);
+              }
+            }
+
+            .flock-container {
+              position: absolute;
+              top: 17%;
+              right: -70px;
+              display: flex;
+              align-items: center;
+              pointer-events: none;
+              z-index: 1;
+              animation: flockAcrossScreen 11s cubic-bezier(0.25, 0.1, 0.25, 1) 0.6s 1 forwards;
+              will-change: transform, opacity;
+            }
+
+            .bird-lead {
+              animation: wingFlapSlow 0.36s ease-in-out infinite;
+              transform-origin: center;
+              filter: drop-shadow(0 0 3px rgba(255,255,255,0.7));
+            }
+
+            .bird-trailing-top {
+              animation: wingFlapFast 0.32s ease-in-out infinite;
+              transform-origin: center;
+              filter: drop-shadow(0 0 3px rgba(255,255,255,0.6));
+            }
+
+            .bird-trailing-bottom {
+              animation: wingFlapSlow 0.34s ease-in-out infinite;
+              transform-origin: center;
+              filter: drop-shadow(0 0 3px rgba(255,255,255,0.6));
+            }
+          `}} />
+
+          <div className="flock-container select-none">
+            {/* Chidiya 1: Front Leader */}
+            <svg
+              viewBox="0 0 36 18"
+              className="w-4 h-2 md:w-5 md:h-2.5 fill-white bird-lead shrink-0"
+            >
+              <path d="M1,12 C7,3 13,2 18,7 C23,2 29,3 35,12 C29,8 24,9 18,13 C12,9 7,8 1,12 Z" />
+            </svg>
+
+            {/* Chidiya 2: Upar wali trailing bird */}
+            <svg
+              viewBox="0 0 36 18"
+              className="w-3 h-1.5 md:w-4 md:h-2 fill-white/90 bird-trailing-top -ml-2 -mt-4 shrink-0"
+            >
+              <path d="M1,12 C7,3 13,2 18,7 C23,2 29,3 35,12 C29,8 24,9 18,13 C12,9 7,8 1,12 Z" />
+            </svg>
+
+            {/* Chidiya 3: Niche wali trailing bird */}
+            <svg
+              viewBox="0 0 36 18"
+              className="w-3 h-1.5 md:w-3.5 md:h-2 fill-white/85 bird-trailing-bottom -ml-1 mt-4 shrink-0"
+            >
+              <path d="M1,12 C7,3 13,2 18,7 C23,2 29,3 35,12 C29,8 24,9 18,13 C12,9 7,8 1,12 Z" />
+            </svg>
+          </div>
+
+
         {/* 55 REALISTIC BLINKING STARS */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
           {[...Array(55)].map((_, i) => (
