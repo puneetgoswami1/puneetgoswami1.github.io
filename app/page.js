@@ -353,113 +353,139 @@ export default function Home() {
 
 
 
-{/* 3 FLYING BIRDS ANIMATION (MICRO1 STYLE - RUNS ONCE ON PAGE LOAD) */}
+{/* REALISTIC 3 FLYING BIRDS FLOCK (FACING LEFT - CONTINUOUS FLOW - ZERO BREAKS) */}
           <style dangerouslySetInnerHTML={{ __html: `
-            @keyframes flockAcrossScreen {
+            @keyframes flyAcrossLinear {
               0% {
                 transform: translate3d(0, 0, 0);
                 opacity: 0;
               }
-              4% {
-                opacity: 0.9;
+              2% {
+                opacity: 0.85;
               }
-              22% {
-                transform: translate3d(calc(-25vw), -15px, 0);
-              }
-              45% {
-                transform: translate3d(calc(-55vw), 14px, 0);
-              }
-              68% {
-                transform: translate3d(calc(-85vw), -18px, 0);
-              }
-              88% {
-                transform: translate3d(calc(-110vw), 10px, 0);
-                opacity: 0.9;
-              }
-              98% {
-                opacity: 0;
+              90% {
+                opacity: 0.85;
               }
               100% {
-                transform: translate3d(calc(-128vw), -5px, 0);
+                transform: translate3d(calc(-100vw - 280px), 0, 0);
                 opacity: 0;
               }
             }
 
-            @keyframes wingFlapSlow {
+            @keyframes flockUndulation {
               0%, 100% {
-                transform: scaleY(1);
+                transform: translateY(0px);
               }
               50% {
-                transform: scaleY(-0.7);
+                transform: translateY(-26px);
               }
             }
 
-            @keyframes wingFlapFast {
-              0%, 100% {
-                transform: scaleY(1);
+            @keyframes wingBeat {
+              0% {
+                transform: rotate(-22deg);
               }
               50% {
-                transform: scaleY(-0.65);
+                transform: rotate(26deg);
+              }
+              100% {
+                transform: rotate(-22deg);
               }
             }
 
-            .flock-container {
+            .flock-motion-path {
               position: absolute;
-              top: 17%;
-              right: -70px;
-              display: flex;
-              align-items: center;
+              top: 18%;
+              right: -100px;
               pointer-events: none;
               z-index: 1;
-              animation: flockAcrossScreen 11s cubic-bezier(0.25, 0.1, 0.25, 1) 0.6s 1 forwards;
+              animation: flyAcrossLinear 12s linear 0.4s 1 forwards;
               will-change: transform, opacity;
             }
 
-            .bird-lead {
-              animation: wingFlapSlow 0.36s ease-in-out infinite;
-              transform-origin: center;
-              filter: drop-shadow(0 0 3px rgba(255,255,255,0.7));
+            .flock-wave {
+              display: flex;
+              align-items: center;
+              position: relative;
+              animation: flockUndulation 4s ease-in-out infinite;
             }
 
-            .bird-trailing-top {
-              animation: wingFlapFast 0.32s ease-in-out infinite;
-              transform-origin: center;
-              filter: drop-shadow(0 0 3px rgba(255,255,255,0.6));
+            .bird-wing-flap {
+              transform-origin: 15px 15px;
+              animation: wingBeat 0.38s ease-in-out infinite;
             }
 
-            .bird-trailing-bottom {
-              animation: wingFlapSlow 0.34s ease-in-out infinite;
-              transform-origin: center;
-              filter: drop-shadow(0 0 3px rgba(255,255,255,0.6));
+            .bird-wing-flap-fast {
+              transform-origin: 15px 15px;
+              animation: wingBeat 0.32s ease-in-out infinite;
+            }
+
+            .bird-wing-flap-slow {
+              transform-origin: 15px 15px;
+              animation: wingBeat 0.42s ease-in-out infinite;
             }
           `}} />
 
-          <div className="flock-container select-none">
-            {/* Chidiya 1: Front Leader */}
-            <svg
-              viewBox="0 0 36 18"
-              className="w-4 h-2 md:w-5 md:h-2.5 fill-white bird-lead shrink-0"
-            >
-              <path d="M1,12 C7,3 13,2 18,7 C23,2 29,3 35,12 C29,8 24,9 18,13 C12,9 7,8 1,12 Z" />
-            </svg>
+          <div className="flock-motion-path select-none">
+            <div className="flock-wave">
+              {/* Chidiya 1: FRONT LEADER (Sabse aage - Face Left) */}
+              <div className="relative">
+                <svg
+                  viewBox="0 0 50 32"
+                  className="w-7 h-4 md:w-9 md:h-5 fill-[#1c1c24] opacity-90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                >
+                  {/* Far Wing */}
+                  <path
+                    d="M15 15 C19 9 26 4 35 2 C31 8 27 13 21 16 Z"
+                    className="bird-wing-flap-slow opacity-60"
+                  />
+                  {/* Main Body (Facing Left) */}
+                  <path d="M2 16 C5 14 9 13 13 14 C18 15 28 17 48 19 C43 21 35 21 25 21 C17 21 12 20 7 18 C4 17 3 17 2 16 Z" />
+                  {/* Near Wing (Flapping) */}
+                  <path
+                    d="M14 15 C19 8 28 2 38 1 C34 8 29 14 22 16 Z"
+                    className="bird-wing-flap"
+                  />
+                </svg>
+              </div>
 
-            {/* Chidiya 2: Upar wali trailing bird */}
-            <svg
-              viewBox="0 0 36 18"
-              className="w-3 h-1.5 md:w-4 md:h-2 fill-white/90 bird-trailing-top -ml-2 -mt-4 shrink-0"
-            >
-              <path d="M1,12 C7,3 13,2 18,7 C23,2 29,3 35,12 C29,8 24,9 18,13 C12,9 7,8 1,12 Z" />
-            </svg>
+              {/* Chidiya 2: TOP TRAILING (Gap: 45px peeche aur thoda upar) */}
+              <div className="absolute left-11 -top-6">
+                <svg
+                  viewBox="0 0 50 32"
+                  className="w-6 h-3.5 md:w-8 md:h-4.5 fill-[#1c1c24] opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                >
+                  <path
+                    d="M15 15 C19 9 26 4 35 2 C31 8 27 13 21 16 Z"
+                    className="bird-wing-flap opacity-60"
+                  />
+                  <path d="M2 16 C5 14 9 13 13 14 C18 15 28 17 48 19 C43 21 35 21 25 21 C17 21 12 20 7 18 C4 17 3 17 2 16 Z" />
+                  <path
+                    d="M14 15 C19 8 28 2 38 1 C34 8 29 14 22 16 Z"
+                    className="bird-wing-flap-fast"
+                  />
+                </svg>
+              </div>
 
-            {/* Chidiya 3: Niche wali trailing bird */}
-            <svg
-              viewBox="0 0 36 18"
-              className="w-3 h-1.5 md:w-3.5 md:h-2 fill-white/85 bird-trailing-bottom -ml-1 mt-4 shrink-0"
-            >
-              <path d="M1,12 C7,3 13,2 18,7 C23,2 29,3 35,12 C29,8 24,9 18,13 C12,9 7,8 1,12 Z" />
-            </svg>
+              {/* Chidiya 3: BOTTOM TRAILING (Gap: 75px peeche aur thoda niche) */}
+              <div className="absolute left-[75px] top-6">
+                <svg
+                  viewBox="0 0 50 32"
+                  className="w-5.5 h-3 md:w-7 md:h-4 fill-[#1c1c24] opacity-75 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                >
+                  <path
+                    d="M15 15 C19 9 26 4 35 2 C31 8 27 13 21 16 Z"
+                    className="bird-wing-flap-fast opacity-60"
+                  />
+                  <path d="M2 16 C5 14 9 13 13 14 C18 15 28 17 48 19 C43 21 35 21 25 21 C17 21 12 20 7 18 C4 17 3 17 2 16 Z" />
+                  <path
+                    d="M14 15 C19 8 28 2 38 1 C34 8 29 14 22 16 Z"
+                    className="bird-wing-flap-slow"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
-
 
         {/* 55 REALISTIC BLINKING STARS */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 transform-gpu">
