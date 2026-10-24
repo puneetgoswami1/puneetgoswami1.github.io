@@ -209,11 +209,10 @@ export default function Home() {
       </div>
 
       {/* NAVBAR */}
-      // PEHLE LAGBHAG AISA THA (Line 180 - 186 ke paas):
-<nav
-  className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+     <nav
+  className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
     scrolled
-      ? "bg-black/80 backdrop-blur-md border-b border-white/10"
+      ? "bg-[#06030f]/85 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
       : "bg-transparent"
   }`}
 >
