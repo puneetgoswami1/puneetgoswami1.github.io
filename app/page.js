@@ -209,10 +209,10 @@ export default function Home() {
       </div>
 
       {/* NAVBAR */}
-     <nav
-  className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+    <nav
+  className={`fixed top-0 left-0 w-full px-5 md:px-12 py-3.5 md:py-4 flex justify-between items-center z-50 transition-all duration-500 ease-in-out ${
     scrolled
-      ? "bg-[#06030f]/85 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+      ? "bg-black/85 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
       : "bg-transparent"
   }`}
 >
