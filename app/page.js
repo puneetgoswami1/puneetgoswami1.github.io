@@ -432,7 +432,7 @@ export default function Home() {
               <div className="relative">
                 <svg
                   viewBox="0 0 50 32"
-                  className="w-7 h-4 md:w-9 md:h-5 fill-white/92 opacity-85 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                  className="w-7 h-4 md:w-9 md:h-5 fill-white/80 opacity-85 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                 >
                   {/* Far Wing */}
                   <path
@@ -453,7 +453,7 @@ export default function Home() {
               <div className="absolute left-11 -top-6">
                 <svg
                   viewBox="0 0 50 32"
-                  className="w-6 h-3.5 md:w-8 md:h-4.5 fill-white/82 opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                  className="w-6 h-3.5 md:w-8 md:h-4.5 fill-white/75 opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                 >
                   <path
                     d="M15 15 C19 9 26 4 35 2 C31 8 27 13 21 16 Z"
