@@ -399,7 +399,7 @@ export default function Home() {
               right: -100px;
               pointer-events: none;
               z-index: 1;
-              animation: flyAcrossLinear 12s linear 0.4s 1 forwards;
+              animation: flyAcrossLinear 9.5s linear 0.4s 1 forwards;
               will-change: transform, opacity;
             }
 
@@ -424,15 +424,34 @@ export default function Home() {
               transform-origin: 15px 15px;
               animation: wingBeat 0.42s ease-in-out infinite;
             }
+@keyframes birdGlance {
+  0%, 42%, 58%, 100% {
+    transform: rotate(0deg) scaleX(1);
+  }
+  48% {
+    /* 1 baar peeche mud kar dekhegi */
+    transform: rotate(14deg) scaleX(-0.85);
+  }
+  53% {
+    /* Wapas aage dekhne lagegi */
+    transform: rotate(-6deg) scaleX(1);
+  }
+}
+
+.bird-glance {
+  animation: birdGlance 9.5s linear 0.4s 1 forwards;
+  transform-origin: center;
+}
+
           `}} />
 
           <div className="flock-motion-path select-none">
             <div className="flock-wave">
               {/* Chidiya 1: FRONT LEADER (Sabse aage - Face Left) */}
-              <div className="relative">
+              <div className="relative bird-glance">
                 <svg
                   viewBox="0 0 50 32"
-                  className="w-7 h-4 md:w-9 md:h-5 fill-white/80 opacity-85 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                  className="w-7 h-4 md:w-9 md:h-5 fill-white/70 opacity-85 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                 >
                   {/* Far Wing */}
                   <path
@@ -453,7 +472,7 @@ export default function Home() {
               <div className="absolute left-11 -top-6">
                 <svg
                   viewBox="0 0 50 32"
-                  className="w-6 h-3.5 md:w-8 md:h-4.5 fill-white/75 opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                  className="w-6 h-3.5 md:w-8 md:h-4.5 fill-white/72 opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                 >
                   <path
                     d="M15 15 C19 9 26 4 35 2 C31 8 27 13 21 16 Z"
@@ -471,7 +490,7 @@ export default function Home() {
               <div className="absolute left-[75px] top-6">
                 <svg
                   viewBox="0 0 50 32"
-                  className="w-5.5 h-3 md:w-7 md:h-4 fill-white/72 opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
+                  className="w-5.5 h-3 md:w-7 md:h-4 fill-white/68 opacity-80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]"
                 >
                   <path
                     d="M15 15 C19 9 26 4 35 2 C31 8 27 13 21 16 Z"
