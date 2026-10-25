@@ -140,6 +140,7 @@ export default function Home() {
       title: "Fintech Real-Time Fraud & Anomaly Detection",
       desc: "Architected transaction velocity and anomaly detection engine processing 200k+ events to flag high-risk transfers and chargeback leaks.",
       tech: ["Python", "SQL", "XGBoost", "Power BI", "Data Modeling"],
+      github: "https://github.com/puneetgoswami1/Fintech-Fraud-Detection-Engine",
     },
     {
       title: "Cross-Border D2C Cohort & Customer LTV Engine",
