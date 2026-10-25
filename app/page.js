@@ -1179,7 +1179,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
           {[
         {
-          title: "Student Lead — Data & Analytics Wing",
+          title: "Student Lead — Data Wing",
           org: "The ICFAI University, Jaipur",
           date: "Aug 2023 - May 2024",
           desc: "Led hands-on SQL and Power BI workshops for 120+ students; mentored juniors on business analytics problem statements and data modeling."
