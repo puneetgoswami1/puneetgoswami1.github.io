@@ -1006,8 +1006,6 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-           
-            // LINE 1009 SE LINE 1043 TAK PURA SELECT KARO AUR REPLACE KAR DO:
           <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300">
             <div className="flex justify-between items-start mb-2">
               <div>
