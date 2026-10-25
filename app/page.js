@@ -1109,7 +1109,8 @@ export default function Home() {
 
                   <div>
                     <a
-                      href="https://github.com/puneetgoswami1"
+                      // ISKO BADAL KAR YE KAR DO:
+href={project.github || "https://github.com/puneetgoswami1"}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={triggerHaptic}
