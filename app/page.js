@@ -1006,34 +1006,36 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+          {/* Card 1: Customer Churn & Retention */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300">
-            <div className="flex justify-between items-start mb-2">
+            <div className="flex justify-between items-start gap-3 mb-2">
               <div>
-                <h3 className="text-base md:text-lg font-bold text-white">Empirical Analysis of Customer Churn & Retention Dynamics</h3>
-                <p className="text-[#d4af37] font-semibold text-xs">Data Analytics Researcher</p>
+                <h3 className="text-sm md:text-base font-bold text-white">Customer Churn & Retention Analysis</h3>
+                <p className="text-[#d4af37] font-semibold text-xs mt-0.5">Data Analytics Researcher</p>
               </div>
-              <span className="text-gray-400 text-xs">Jan 2024 - Jul 2024</span>
+              <span className="text-gray-400 text-xs whitespace-nowrap shrink-0">Jan 2024 - Jul 2024</span>
             </div>
             <p className="text-gray-300 text-xs md:text-[13px] mb-3 leading-relaxed">
-              Conducted longitudinal survival analysis and parametric hazard modeling on 120k+ user transaction logs to isolate early churn signals and identify friction points in customer retention lifecycles.
+              Analyzed 120k+ user transaction logs to isolate early churn signals and identify friction points in customer retention lifecycles.
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {["Python", "SQL", "Survival Analysis", "Cohort Modeling"].map((tag) => (
+              {["Python", "SQL", "Cohort Analysis", "Retention Modeling"].map((tag) => (
                 <span key={tag} className="px-2 py-0.5 rounded-md bg-white/10 text-[11px] text-white">{tag}</span>
               ))}
             </div>
           </div>
 
+          {/* Card 2: Retail Demand Forecasting */}
           <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300">
-            <div className="flex justify-between items-start mb-2">
+            <div className="flex justify-between items-start gap-3 mb-2">
               <div>
-                <h3 className="text-base md:text-lg font-bold text-white">Comparative Evaluation of Time-Series Models in Demand Forecasting</h3>
-                <p className="text-[#d4af37] font-semibold text-xs">Applied Data Researcher</p>
+                <h3 className="text-sm md:text-base font-bold text-white">Retail Demand Forecasting Study</h3>
+                <p className="text-[#d4af37] font-semibold text-xs mt-0.5">Applied Data Researcher</p>
               </div>
-              <span className="text-gray-400 text-xs">Aug 2024 - Mar 2025</span>
+              <span className="text-gray-400 text-xs whitespace-nowrap shrink-0">Aug 2024 - Mar 2025</span>
             </div>
             <p className="text-gray-300 text-xs md:text-[13px] mb-3 leading-relaxed">
-              Benchmarked classical econometric models (ARIMA/SARIMAX) against gradient-boosted decision trees across multi-echelon retail supply chain datasets to optimize forecast accuracy during demand surges.
+              Benchmarked classical time-series algorithms against gradient-boosted trees on retail supply chain data to optimize sales forecasting.
             </p>
             <div className="flex flex-wrap gap-1.5">
               {["Python", "Time Series", "Pandas", "Scikit-Learn"].map((tag) => (
