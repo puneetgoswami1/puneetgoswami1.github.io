@@ -111,20 +111,19 @@ export default function Home() {
     },
   };
 
-  const certifications = [
-    { title: "Google IT Automation with Python", issuer: "Google", date: "Apr 2025" },
-    { title: "Introduction to AI in Digital Marketing", issuer: "HubSpot", date: "Mar 2025" },
-    { title: "Configuration Management and the Cloud", issuer: "Google", date: "Jan 2025" },
-    { title: "Troubleshooting and Debugging Techniques", issuer: "Google", date: "Dec 2024" },
-    { title: "Introduction to Git and GitHub", issuer: "Google", date: "Dec 2024" },
-    { title: "Using Python to Interact with the Operating System", issuer: "Google", date: "Dec 2024" },
-    { title: "Crash Course on Python", issuer: "Google", date: "Dec 2024" },
-    { title: "Stanford Science Small Groups — U-Net AI for Biomedical Image Segmentation", issuer: "Stanford University", date: "Nov 2024" },
-    { title: "Stanford CCOP Bootcamp — Certificate of Completion", issuer: "Stanford University", date: "Aug 2024" },
-    { title: "Stanford Fair for Community College Students", issuer: "Stanford University", date: "May 2025" },
-    { title: "IRB Administration", issuer: "CITI Program", date: "Jun 2024" },
-    { title: "Responsible Conduct of Research for Engineers", issuer: "CITI Program", date: "Jun 2024" },
-    { title: "Stanford Code in Place — Certificate of Completion", issuer: "Stanford / Code in Place", date: "Jun 2024" },
+ const certifications = [
+    { title: "Google Data Analytics Professional Certificate", issuer: "Google", date: "Jul 2023" },
+    { title: "SQL for Data Science & Business Intelligence", issuer: "UC Davis", date: "Oct 2023" },
+    { title: "Microsoft Certified: Power BI Data Analyst Associate (PL-300)", issuer: "Microsoft", date: "Apr 2024" },
+    { title: "HubSpot Inbound Marketing & Revenue Analytics", issuer: "HubSpot", date: "Aug 2024" },
+    { title: "Tableau Desktop Specialist", issuer: "Tableau", date: "Nov 2024" },
+    { title: "Google Advanced Data Analytics Specialization", issuer: "Google", date: "Jan 2025" },
+    { title: "Fundamentals of Accelerated Computing with Python", issuer: "NVIDIA", date: "Apr 2025" },
+    { title: "dbt Fundamentals (Analytics Engineering)", issuer: "dbt Labs", date: "Jul 2025" },
+    { title: "HubSpot CRM & Sales Operations Reporting", issuer: "HubSpot", date: "Sep 2025" },
+    { title: "Snowflake Hands-On Essentials: Data Warehousing", issuer: "Snowflake", date: "Nov 2025" },
+    { title: "Microsoft Certified: Azure Data Fundamentals (DP-900)", issuer: "Microsoft", date: "Jan 2026" },
+    { title: "Generative AI for Data Analytics & Insights", issuer: "Google Cloud", date: "Apr 2026" },
   ];
 
  // LINE 130 SE 143 TAK PURA REPLACE KAR DO:
@@ -1007,41 +1006,43 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300">
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h3 className="text-base md:text-lg font-bold text-white">Research Project Three</h3>
-                  <p className="text-[#d4af37] font-semibold text-xs">AI Researcher</p>
-                </div>
-                <span className="text-gray-400 text-xs">June 2024 - Present</span>
+           
+            // LINE 1009 SE LINE 1043 TAK PURA SELECT KARO AUR REPLACE KAR DO:
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base md:text-lg font-bold text-white">Empirical Analysis of Customer Churn & Retention Dynamics</h3>
+                <p className="text-[#d4af37] font-semibold text-xs">Data Analytics Researcher</p>
               </div>
-              <p className="text-gray-300 text-xs md:text-[13px] mb-3 leading-relaxed">
-                Developed advanced AI systems and biomedical image segmentation using modern machine learning pipelines.
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {["Python", "TensorFlow", "NLP", "LLM"].map((tag) => (
-                  <span key={tag} className="px-2 py-0.5 rounded-md bg-white/10 text-[11px] text-white">{tag}</span>
-                ))}
-              </div>
+              <span className="text-gray-400 text-xs">Jan 2024 - Jul 2024</span>
             </div>
+            <p className="text-gray-300 text-xs md:text-[13px] mb-3 leading-relaxed">
+              Conducted longitudinal survival analysis and parametric hazard modeling on 120k+ user transaction logs to isolate early churn signals and identify friction points in customer retention lifecycles.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {["Python", "SQL", "Survival Analysis", "Cohort Modeling"].map((tag) => (
+                <span key={tag} className="px-2 py-0.5 rounded-md bg-white/10 text-[11px] text-white">{tag}</span>
+              ))}
+            </div>
+          </div>
 
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300">
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h3 className="text-base md:text-lg font-bold text-white">Research Project Four</h3>
-                  <p className="text-[#d4af37] font-semibold text-xs">AI Researcher</p>
-                </div>
-                <span className="text-gray-400 text-xs">June 2024 - Present</span>
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_20px_rgba(212,175,55,0.15)] transition-all duration-300">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-base md:text-lg font-bold text-white">Comparative Evaluation of Time-Series Models in Demand Forecasting</h3>
+                <p className="text-[#d4af37] font-semibold text-xs">Applied Data Researcher</p>
               </div>
-              <p className="text-gray-300 text-xs md:text-[13px] mb-3 leading-relaxed">
-                Built intelligent systems for prediction and model optimization through distributed computing methods.
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {["PyTorch", "Deep Learning", "CV", "AI"].map((tag) => (
-                  <span key={tag} className="px-2 py-0.5 rounded-md bg-white/10 text-[11px] text-white">{tag}</span>
-                ))}
-              </div>
+              <span className="text-gray-400 text-xs">Aug 2024 - Mar 2025</span>
             </div>
+            <p className="text-gray-300 text-xs md:text-[13px] mb-3 leading-relaxed">
+              Benchmarked classical econometric models (ARIMA/SARIMAX) against gradient-boosted decision trees across multi-echelon retail supply chain datasets to optimize forecast accuracy during demand surges.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {["Python", "Time Series", "Pandas", "Scikit-Learn"].map((tag) => (
+                <span key={tag} className="px-2 py-0.5 rounded-md bg-white/10 text-[11px] text-white">{tag}</span>
+              ))}
+            </div>
+          </div>
           </div>
         </section>
 
@@ -1168,11 +1169,26 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
-            {[
-              { title: "Stanford SERIS Scholar", org: "Stanford School of Engineering", date: "Dec 2024 - Feb 2025", desc: "1 of 23 undergraduates selected nationwide for research introduction." },
-              { title: "Break Through Tech Fellow", org: "Cornell University", date: "Mar 2025 - Jun 2025", desc: "Completed hands-on machine learning AI studio programs." },
-              { title: "Girls Who Code — President", org: "College of San Mateo", date: "Apr 2024 - May 2025", desc: "Organized technical workshops to promote diversity in STEM." }
-            ].map((item, idx) => (
+          {[
+        {
+          title: "Student Lead — Data & Analytics Wing",
+          org: "The ICFAI University, Jaipur",
+          date: "Aug 2023 - May 2024",
+          desc: "Led hands-on SQL and Power BI workshops for 120+ students; mentored juniors on business analytics problem statements and data modeling."
+        },
+        {
+          title: "Analytics Track Coordinator",
+          org: "Annual University Tech Fest",
+          date: "Sep 2023 - Feb 2024",
+          desc: "Designed exploratory data challenge rubrics, curating retail and financial datasets for 35+ participating collegiate teams."
+        },
+        {
+          title: "Technical Peer Mentor",
+          org: "Google Developer Student Clubs (GDSC)",
+          date: "Jan 2023 - Dec 2023",
+          desc: "Conducted collaborative sessions covering Python for data analysis, clean ETL practices, and Git-based collaborative workflows."
+        }
+      ].map((item, idx) => (
               <div
                 key={idx}
                 className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300"
@@ -1215,12 +1231,32 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
             {[
-              { title: "Languages", list: ["Java", "Python", "C++", "SQL", "JavaScript", "TypeScript", "HTML/CSS"] },
-              { title: "Frameworks", list: ["React", "Node.js", "Next.js", "WordPress", "GraphQL", "Django", "Flask"] },
-              { title: "Developer Tools", list: ["Git", "GitHub", "Docker", "Kubernetes", "VS Code", "JIRA"] },
-              { title: "Libraries", list: ["Pandas", "NumPy", "Matplotlib", "SciPy", "Seaborn", "OpenAI API"] },
-              { title: "Databases", list: ["PostgreSQL", "MySQL", "Firebase", "SQLite"] },
-            ].map((category, idx) => (
+        { 
+          title: "Languages & Querying", 
+          list: ["SQL", "Python", "R", "DAX", "Power Query (M)", "Bash"] 
+        },
+        { 
+          title: "BI & Visualization", 
+          list: ["Power BI", "Tableau", "Microsoft Fabric", "Looker Studio", "Excel (Advanced)"] 
+        },
+        { 
+          title: "Cloud & Data Warehouse", 
+          list: ["Snowflake", "Google BigQuery", "Microsoft Azure", "dbt", "Databricks"] 
+        },
+        { 
+          title: "Libraries & Analytics", 
+          list: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-Learn", "Statsmodels"] 
+        },
+        { 
+          title: "Databases & Storage", 
+          list: ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Supabase"] 
+        },
+        { 
+          title: "Developer & Agile Tools", 
+          list: ["Git", "GitHub", "GitLab", "Git Bash", "JIRA", "Docker", "VS Code"] 
+        },
+      ].map((category, idx) => (
+            
               <div
                 key={idx}
                 className="bg-white/5 border border-white/10 rounded-2xl p-4 md:p-5 hover:border-[#d4af37]/50 hover:shadow-[0_0_25px_rgba(212,175,55,0.2)] hover:-translate-y-1 transition-all duration-300"
