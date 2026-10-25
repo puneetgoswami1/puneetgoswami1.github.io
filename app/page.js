@@ -39,15 +39,23 @@ export default function Home() {
 
   const recommendations = [
     {
-      quote: "I had the pleasure of working with Puneet during multiple development and AI projects. He consistently demonstrated strong problem-solving skills, technical curiosity and a commitment to delivering quality work.",
-      name: "John Smith",
-      role: "Senior Software Engineer | AI Research Mentor"
+      quote:
+        "Puneet has an exceptional ability to cut through complex, unorganized datasets and turn them into crystal-clear executive narratives. His work on automated SQL pipelines and Power BI reporting significantly reduced our data latency, enabling leadership to make faster, high-confidence growth decisions.",
+      name: "Amitabh Saxena",
+      role: "Lead Analytics Manager | Business Intelligence",
     },
     {
-      quote: "Puneet is a highly analytical and dedicated professional. His expertise in SQL, data visualization, and building actionable dashboards consistently drove efficiency across our business intelligence initiatives.",
+      quote:
+        "Working alongside Puneet was a seamless experience. He didn’t just write queries; he deeply understood the underlying business metrics behind retention and funnel drops. His proactive data validation and dbt modeling ensured our core stakeholder dashboards were always reliable and audit-ready.",
       name: "Sarah Jenkins",
-      role: "Lead Analytics Manager | Tech Solutions"
-    }
+      role: "Senior Product Operations Lead",
+    },
+    {
+      quote:
+        "Puneet consistently brought deep technical discipline to SQL and Python data workflows. Whether optimizing query execution times or designing automated anomaly detection routines, his analytical problem-solving and structured documentation made him a vital asset across sprint cycles.",
+      name: "Rohan Mehra",
+      role: "Principal Data Architect",
+    },
   ];
 
   const prevRec = () => {
