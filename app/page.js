@@ -1253,11 +1253,11 @@ export default function Home() {
         },
         { 
           title: "Libraries & Analytics", 
-          list: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Statsmodels"] 
+          list: ["Pandas", "NumPy", "Matplotlib", "Seaborn"] 
         },
         { 
           title: "Databases & Storage", 
-          list: ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Supabase"] 
+          list: ["PostgreSQL", "MySQL", "SQL Server", "MongoDB"] 
         },
         { 
           title: "Developer & Agile Tools", 
