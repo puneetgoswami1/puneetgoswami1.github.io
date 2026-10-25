@@ -1241,19 +1241,19 @@ export default function Home() {
             {[
         { 
           title: "Languages & Querying", 
-          list: ["SQL", "Python", "R", "DAX", "Power Query (M)", "Bash"] 
+          list: ["SQL", "Python", "Power Query (M)", "Bash"] 
         },
         { 
           title: "BI & Visualization", 
-          list: ["Power BI", "Tableau", "Microsoft Fabric", "Looker Studio", "Excel (Advanced)"] 
+          list: ["Power BI", "Tableau", "Microsoft Fabric", "Excel (Advanced)"] 
         },
         { 
           title: "Cloud & Data Warehouse", 
-          list: ["Snowflake", "Google BigQuery", "Microsoft Azure", "dbt", "Databricks"] 
+          list: ["Snowflake", "Google BigQuery", "Microsoft Azure", "Databricks"] 
         },
         { 
           title: "Libraries & Analytics", 
-          list: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Scikit-Learn", "Statsmodels"] 
+          list: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Statsmodels"] 
         },
         { 
           title: "Databases & Storage", 
