@@ -127,19 +127,68 @@ export default function Home() {
     { title: "Stanford Code in Place — Certificate of Completion", issuer: "Stanford / Code in Place", date: "Jun 2024" },
   ];
 
+ // LINE 130 SE 143 TAK PURA REPLACE KAR DO:
   const projects = [
-    { title: "AI Research Assistant", desc: "Built an advanced AI research assistant using LLMs, RAG pipelines and vector databases for semantic search.", tech: ["Python", "OpenAI", "RAG", "Vector DB"] },
-    { title: "Medical Image Analysis", desc: "Deep learning system for automated disease detection from radiology images using CNN architectures.", tech: ["PyTorch", "CNN", "Medical AI", "CV"] },
-    { title: "Fraud Detection System", desc: "Machine learning platform for detecting financial fraud using anomaly detection techniques.", tech: ["Python", "ML", "XGBoost", "Analytics"] },
-    { title: "Smart Traffic Prediction", desc: "Predictive traffic management platform using AI and real-time sensor data.", tech: ["AI", "Prediction", "Data Science", "IoT"] },
-    { title: "NLP Sentiment Engine", desc: "Natural language processing engine capable of classifying sentiment from large scale datasets.", tech: ["NLP", "Transformers", "BERT", "Python"] },
-    { title: "Computer Vision Surveillance", desc: "Real-time object detection and monitoring platform using YOLO and OpenCV.", tech: ["YOLO", "OpenCV", "CV", "AI"] },
-    { title: "3D Geological Visualization Tool", desc: "Interactive 3D subsurface visualization tool using Python and Mayavi for volumetric geological datasets.", tech: ["Python", "Mayavi", "NumPy", "PyVista"] },
-    { title: "Computer Science Club Website", desc: "Full-stack website featuring AI chatbot, gallery, team section and contact forms.", tech: ["JavaScript", "HTML/CSS", "AI Chatbot", "Full-Stack"] },
-    { title: "Girls Who Code Club Website", desc: "Platform promoting diversity and inclusion with events, membership signup and contact forms.", tech: ["HTML5", "CSS3", "JavaScript", "Bootstrap"] },
-    { title: "Network Connectivity Monitor", desc: "Raspberry Pi based monitoring system with real-time network status indicators.", tech: ["Python", "Raspberry Pi", "GPIO", "Networking"] },
-    { title: "K-12 STEM Enrichment Platform", desc: "Responsive STEM learning platform built using React, Astro and Firebase.", tech: ["React", "Astro", "Firebase", "Tailwind CSS"] },
-    { title: "Automated Attendance System", desc: "Attendance management system using image recognition and automation workflows.", tech: ["Python", "SikuliX", "Automation"] }
+    {
+      title: "Fintech Real-Time Fraud & Anomaly Detection",
+      desc: "Architected transaction velocity and anomaly detection engine processing 200k+ events to flag high-risk transfers and chargeback leaks.",
+      tech: ["Python", "SQL", "XGBoost", "Power BI", "Data Modeling"],
+    },
+    {
+      title: "Cross-Border D2C Cohort & Customer LTV Engine",
+      desc: "Modeled multi-region retention curves, repurchase rates, and customer acquisition payback to optimize global advertising ROAS.",
+      tech: ["SQL", "Python", "Tableau", "Cohort Analysis", "PostgreSQL"],
+    },
+    {
+      title: "Modern Data Stack ELT Pipeline with dbt & Snowflake",
+      desc: "Designed star-schema dimensional models with automated data quality testing and incremental dbt builds for daily analytics refresh.",
+      tech: ["dbt", "Snowflake", "SQL", "Airflow", "Data Warehousing"],
+    },
+    {
+      title: "SaaS Product Funnel & Churn Prediction System",
+      desc: "Built user journey activation funnels and a logistic regression churn score to identify high-risk accounts 30 days prior to renewal.",
+      tech: ["Python", "Pandas", "Scikit-Learn", "Mixpanel", "SQL"],
+    },
+    {
+      title: "Omnichannel Marketing Multi-Touch Attribution",
+      desc: "Developed Markov-chain and algorithmic attribution models across 6 ad networks to eliminate multi-channel revenue over-reporting.",
+      tech: ["Python", "R", "SQL", "Google BigQuery", "Power BI"],
+    },
+    {
+      title: "Supply Chain Inventory & Safety Stock Optimization",
+      desc: "Implemented dynamic reorder point models and supplier transit variance tracking to reduce stockout rate by 18% across 4 warehouses.",
+      tech: ["Python", "Time Series", "SQL", "Tableau", "Operations Analytics"],
+    },
+    {
+      title: "Multi-Asset Prop Trading Risk & Volatility Dashboard",
+      desc: "Built automated risk engine calculating Sharpe/Sortino ratios, max drawdown distributions, and Value-at-Risk (VaR) for spot & derivatives.",
+      tech: ["Python", "NumPy", "SQL", "Power BI", "Financial Modeling"],
+    },
+    {
+      title: "Healthcare Clinic Utilization & Patient Wait Analytics",
+      desc: "Analyzed admission arrival patterns and clinical triage flow to balance provider capacity and compress average emergency queue times.",
+      tech: ["SQL", "Python", "Tableau", "Capacity Planning", "Statistics"],
+    },
+    {
+      title: "AI Voice & Text Support Ticket Topic Discovery",
+      desc: "Engineered NLP embedding cluster pipeline to auto-categorize 50k+ raw customer complaints into actionable product defect trends.",
+      tech: ["Python", "Transformers", "spaCy", "SQL", "Data Analytics"],
+    },
+    {
+      title: "B2B Sales Velocity & Quota Performance Dashboard",
+      desc: "Created executive revenue pipeline dashboard tracking deal stage conversion, sales cycle friction, and rep quota attainment.",
+      tech: ["Power BI", "DAX", "SQL Server", "ETL", "Sales Analytics"],
+    },
+    {
+      title: "Geospatial Retail Market Penetration & Cannibalization",
+      desc: "Evaluated customer drive-time radiuses and trade-area demographics to optimize new storefront expansion while minimizing store overlap.",
+      tech: ["Python", "GeoPandas", "PostGIS", "SQL", "Data Visualization"],
+    },
+    {
+      title: "Employee Flight Risk & Workforce Equity Analytics",
+      desc: "Modeled tenure survival analysis and internal pay-band distributions to provide predictive attrition warnings for core technical roles.",
+      tech: ["Python", "Survival Analysis", "SQL", "Power BI", "People Analytics"],
+    },
   ];
 
  const experiences = [
