@@ -146,6 +146,7 @@ export default function Home() {
       title: "Cross-Border D2C Cohort & Customer LTV Engine",
       desc: "Modeled multi-region retention curves, repurchase rates, and customer acquisition payback to optimize global advertising ROAS.",
       tech: ["SQL", "Python", "Tableau", "Cohort Analysis", "PostgreSQL"],
+      github: "https://github.com/puneetgoswami1/cross-border-d2c-cohort-ltv-engine",
     },
     {
       title: "Modern Data Stack ELT Pipeline with dbt & Snowflake",
