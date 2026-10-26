@@ -153,7 +153,6 @@ export default function Home() {
       desc: "Designed star-schema dimensional models with automated data quality testing and incremental dbt builds for daily analytics refresh.",
       tech: ["dbt", "Snowflake", "SQL", "Airflow", "Data Warehousing"],
       github: "https://github.com/puneetgoswami1/modern-data-stack-elt-pipeline",
-  
     },
     {
       title: "SaaS Product Funnel & Churn Prediction System",
