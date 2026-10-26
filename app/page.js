@@ -158,6 +158,7 @@ export default function Home() {
       title: "SaaS Product Funnel & Churn Prediction System",
       desc: "Built user journey activation funnels and a logistic regression churn score to identify high-risk accounts 30 days prior to renewal.",
       tech: ["Python", "Pandas", "Scikit-Learn", "Mixpanel", "SQL"],
+      github: "https://github.com/puneetgoswami1/saas-product-funnel-churn-prediction",
     },
     {
       title: "Omnichannel Marketing Multi-Touch Attribution",
