@@ -164,6 +164,7 @@ export default function Home() {
       title: "Omnichannel Marketing Multi-Touch Attribution",
       desc: "Developed Markov-chain and algorithmic attribution models across 6 ad networks to eliminate multi-channel revenue over-reporting.",
       tech: ["Python", "R", "SQL", "Google BigQuery", "Power BI"],
+      github: "https://github.com/puneetgoswami1/omnichannel-marketing-attribution-engine",
     },
     {
       title: "Supply Chain Inventory & Safety Stock Optimization",
