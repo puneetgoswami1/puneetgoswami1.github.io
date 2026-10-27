@@ -170,19 +170,19 @@ export default function Home() {
       title: "Supply Chain Inventory & Safety Stock Optimization",
       desc: "Implemented dynamic reorder point models and supplier transit variance tracking to reduce stockout rate by 18% across 4 warehouses.",
       tech: ["Python", "Time Series", "SQL", "Tableau", "Operations Analytics"],
-      github: "https://github.com/puneetgoswami1/healthcare-readmission-risk-engine",
+       github: "https://github.com/puneetgoswami1/supply-chain-inventory-optimization-engine",
     },
     {
       title: "Multi-Asset Prop Trading Risk & Volatility Dashboard",
       desc: "Built automated risk engine calculating Sharpe/Sortino ratios, max drawdown distributions, and Value-at-Risk (VaR) for spot & derivatives.",
       tech: ["Python", "NumPy", "SQL", "Power BI", "Financial Modeling"],
-      github: "https://github.com/puneetgoswami1/supply-chain-inventory-optimization-engine",
+     github: "https://github.com/puneetgoswami1/multi-asset-prop-trading-risk-engine",
     },
     {
       title: "Healthcare Clinic Utilization & Patient Wait Analytics",
       desc: "Analyzed admission arrival patterns and clinical triage flow to balance provider capacity and compress average emergency queue times.",
       tech: ["SQL", "Python", "Tableau", "Capacity Planning", "Statistics"],
-      github: "https://github.com/puneetgoswami1/pricing-elasticity-yield-optimizer",
+      github: "https://github.com/puneetgoswami1/healthcare-readmission-risk-engine",
     },
     {
       title: "AI Voice & Text Support Ticket Topic Discovery",
@@ -193,6 +193,7 @@ export default function Home() {
       title: "B2B Sales Velocity & Quota Performance Dashboard",
       desc: "Created executive revenue pipeline dashboard tracking deal stage conversion, sales cycle friction, and rep quota attainment.",
       tech: ["Power BI", "DAX", "SQL Server", "ETL", "Sales Analytics"],
+      github: "https://github.com/puneetgoswami1/b2b-sales-velocity-quota-engine",
     },
     {
       title: "Geospatial Retail Market Penetration & Cannibalization",
