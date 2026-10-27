@@ -182,6 +182,7 @@ export default function Home() {
       title: "Healthcare Clinic Utilization & Patient Wait Analytics",
       desc: "Analyzed admission arrival patterns and clinical triage flow to balance provider capacity and compress average emergency queue times.",
       tech: ["SQL", "Python", "Tableau", "Capacity Planning", "Statistics"],
+      github: "https://github.com/puneetgoswami1/pricing-elasticity-yield-optimizer",
     },
     {
       title: "AI Voice & Text Support Ticket Topic Discovery",
