@@ -170,6 +170,7 @@ export default function Home() {
       title: "Supply Chain Inventory & Safety Stock Optimization",
       desc: "Implemented dynamic reorder point models and supplier transit variance tracking to reduce stockout rate by 18% across 4 warehouses.",
       tech: ["Python", "Time Series", "SQL", "Tableau", "Operations Analytics"],
+      github: "https://github.com/puneetgoswami1/healthcare-readmission-risk-engine",
     },
     {
       title: "Multi-Asset Prop Trading Risk & Volatility Dashboard",
