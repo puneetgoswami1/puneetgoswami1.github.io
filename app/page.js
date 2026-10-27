@@ -176,6 +176,7 @@ export default function Home() {
       title: "Multi-Asset Prop Trading Risk & Volatility Dashboard",
       desc: "Built automated risk engine calculating Sharpe/Sortino ratios, max drawdown distributions, and Value-at-Risk (VaR) for spot & derivatives.",
       tech: ["Python", "NumPy", "SQL", "Power BI", "Financial Modeling"],
+      github: "https://github.com/puneetgoswami1/supply-chain-inventory-optimization-engine",
     },
     {
       title: "Healthcare Clinic Utilization & Patient Wait Analytics",
